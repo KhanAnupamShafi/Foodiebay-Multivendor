@@ -10,7 +10,7 @@ function App() {
         {<RedAmazon size="48" title="Amazon Logo" />}
       </h1>
       <h2>hello Bhaia</h2>
-      <p>I changed readme file</p>
+      <p>I installed react router v6</p>
     </RootContainer>
   );
 }
