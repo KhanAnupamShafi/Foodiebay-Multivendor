@@ -9,6 +9,7 @@ function App() {
         Hello I am inside styled component
         {<RedAmazon size="48" title="Amazon Logo" />}
       </h1>
+      <h2>hello Bhaia</h2>
     </RootContainer>
   );
 }
