@@ -1,16 +1,18 @@
+import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import { Amazon } from "styled-icons/fa-brands";
-import "./App.css";
 
+import "./App.css";
+import Home from "./pages/Home/Home";
+import NotFound from "./pages/NotFound/NotFound";
+// xxx;
 function App() {
   return (
-    <RootContainer className="App">
-      <h1>
-        Hello I am inside styled component
-        {<RedAmazon size="48" title="Amazon Logo" />}
-      </h1>
-      <h2>hello Bhaia</h2>
-      <p>I installed react router v6</p>
+    <RootContainer>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </RootContainer>
   );
 }
@@ -20,9 +22,6 @@ export default App;
 const RootContainer = styled.div`
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   text-align: center;
-`;
-
-const RedAmazon = styled(Amazon)`
-  color: red;
 `;
