@@ -33,10 +33,8 @@ const Banner = () => {
 export default Banner;
 
 const Content = styled.div`
+  max-width: 100%;
   text-align: center;
-  h1 {
-    font-size: 140px;
-  }
 `;
 
 const Widget = styled.div`
@@ -54,12 +52,26 @@ const BannerHeading = styled.div`
     font-size: 115px;
     font-weight: 800;
   }
+  @media screen and (max-width: 960px) {
+    h1 {
+      font-size: 5em;
+    }
+  }
+  @media screen and (max-width: 640px) {
+    h1 {
+      font-size: 3em;
+    }
+  }
 `;
 const BannderContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 40px;
+  @media screen and (max-width: 960px) {
+    width: 80%;
+    margin: 0 auto 30px auto;
+  }
 `;
 const Tagline = styled.div`
   border-style: solid;
@@ -73,6 +85,17 @@ const Tagline = styled.div`
     line-height: 30px;
     color: #fff;
   }
+  @media screen and (max-width: 960px) {
+    p {
+      padding-bottom: 15px;
+      font-size: 18px;
+    }
+  }
+  @media screen and (max-width: 640px) {
+    p {
+      font-size: 14px;
+    }
+  }
 `;
 const ButtonContainer = styled.div`
   width: 100%;
@@ -84,6 +107,13 @@ const ButtonBannerGroup = styled.div`
   justify-content: center;
   width: 80%;
   margin: auto;
+
+  @media screen and (max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 20px;
+  }
 `;
 const BookBtn = styled.button`
   color: #ffffff;
@@ -104,6 +134,9 @@ const BookBtn = styled.button`
   &:hover {
     background-color: #ffffff;
     color: #e7272d;
+  }
+  @media screen and (max-width: 960px) {
+    margin-right: 0;
   }
 `;
 const OrderBtn = styled.button`
