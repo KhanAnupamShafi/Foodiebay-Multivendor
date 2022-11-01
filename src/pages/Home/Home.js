@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "../../layouts/Header/Header";
 import video from "../../assets/Banner/FoodVideo.mp4";
 import Banner from "../../components/Banner/Banner";
-
+import HeroImg from "../../assets/Banner/hero_image.png";
 const Home = () => {
   return (
     <>
@@ -36,12 +36,14 @@ const BackgroundVideo = styled.video`
   z-index: -1;
 
   @media (min-aspect-ratio: 16/9) {
-    hight: auto;
+    height: auto;
     width: 100%;
   }
   @media (max-aspect-ratio: 16/9) {
-    hight: 100%;
+    height: 100%;
     width: auto;
+    background-image: url(${HeroImg});
+    background-size: cover;
   }
 `;
 export default Home;

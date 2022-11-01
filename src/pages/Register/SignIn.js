@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Food_delivery from "../../assets/Login/food_delivery.png";
-import HeroImg from "../../assets/Login/hero-login.jpg";
 import { Logo, NavLogo } from "../../layouts/Header/Header.elements";
 import headerLogo from "../../assets/Header/Logo1.png";
+import Food_delivery from "../../assets/Login/food_delivery.png";
+import HeroImg from "../../assets/Login/hero-login.jpg";
 import { Link } from "react-router-dom";
+import { Google } from "styled-icons/boxicons-logos";
 
-const SignUp = () => {
+const SignIn = () => {
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
@@ -23,6 +24,7 @@ const SignUp = () => {
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+
   return (
     <>
       <Container>
@@ -44,15 +46,15 @@ const SignUp = () => {
                 Welome to Foodiebay
               </p>
               <p className="text-right text-xs md:text-sm text-slate-400">
-                Already have an account?
-                <Link to="/signin">
+                No account?
+                <Link to="/signup">
                   <span className="block transition-colors duration-300 text-accent hover:text-orange-400 cursor-pointer">
-                    Sign In
+                    Sign Up
                   </span>
                 </Link>
               </p>
             </Top>
-            <h1 className="text-5xl md:text-6xl py-4">Sign Up</h1>
+            <h1 className="text-5xl md:text-6xl py-4">Sign In</h1>
             <Form onSubmit={handleMouseDownPassword}>
               <div className="form-control w-full">
                 <label className="label">
@@ -66,39 +68,11 @@ const SignUp = () => {
                   className="input input-bordered w-full focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                 />
                 {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
+            <span className="label-text-alt">Alt label</span>
             </label> */}
               </div>
 
-              <div className="flex flex-row gap-5 py-8">
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text md:text-base">Username</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Username"
-                    className="input input-bordered w-full focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-                  />
-                  {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
-            </label> */}
-                </div>
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text md:text-base">Contact No.</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Contact"
-                    className="input input-bordered w-full focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
-                  />
-                  {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
-            </label> */}
-                </div>
-              </div>
-              <div className="form-control w-full">
+              <div className="form-control w-full pt-5">
                 <label className="label">
                   <span className="label-text md:text-base">
                     Enter your password
@@ -147,13 +121,89 @@ const SignUp = () => {
                   </div>
                 </div>
                 {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
+            <span className="label-text-alt">Alt label</span>
             </label> */}
               </div>
-              <button type="submit" className="btn btn-accent btn-block my-14">
-                Sign Up
+              <button type="submit" className="btn btn-accent btn-block my-10">
+                Sign In
               </button>
             </Form>
+            <div className="divider">OR</div>
+            <ButtonGroup>
+              <button className="btn btn-outline btn-warning  flex-auto sm:flex-1">
+                <svg
+                  width="24"
+                  height="24"
+                  color="SystemWhite"
+                  viewBox="0 0 24 24"
+                  style={{ marginRight: 4 }}
+                >
+                  <path
+                    fill="#fff"
+                    d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12z"
+                  ></path>
+                  <path
+                    fill="#4285F4"
+                    fillRule="evenodd"
+                    d="M19.2 12.17c0-.531-.048-1.042-.136-1.533H12v2.9h4.036a3.45 3.45 0 01-1.496 2.264v1.882h2.424c1.418-1.305 2.236-3.228 2.236-5.512z"
+                    clipRule="evenodd"
+                  ></path>
+                  <path
+                    fill="#34A853"
+                    fillRule="evenodd"
+                    d="M12 19.5c2.025 0 3.723-.672 4.964-1.817L14.54 15.8c-.672.45-1.53.716-2.54.716-1.953 0-3.607-1.32-4.196-3.092H5.298v1.943A7.497 7.497 0 0012 19.5z"
+                    clipRule="evenodd"
+                  ></path>
+                  <path
+                    fill="#FBBC05"
+                    fillRule="evenodd"
+                    d="M7.803 13.425c-.15-.45-.235-.93-.235-1.425 0-.494.085-.975.235-1.425V8.632H5.298A7.497 7.497 0 004.5 12c0 1.21.29 2.356.798 3.368l2.505-1.943z"
+                    clipRule="evenodd"
+                  ></path>
+                  <path
+                    fill="#EA4335"
+                    fillRule="evenodd"
+                    d="M12 7.483c1.101 0 2.09.378 2.867 1.122l2.151-2.152C15.72 5.243 14.022 4.5 12 4.5a7.497 7.497 0 00-6.702 4.132l2.506 1.943c.59-1.773 2.243-3.092 4.196-3.092z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                <span className="">Sign in with Google</span>
+              </button>
+              <button className="btn btn-square btn-active btn-ghost grow md:grow-0">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  fill="none"
+                  ariaHidden="true"
+                  className="styles__StyledInlineSvg-sc-12l8vvi-0 bLgQGi"
+                  viewBox="0 0 24 24"
+                  style={{ marginRight: 4 }}
+                >
+                  <path
+                    fill="#1877F2"
+                    d="M21 12a9 9 0 10-10.406 8.89v-6.288H8.309V12h2.285v-1.983c0-2.255 1.343-3.501 3.4-3.501.984 0 2.014.175 2.014.175v2.215h-1.135c-1.118 0-1.467.694-1.467 1.406V12h2.496l-.399 2.602h-2.097v6.289C17.71 20.216 21 16.492 21 12z"
+                  ></path>
+                </svg>
+              </button>
+              <button className="btn btn-square btn-active btn-ghost grow md:grow-0">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  fill="none"
+                  ariaHidden="true"
+                  className="styles__StyledInlineSvg-sc-12l8vvi-0 bLgQGi"
+                  viewBox="0 0 24 24"
+                  style={{ marginRight: 4 }}
+                >
+                  <path
+                    fill="#191919"
+                    d="M17.02 11.094c.027 2.875 2.523 3.832 2.55 3.844-.02.068-.398 1.364-1.314 2.703-.792 1.157-1.614 2.31-2.909 2.334-1.272.024-1.681-.754-3.136-.754-1.454 0-1.908.73-3.112.778-1.25.047-2.202-1.252-3-2.405-1.632-2.359-2.879-6.666-1.204-9.573.831-1.444 2.318-2.358 3.931-2.381 1.227-.024 2.386.825 3.136.825s2.157-1.02 3.637-.87c.62.025 2.358.25 3.475 1.884-.09.056-2.075 1.211-2.053 3.615zm-2.39-7.06c.663-.804 1.11-1.922.988-3.034-.956.038-2.113.637-2.799 1.44-.615.71-1.153 1.849-1.008 2.939 1.066.082 2.155-.542 2.819-1.345"
+                  ></path>
+                </svg>
+              </button>
+            </ButtonGroup>
           </RegisterContainer>
         </Wrapper>
       </Container>
@@ -161,7 +211,7 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
 
 const Container = styled.div`
   position: relative;
@@ -208,7 +258,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 40px;
+  padding-top: 50px;
 `;
 const RegisterContainer = styled.div.attrs({ className: "text-left" })`
   margin: auto 10px;
@@ -238,5 +288,11 @@ const LogoContainer = styled.div`
   top: 2%;
   left: 5%;
   width: 100px;
-  z-index: 5;
+  z-index: 1;
+`;
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 `;

@@ -4,16 +4,17 @@ import styled from "styled-components";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
+import SignIn from "./pages/Register/SignIn";
 import SignUp from "./pages/Register/SignUp";
-// xxx;
+
 function App() {
   return (
     <RootContainer>
       <Routes>
         <Route index path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
-        {/* <Route path="login" element={<Login />} /> */}
         <Route path="signup" element={<SignUp />} />
+        <Route path="signin" element={<SignIn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </RootContainer>
