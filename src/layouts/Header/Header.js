@@ -18,8 +18,17 @@ import {
 } from "./Header.elements";
 
 import { Menu3, Close } from "styled-icons/remix-line";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from "../../firebase.init";
+import { signOut } from "firebase/auth";
 
 const Header = () => {
+
+  const [user] = useAuthState(auth);
+  console.log(user)
+  const logout = () => {
+    signOut(auth);
+  };
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const handleClick = () => setClick(!click);
@@ -71,6 +80,19 @@ const Header = () => {
               <NavLink to="/blog" onClick={closeMobileMenu}>
                 Blog
               </NavLink>
+            </ListItem>
+            <ListItem>
+              {
+                user ?
+                  <button onClick={logout} className='btn btn-warning'>SignOut</button>
+                  :
+                  <NavLink to="/signin" onClick={closeMobileMenu}>
+                    Signin
+                  </NavLink>
+              }
+              {/* <NavLink to="/signin" onClick={closeMobileMenu}>
+                Signin
+              </NavLink> */}
             </ListItem>
             <NavItemBtn>
               {!button && (

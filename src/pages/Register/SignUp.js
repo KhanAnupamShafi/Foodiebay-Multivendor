@@ -4,9 +4,29 @@ import Food_delivery from "../../assets/Login/food_delivery.png";
 import HeroImg from "../../assets/Login/hero-login.jpg";
 import { Logo, NavLogo } from "../../layouts/Header/Header.elements";
 import headerLogo from "../../assets/Header/Logo1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import Loading from "../../components/Shared/Loading/Loading";
 
 const SignUp = () => {
+  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+
+
+
+  // sign up with (Email & Password)
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useCreateUserWithEmailAndPassword(auth);
+
+  // update user Name....
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+
+
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
@@ -16,13 +36,39 @@ const SignUp = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
-  const handleMouseDownPassword = (event) => {
+  const handleMouseDownPassword = async (event) => {
     event.preventDefault();
+    const name = event.target.name.value
+    const email = event.target.email.value
+    const number = event.target.number.value
+    const password = event.target.password.value
+    console.log(name, email, number, password)
+    await createUserWithEmailAndPassword(email, password)
+    await updateProfile({ displayName: name });
+    alert('Updated profile');
+    console.log('Update done')
+    navigate('/home')
   };
 
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+
+  const navigate = useNavigate()
+
+  if (guser || user) {
+    console.log(guser || user)
+    // navigate('/')
+  }
+
+  if (loading || gloading) {
+    return <Loading></Loading>
+  }
+  let errorMessage;
+  if (error || gerror || updateError) {
+      console.log('error message',error || gerror || updateError)
+      errorMessage = <p className='text-red-500'>Error: {error?.message || gerror?.message || updateError?.message}</p>;
+  }
   return (
     <>
       <Container>
@@ -61,7 +107,8 @@ const SignUp = () => {
                   </span>
                 </label>
                 <input
-                  type="text"
+                  name="email"
+                  type="email"
                   placeholder="Email"
                   className="input input-bordered w-full focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                 />
@@ -76,6 +123,7 @@ const SignUp = () => {
                     <span className="label-text md:text-base">Username</span>
                   </label>
                   <input
+                    name="name"
                     type="text"
                     placeholder="Username"
                     className="input input-bordered w-full focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
@@ -89,7 +137,8 @@ const SignUp = () => {
                     <span className="label-text md:text-base">Contact No.</span>
                   </label>
                   <input
-                    type="text"
+                    name="number"
+                    type="number"
                     placeholder="Contact"
                     className="input input-bordered w-full focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                   />
@@ -106,6 +155,7 @@ const SignUp = () => {
                 </label>
                 <div className="relative">
                   <input
+                    name="password"
                     placeholder="Password"
                     type={values.showPassword ? "text" : "password"}
                     onChange={handlePasswordChange("password")}
@@ -150,10 +200,19 @@ const SignUp = () => {
               <span className="label-text-alt">Alt label</span>
             </label> */}
               </div>
+
+            {/* Error Message */}
+              {errorMessage}
+
               <button type="submit" className="btn btn-accent btn-block my-14">
                 Sign Up
               </button>
             </Form>
+            <div class="divider">OR</div>
+
+            <div className="text-center">
+              <button onClick={() => signInWithGoogle()} class="btn btn-accent sm:btn-sm md:btn-md lg:btn-lg">Google Registration</button>
+            </div>
           </RegisterContainer>
         </Wrapper>
       </Container>

@@ -4,10 +4,25 @@ import { Logo, NavLogo } from "../../layouts/Header/Header.elements";
 import headerLogo from "../../assets/Header/Logo1.png";
 import Food_delivery from "../../assets/Login/food_delivery.png";
 import HeroImg from "../../assets/Login/hero-login.jpg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Google } from "styled-icons/boxicons-logos";
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import Loading from "../../components/Shared/Loading/Loading";
 
 const SignIn = () => {
+
+  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+
+
+
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
@@ -19,11 +34,36 @@ const SignIn = () => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(email, password)
+    signInWithEmailAndPassword(email, password)
   };
 
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+
+  const navigate = useNavigate()
+    const location = useLocation()
+    let from = location.state?.from?.pathname || "/";
+
+    if (guser || user) {
+        console.log(guser || user)
+        navigate(from, { replace: true });
+        // navigate('/home')
+
+    }
+
+    if (loading || gloading) {
+        return <Loading></Loading>
+    }
+
+    let errorMessage;
+    if (error || gerror) {
+        console.log('error message',error || gerror)
+        errorMessage = <p className='text-red-500'>ErRoR: {error?.message || gerror?.message}</p>;
+    }
 
   return (
     <>
@@ -63,6 +103,7 @@ const SignIn = () => {
                   </span>
                 </label>
                 <input
+                  name="email"
                   type="text"
                   placeholder="Email"
                   className="input input-bordered w-full focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
@@ -80,6 +121,7 @@ const SignIn = () => {
                 </label>
                 <div className="relative">
                   <input
+                    name="password"
                     placeholder="Password"
                     type={values.showPassword ? "text" : "password"}
                     onChange={handlePasswordChange("password")}
