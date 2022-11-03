@@ -35,6 +35,19 @@ export const NavMenu = styled.ul`
   }
 `;
 
+export const UserNavContainer = styled.nav`
+  position: absolute;
+  top: 100px;
+  right: 2px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background-color: #e2e8f0;
+  color: gray;
+  padding: 4px;
+  border-radius: 5px;
+`;
 export const NavLogo = styled(Link)`
   cursor: pointer;
   text-decoration: none;
@@ -155,7 +168,8 @@ export const RegisterBtn = styled.button`
   font-weight: 700;
   text-transform: uppercase;
   color: #ffffff;
-  border: 2px solid #ffffff;
+  border: ${(props) =>
+    props.user ? "2px solid #e7272d" : "2px solid #ffffff"};
   background-color: transparent;
   background-repeat: no-repeat;
   outline: none;
@@ -180,12 +194,14 @@ export const RegisterBtn = styled.button`
   }
 
   &:before {
-    border-top: 2px solid #fff;
+    border-top: ${(props) =>
+      props.user ? "2px solid #e7272d" : "2px solid #ffffff"};
     right: 0;
     top: -4px;
   }
   &:after {
-    border-bottom: 2px solid #fff;
+    border-bottom: ${(props) =>
+      props.user ? "2px solid #e7272d" : "2px solid #ffffff"};
     bottom: -4px;
     left: 0;
   }
@@ -210,4 +226,28 @@ export const MobileIcon = styled.div`
     font-size: 1.8rem;
     cursor: pointer;
   }
+`;
+
+export const CartBtn = styled.div`
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: block;
+  min-width: 64px;
+  padding: 0 5px;
+  position: relative;
+  z-index: 2;
+  color: red;
+  transition: background-color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+`;
+export const UserProfile = styled.div`
+  display: flex;
+  place-items: center;
+  cursor: pointer;
+`;
+export const ProfileImage = styled.div`
+  width: 42px;
+  height: 42px;
+  margin: 0 5px;
 `;

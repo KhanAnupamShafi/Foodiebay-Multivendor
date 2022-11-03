@@ -1,29 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Logo, NavLogo } from "../../layouts/Header/Header.elements";
 import headerLogo from "../../assets/Header/Logo1.png";
 import Food_delivery from "../../assets/Login/food_delivery.png";
 import HeroImg from "../../assets/Login/hero-login.jpg";
-import { Link } from "react-router-dom";
-import { Google } from "styled-icons/boxicons-logos";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import Loading from "../../components/Shared/Loading/Loading";
+import { useForm } from "react-hook-form";
 
 const SignIn = () => {
-  const [values, setValues] = React.useState({
+  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+  const [checked, setChecked] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  const [values, setValues] = useState({
     password: "",
     showPassword: false,
   });
 
+  const onSubmit = (data) => {
+    signInWithEmailAndPassword(data.email, data.password);
+  };
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+    // const email = event.target.email.value;
+    // const password = event.target.password.value;
+    // console.log(email, password);
+    // signInWithEmailAndPassword(email, password);
   };
 
   const handlePasswordChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
+  if (guser || user) {
+    console.log(guser || user);
+    navigate(from, { replace: true });
+    // navigate('/home')
+  }
+  let loadingButton;
+  if (loading || gloading) {
+    loadingButton = <Loading />;
+  }
+
+  let errorMessage;
+  if (error || gerror) {
+    console.log("error message", error || gerror);
+    errorMessage = (
+      <p className="m-auto text-red-500">{error?.message || gerror?.message}</p>
+    );
+  }
 
   return (
     <>
@@ -55,7 +105,7 @@ const SignIn = () => {
               </p>
             </Top>
             <h1 className="text-5xl md:text-6xl py-4">Sign In</h1>
-            <Form onSubmit={handleMouseDownPassword}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text md:text-base">
@@ -63,13 +113,34 @@ const SignIn = () => {
                   </span>
                 </label>
                 <input
+                  {...register("email", {
+                    required: {
+                      value: true,
+                      message: "Email Required !",
+                    },
+                    pattern: {
+                      value:
+                        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                      message: "Provide a valid email!",
+                    },
+                  })}
+                  name="email"
                   type="text"
                   placeholder="Email"
                   className="input input-bordered w-full focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                 />
-                {/* <label className="label">
-            <span className="label-text-alt">Alt label</span>
-            </label> */}
+                <label className="label">
+                  {errors.email?.type === "required" && (
+                    <span className="label-text-alt text-red-500">
+                      {errors.email.message}
+                    </span>
+                  )}
+                  {errors.email?.type === "pattern" && (
+                    <span className="label-text-alt text-red-500">
+                      {errors.email.message}
+                    </span>
+                  )}
+                </label>
               </div>
 
               <div className="form-control w-full pt-5">
@@ -80,12 +151,24 @@ const SignIn = () => {
                 </label>
                 <div className="relative">
                   <input
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Password Required !",
+                      },
+                      minLength: {
+                        value: 6,
+                        message: "Must be 6 character or longer",
+                      },
+                    })}
+                    name="password"
                     placeholder="Password"
                     type={values.showPassword ? "text" : "password"}
                     onChange={handlePasswordChange("password")}
                     value={values.password}
                     className="input input-bordered w-full focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
                   />
+
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                     <button
                       onClick={handleClickShowPassword}
@@ -120,17 +203,49 @@ const SignIn = () => {
                     </button>
                   </div>
                 </div>
-                {/* <label className="label">
-            <span className="label-text-alt">Alt label</span>
-            </label> */}
+                <label className="label">
+                  {errors.password?.type === "required" && (
+                    <span className="label-text-alt text-red-500">
+                      {errors.password.message}
+                    </span>
+                  )}
+                  {errors.password?.type === "minLength" && (
+                    <span className="label-text-alt text-red-500">
+                      {errors.password.message}
+                    </span>
+                  )}
+                </label>
+                <label className="label">
+                  <div className="form-control">
+                    <label className="label cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={handleChange}
+                        className="checkbox"
+                      />
+                      <span className="label-text ml-2">Remember me</span>
+                    </label>
+                  </div>
+                  <label className="label">
+                    <span className="label-text-alt cursor-pointer">
+                      Forgot password?
+                    </span>
+                  </label>
+                </label>
               </div>
+              {errorMessage}
               <button type="submit" className="btn btn-accent btn-block my-10">
                 Sign In
               </button>
+              {loadingButton}
             </Form>
             <div className="divider">OR</div>
             <ButtonGroup>
-              <button className="btn btn-outline btn-warning  flex-auto sm:flex-1">
+              <button
+                onClick={() => signInWithGoogle()}
+                className="btn btn-outline btn-warning  flex-auto md:flex-1"
+              >
                 <svg
                   width="24"
                   height="24"
@@ -175,7 +290,7 @@ const SignIn = () => {
                   width="36"
                   height="36"
                   fill="none"
-                  ariaHidden="true"
+                  aria-hidden="true"
                   className="styles__StyledInlineSvg-sc-12l8vvi-0 bLgQGi"
                   viewBox="0 0 24 24"
                   style={{ marginRight: 4 }}
@@ -192,7 +307,7 @@ const SignIn = () => {
                   width="36"
                   height="36"
                   fill="none"
-                  ariaHidden="true"
+                  aria-hidden="true"
                   className="styles__StyledInlineSvg-sc-12l8vvi-0 bLgQGi"
                   viewBox="0 0 24 24"
                   style={{ marginRight: 4 }}

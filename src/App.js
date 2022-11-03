@@ -2,8 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
 import "./App.css";
+import Blogs from "./pages/Blogs/Blogs";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
+import RequireAuth from "./pages/Register/RequireAuth";
 import SignIn from "./pages/Register/SignIn";
 import SignUp from "./pages/Register/SignUp";
 
@@ -13,6 +15,13 @@ function App() {
       <Routes>
         <Route index path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
+
+        <Route path="blog" element={
+          <RequireAuth>
+            <Blogs></Blogs>
+          </RequireAuth>
+        }></Route>
+
         <Route path="signup" element={<SignUp />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="*" element={<NotFound />} />
