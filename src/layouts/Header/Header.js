@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-
+import DefaultPic from "../../assets/Login/default_pic.jpg";
 import headerLogo from "../../assets/Header/Logo1.png";
 import {
   NavContainer,
+  CartBtn,
   Logo,
   LeftNav,
   RightNav,
@@ -15,17 +16,20 @@ import {
   NavMenu,
   NavItemBtn,
   NavLogo,
+  UserNavContainer,
+  UserProfile,
+  ProfileImage,
 } from "./Header.elements";
 
 import { Menu3, Close } from "styled-icons/remix-line";
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
+import { ShoppingCartOutline } from "@styled-icons/evaicons-outline/ShoppingCartOutline";
 
 const Header = () => {
-
   const [user] = useAuthState(auth);
-  console.log(user)
+  console.log(user);
   const logout = () => {
     signOut(auth);
   };
@@ -81,19 +85,7 @@ const Header = () => {
                 Blog
               </NavLink>
             </ListItem>
-            <ListItem>
-              {
-                user ?
-                  <button onClick={logout} className='btn btn-warning'>SignOut</button>
-                  :
-                  <NavLink to="/signin" onClick={closeMobileMenu}>
-                    Signin
-                  </NavLink>
-              }
-              {/* <NavLink to="/signin" onClick={closeMobileMenu}>
-                Signin
-              </NavLink> */}
-            </ListItem>
+
             <NavItemBtn>
               {!button && (
                 <>
@@ -116,15 +108,45 @@ const Header = () => {
           <Link to="/signup">
             <BookingBtn>Book A table</BookingBtn>
           </Link>
-          <Link to="/signup">
-            <RegisterBtn>Sign Up</RegisterBtn>
-          </Link>
+          {user ? (
+            <RegisterBtn user onClick={logout}>
+              Sign Out
+            </RegisterBtn>
+          ) : (
+            <Link to="/signup">
+              <RegisterBtn>Sign Up</RegisterBtn>
+            </Link>
+          )}
         </RightNav>
         <MobileIcon onClick={handleClick}>
           {!click ? <Menu3 size="48" /> : <Close size="48" />}
         </MobileIcon>
       </NavContainer>
       <NavOverlay></NavOverlay>
+      {user && (
+        <UserNavContainer>
+          <div className="grid z-10 flex-grow  bg-slate-200  place-items-center p-1">
+            <UserProfile>
+              <ProfileImage>
+                <img
+                  src={user.photoURL ? user.photoURL : DefaultPic}
+                  alt="..."
+                  class="shadow rounded-full max-w-full h-auto align-middle border-none"
+                />
+              </ProfileImage>
+              <p className="px-1 font-bold text-red-400">
+                {user.displayName ? user?.displayName : "user"}
+              </p>
+            </UserProfile>
+          </div>
+          <div className="divider divider-horizontal p-0 m-0"></div>
+          <div className="grid z-10 flex-grow  bg-slate-300  place-items-center p-1">
+            <CartBtn>
+              <ShoppingCartOutline width={42} />
+            </CartBtn>
+          </div>
+        </UserNavContainer>
+      )}
     </>
   );
 };
