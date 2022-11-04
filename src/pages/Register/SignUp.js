@@ -13,6 +13,7 @@ import {
 } from "react-firebase-hooks/auth";
 import Loading from "../../components/Shared/Loading/Loading";
 import { useForm } from "react-hook-form";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
@@ -30,13 +31,17 @@ const SignUp = () => {
   // update user Name....
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+  // Custom Hook (useToken)....
+  const [Token]=useToken(guser || user)
+
+
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
   });
   const navigate = useNavigate();
-  const location = useLocation();
-  let from = location.state?.from?.pathname || "/";
+  // const location = useLocation();
+  // let from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
@@ -68,7 +73,7 @@ const SignUp = () => {
 
   if (guser || user) {
     console.log(guser || user);
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   }
 
   let loadingButton;
