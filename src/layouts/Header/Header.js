@@ -86,11 +86,6 @@ const Header = () => {
                 Blog
               </NavLink>
             </ListItem>
-            <ListItem>
-              <NavLink to="/dashboard" onClick={closeMobileMenu}>
-                Dashboard
-              </NavLink>
-            </ListItem>
 
             <NavItemBtn>
               {!button && (
