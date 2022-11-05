@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import DefaultPic from "../../assets/Login/default_pic.jpg";
 import headerLogo from "../../assets/Header/Logo1.png";
+import { ChevronDown } from "@styled-icons/entypo/ChevronDown";
 import {
   NavContainer,
   CartBtn,
@@ -100,9 +101,15 @@ const Header = () => {
                     </NavLink>
                   </ListItem>
                   <ListItem>
-                    <Link to="/signup">
-                      <RegisterBtn>Sign Up</RegisterBtn>
-                    </Link>
+                    {user ? (
+                      <RegisterBtn user onClick={logout}>
+                        Sign Out
+                      </RegisterBtn>
+                    ) : (
+                      <Link to="/signup">
+                        <RegisterBtn>Sign Up</RegisterBtn>
+                      </Link>
+                    )}
                   </ListItem>
                 </>
               )}
@@ -134,14 +141,50 @@ const Header = () => {
             <UserProfile>
               <ProfileImage>
                 <img
-                  src={user.photoURL ? user.photoURL : DefaultPic}
+                  src={user?.photoURL ? user.photoURL : DefaultPic}
                   alt="..."
                   class="shadow rounded-full max-w-full h-auto align-middle border-none"
                 />
               </ProfileImage>
-              <p className="px-1 font-bold text-red-400">
-                {user.displayName ? user?.displayName : "user"}
+              <p className="px-1 font-bold text-slate-600">
+                {user?.displayName ? user?.displayName : "user"}
               </p>
+
+              <div className="dropdown dropdown-end">
+                <button
+                  tabIndex={0}
+                  className="btn btn-circle btn-ghost btn-sm"
+                >
+                  <ChevronDown width={24} height={24} />
+                </button>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content mt-4 menu p-2 gap-2 shadow bg-slate-100 rounded w-52"
+                >
+                  <li>
+                    <Link to="/dashboard" className="p-0">
+                      <button className="btn btn-ghost btn-block">
+                        Profile
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/orders" className="p-0">
+                      <button className="btn btn-ghost btn-block">
+                        Orders
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      className="btn btn-outline btn-error"
+                      onClick={logout}
+                    >
+                      Sign Out
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </UserProfile>
           </div>
           <div className="divider divider-horizontal p-0 m-0"></div>

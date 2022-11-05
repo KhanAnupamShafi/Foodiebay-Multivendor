@@ -39,10 +39,6 @@ const SignIn = () => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
-    // const email = event.target.email.value;
-    // const password = event.target.password.value;
-    // console.log(email, password);
-    // signInWithEmailAndPassword(email, password);
   };
 
   const handlePasswordChange = (prop) => (event) => {
@@ -143,7 +139,7 @@ const SignIn = () => {
                 </label>
               </div>
 
-              <div className="form-control w-full pt-5">
+              <div className="form-control w-full pt-2">
                 <label className="label">
                   <span className="label-text md:text-base">
                     Enter your password
@@ -235,7 +231,7 @@ const SignIn = () => {
                 </label>
               </div>
               {errorMessage}
-              <button type="submit" className="btn btn-accent btn-block my-10">
+              <button type="submit" className="btn btn-accent btn-block my-8">
                 Sign In
               </button>
               {loadingButton}
@@ -244,7 +240,7 @@ const SignIn = () => {
             <ButtonGroup>
               <button
                 onClick={() => signInWithGoogle()}
-                className="btn btn-outline btn-warning  flex-auto md:flex-1"
+                className="btn btn-outline btn-accent flex-auto md:flex-1"
               >
                 <svg
                   width="24"
@@ -373,7 +369,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 80px;
 `;
 const RegisterContainer = styled.div.attrs({ className: "text-left" })`
   margin: auto 10px;
@@ -381,7 +377,7 @@ const RegisterContainer = styled.div.attrs({ className: "text-left" })`
   background-color: #fff;
   box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.08);
   border-radius: 40px;
-  padding: 40px;
+  padding: 35px;
 
   @media screen and (max-width: 540px) {
     max-width: auto;
@@ -400,14 +396,18 @@ const Form = styled.form`
 
 const LogoContainer = styled.div`
   position: absolute;
-  top: 2%;
+  top: 5px;
   left: 5%;
-  width: 100px;
+
   z-index: 1;
+  img {
+    width: 100px;
+    height: 80px;
+  }
 `;
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
 `;

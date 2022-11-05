@@ -6,6 +6,10 @@ module.exports = {
       fontFamily: {
         uber: ["Uber", "sans-serif"],
       },
+      colors: {
+        lightOrange: "#FEEFE7",
+        softOrange: "#FBCDB4",
+      },
     },
     daisyui: {
       themes: [

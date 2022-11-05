@@ -32,8 +32,7 @@ const SignUp = () => {
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
   // Custom Hook (useToken)....
-  const [Token]=useToken(guser || user)
-
+  const [Token] = useToken(guser || user);
 
   const [values, setValues] = React.useState({
     password: "",
@@ -55,16 +54,6 @@ const SignUp = () => {
 
   const handleMouseDownPassword = async (event) => {
     event.preventDefault();
-    // const name = event.target.name.value;
-    // const email = event.target.email.value;
-    // const number = event.target.number.value;
-    // const password = event.target.password.value;
-    // console.log(name, email, number, password);
-    // await createUserWithEmailAndPassword(email, password);
-    // await updateProfile({ displayName: name });
-    // alert("Updated profile");
-    // console.log("Update done");
-    // navigate("/home");
   };
 
   const handlePasswordChange = (prop) => (event) => {
@@ -297,7 +286,7 @@ const SignUp = () => {
               </button>
               {loadingButton}
             </Form>
-            <div className="divider">OR</div>
+            {/* <div className="divider">OR</div>
 
             <div className="text-center">
               <button
@@ -342,7 +331,7 @@ const SignUp = () => {
                 </svg>
                 <span>Sign in With Google</span>
               </button>
-            </div>
+            </div> */}
           </RegisterContainer>
         </Wrapper>
       </Container>
