@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 import "./App.css";
 import Blogs from "./pages/Blogs/Blogs";
+import AllUsers from "./pages/Dashboard/AllUsers/AllUsers";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import MyProfile from "./pages/Dashboard/MyProfile";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import RequireAuth from "./pages/Register/RequireAuth";
@@ -24,6 +27,13 @@ function App() {
 
         <Route path="signup" element={<SignUp />} />
         <Route path="signin" element={<SignIn />} />
+
+        {/* Dashboard.... */}
+        <Route path="/dashboard" element={<Dashboard></Dashboard>} >
+          <Route index element={<MyProfile></MyProfile>}></Route>
+          <Route path='allUsers' element={<AllUsers></AllUsers>}></Route>
+
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </RootContainer>

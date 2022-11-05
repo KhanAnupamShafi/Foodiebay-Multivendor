@@ -13,6 +13,7 @@ import {
 } from "react-firebase-hooks/auth";
 import Loading from "../../components/Shared/Loading/Loading";
 import { useForm } from "react-hook-form";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
@@ -30,13 +31,16 @@ const SignUp = () => {
   // update user Name....
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+  // Custom Hook (useToken)....
+  const [Token] = useToken(guser || user);
+
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
   });
   const navigate = useNavigate();
-  const location = useLocation();
-  let from = location.state?.from?.pathname || "/";
+  // const location = useLocation();
+  // let from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
@@ -50,16 +54,6 @@ const SignUp = () => {
 
   const handleMouseDownPassword = async (event) => {
     event.preventDefault();
-    // const name = event.target.name.value;
-    // const email = event.target.email.value;
-    // const number = event.target.number.value;
-    // const password = event.target.password.value;
-    // console.log(name, email, number, password);
-    // await createUserWithEmailAndPassword(email, password);
-    // await updateProfile({ displayName: name });
-    // alert("Updated profile");
-    // console.log("Update done");
-    // navigate("/home");
   };
 
   const handlePasswordChange = (prop) => (event) => {
@@ -68,7 +62,7 @@ const SignUp = () => {
 
   if (guser || user) {
     console.log(guser || user);
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   }
 
   let loadingButton;
@@ -292,7 +286,7 @@ const SignUp = () => {
               </button>
               {loadingButton}
             </Form>
-            <div className="divider">OR</div>
+            {/* <div className="divider">OR</div>
 
             <div className="text-center">
               <button
@@ -337,7 +331,7 @@ const SignUp = () => {
                 </svg>
                 <span>Sign in With Google</span>
               </button>
-            </div>
+            </div> */}
           </RegisterContainer>
         </Wrapper>
       </Container>

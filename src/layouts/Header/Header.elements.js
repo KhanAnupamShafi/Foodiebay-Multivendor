@@ -128,6 +128,9 @@ export const NavOverlay = styled.div`
 export const Logo = styled.img`
   height: 100px;
 `;
+export const LogoImage = styled.img`
+  height: 100px;
+`;
 export const LeftNav = styled.div`
   margin-left: 2rem;
 `;
