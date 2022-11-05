@@ -30,7 +30,7 @@ import { ShoppingCartOutline } from "@styled-icons/evaicons-outline/ShoppingCart
 
 const Header = () => {
   const [user] = useAuthState(auth);
-  console.log(user);
+  // console.log(user);
   const logout = () => {
     signOut(auth);
   };
