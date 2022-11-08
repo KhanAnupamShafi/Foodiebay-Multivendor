@@ -22,10 +22,10 @@ const Dashboard = () => {
           {/* <!-- Page content here --> */}
           <nav
             aria-label="menu nav"
-            class="border-2 border-softOrange mb-6 pt-2 md:pt-1 pb-1 px-1 rounded mt-0 w-full h-auto "
+            className="border-2 border-softOrange mb-6 pt-2 md:pt-1 pb-1 px-1 rounded mt-0 w-full h-auto "
           >
-            <div class="flex flex-wrap items-center justify-between">
-              <div class="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
+            <div className="flex flex-wrap items-center justify-between">
+              <div className="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
                 <label
                   htmlFor="dashboard-menu"
                   className="btn btn-ghost color-softOrange drawer-button lg:hidden"
@@ -34,33 +34,33 @@ const Dashboard = () => {
                 </label>
               </div>
 
-              <div class="flex w-full pt-2 content-center justify-between md:w-1/3 md:justify-end">
-                <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
-                  <li class="flex-1 md:flex-none md:mr-3">
+              <div className="flex w-full pt-2 content-center justify-between md:w-1/3 md:justify-end">
+                <ul className="list-reset flex justify-between flex-1 md:flex-none items-center">
+                  <li className="flex-1 md:flex-none md:mr-3">
                     <Link
-                      class="inline-block py-2 px-4 text-orange-900 hover:text-orange-700 no-underline"
+                      className="inline-block py-2 px-4 text-orange-900 hover:text-orange-700 no-underline"
                       to="/"
                     >
                       Home
                     </Link>
                   </li>
-                  <li class="flex-1 md:flex-none md:mr-3">
+                  <li className="flex-1 md:flex-none md:mr-3">
                     <a
-                      class="inline-block text-gray-400 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
+                      className="inline-block text-gray-400 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
                       href="/"
                     >
                       Restaurants
                     </a>
                   </li>
-                  <li class="flex-2  md:flex-none md:mr-3 ">
-                    <div class="relative inline-block ">
-                      <button class="drop-button text-red-800 rounded py-2 px-2 bg-softOrange">
-                        <span class="pr-2">
-                          <i class="em em-robot_face"></i>
+                  <li className="flex-2  md:flex-none md:mr-3 ">
+                    <div className="relative inline-block ">
+                      <button className="drop-button text-red-800 rounded py-2 px-2 bg-softOrange">
+                        <span className="pr-2">
+                          <i className="em em-robot_face"></i>
                         </span>{" "}
                         Hi, {user?.displayName ? user?.displayName : "user"}
                         <svg
-                          class="h-3 fill-current inline"
+                          className="h-3 fill-current inline"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                         >
@@ -73,13 +73,13 @@ const Dashboard = () => {
                       <p className="text-right text-xs">Admin</p>
                     </div>
                   </li>
-                  <li class="flex-1 md:flex-none hidden md:block md:mr-3">
+                  <li className="flex-1 md:flex-none hidden md:block md:mr-3">
                     {" "}
                     <ProfileImage>
                       <img
                         src={user?.photoURL ? user.photoURL : DefaultPic}
                         alt="..."
-                        class="shadow rounded-full max-w-full h-auto align-middle border-none"
+                        className="shadow rounded-full max-w-full h-auto align-middle border-none"
                       />
                     </ProfileImage>
                   </li>
