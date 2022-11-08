@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Food_delivery from "../../assets/Login/food_delivery.png";
 import HeroImg from "../../assets/Login/hero-login.jpg";
 import { Logo, NavLogo } from "../../layouts/Header/Header.elements";
 import headerLogo from "../../assets/Header/Logo1.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import {
   useCreateUserWithEmailAndPassword,
@@ -16,7 +16,20 @@ import { useForm } from "react-hook-form";
 import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
+  // sign up with (Email & Password)
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+
+  // update user Name....
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  // Custom Hook (useToken)....
+  const [token] = useToken(guser || user);
+
+  const navigate = useNavigate();
+  // const location = useLocation();
+  // let from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -24,23 +37,39 @@ const SignUp = () => {
     handleSubmit,
   } = useForm();
 
-  // sign up with (Email & Password)
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  let loadingButton;
 
-  // update user Name....
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  let errorMessage;
 
-  // Custom Hook (useToken)....
-  const [Token] = useToken(guser || user);
+  if (loading || gloading || updating) {
+    loadingButton = <Loading />;
+  }
 
+  if (error || gerror || updateError) {
+    console.log("error message", error || gerror || updateError);
+    errorMessage = (
+      <p className="text-red-500">
+        Error: {error?.message || gerror?.message || updateError?.message}
+      </p>
+    );
+  }
+
+  //useEffect required to avoid Cannot update a component error
+  useEffect(() => {
+    if (token) {
+      navigate("/", { replace: "true" });
+    }
+  }, [token, navigate]);
+
+  useEffect(() => {
+    if (guser) {
+      navigate("/home");
+    }
+  }, [guser, navigate]);
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
   });
-  const navigate = useNavigate();
-  // const location = useLocation();
-  // let from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
@@ -60,25 +89,6 @@ const SignUp = () => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  if (guser || user) {
-    console.log(guser || user);
-    // navigate(from, { replace: true });
-  }
-
-  let loadingButton;
-
-  if (loading || gloading || updating) {
-    loadingButton = <Loading />;
-  }
-  let errorMessage;
-  if (error || gerror || updateError) {
-    console.log("error message", error || gerror || updateError);
-    errorMessage = (
-      <p className="text-red-500">
-        Error: {error?.message || gerror?.message || updateError?.message}
-      </p>
-    );
-  }
   return (
     <>
       <Container>
@@ -286,7 +296,7 @@ const SignUp = () => {
               </button>
               {loadingButton}
             </Form>
-            {/* <div className="divider">OR</div>
+            <div className="divider">OR</div>
 
             <div className="text-center">
               <button
@@ -331,7 +341,7 @@ const SignUp = () => {
                 </svg>
                 <span>Sign in With Google</span>
               </button>
-            </div> */}
+            </div>
           </RegisterContainer>
         </Wrapper>
       </Container>

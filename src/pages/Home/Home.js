@@ -4,9 +4,11 @@ import Header from "../../layouts/Header/Header";
 import video from "../../assets/Banner/FoodVideo.mp4";
 import Banner from "../../components/Banner/Banner";
 import HeroImg from "../../assets/Banner/hero_image.png";
+import BusinessBanner from "../../components/BusinessBanner/BusinessBanner";
 const Home = () => {
   return (
     <>
+      <BusinessBanner />
       <Container>
         <BackgroundVideo autoPlay loop muted playsInline>
           <source src={video} type="video/mp4" />

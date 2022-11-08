@@ -138,7 +138,7 @@ const Header = () => {
                 <img
                   src={user?.photoURL ? user.photoURL : DefaultPic}
                   alt="..."
-                  class="shadow rounded-full max-w-full h-auto align-middle border-none"
+                  className="shadow rounded-full max-w-full h-auto align-middle border-none"
                 />
               </ProfileImage>
               <p className="px-1 font-bold text-slate-600">

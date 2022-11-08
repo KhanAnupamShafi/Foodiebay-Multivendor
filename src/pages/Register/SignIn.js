@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Logo, NavLogo } from "../../layouts/Header/Header.elements";
 import headerLogo from "../../assets/Header/Logo1.png";
@@ -53,11 +53,14 @@ const SignIn = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  if (guser || user) {
-    console.log(guser || user);
-    navigate(from, { replace: true });
-    // navigate('/home')
-  }
+  useEffect(() => {
+    if (guser || user) {
+      console.log(guser || user);
+      navigate(from, { replace: true });
+      // navigate('/home')
+    }
+  }, [guser, user, from, navigate]);
+
   let loadingButton;
   if (loading || gloading) {
     loadingButton = <Loading />;
