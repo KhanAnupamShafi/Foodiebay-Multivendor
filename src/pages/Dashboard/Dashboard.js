@@ -11,9 +11,12 @@ import DefaultPic from "../../assets/Login/default_pic.jpg";
 import { Menu } from "@styled-icons/zondicons/Menu";
 import { AdminPanelSettings } from "@styled-icons/material/AdminPanelSettings";
 import headerLogo from "../../assets/Header/Logo2.png";
+import useAdmin from "../../hooks/useAdmin";
 
 const Dashboard = () => {
   const [user] = useAuthState(auth);
+
+  const [admin] = useAdmin(user)
   return (
     <>
       <div className="drawer drawer-mobile  bg-lightOrange pt-2 md:pt-1 pb-1 px-1 mt-0 font-uber">
@@ -103,7 +106,11 @@ const Dashboard = () => {
             </li>
             <li>
               {" "}
-              <Link to="/dashboard/allUsers">All Users</Link>{" "}
+
+              {admin && <Link to="/dashboard/allUsers">All Users</Link>}
+
+              {" "}
+
             </li>
           </ul>
         </div>

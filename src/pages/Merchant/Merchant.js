@@ -153,7 +153,7 @@ const Merchant = () => {
                 </div>
                 <div className="form-control w-full max-w-xs pt-5">
                   <input
-                    required
+                    // required
                     {...register("banner", {})}
                     type="url"
                     placeholder="Company Banner"
@@ -162,7 +162,7 @@ const Merchant = () => {
                 </div>
                 <div className="form-control w-full max-w-xs pt-5">
                   <input
-                    required
+                    // required
                     {...register("logo", {})}
                     type="url"
                     placeholder="Company Logo"
@@ -175,7 +175,7 @@ const Merchant = () => {
                       <Location width={24} />
                     </span>
                     <input
-                      required
+                      // required
                       {...register("address", {})}
                       type="text"
                       placeholder="Address"

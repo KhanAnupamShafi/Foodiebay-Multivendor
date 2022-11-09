@@ -14,6 +14,12 @@ import SignUp from "./pages/Register/SignUp";
 import Payment from "./pages/Dashboard/Payment";
 import Merchant from "./pages/Merchant/Merchant";
 
+// Toastify...
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+import RequireAdmin from "./pages/Register/RequireAdmin";
+
 function App() {
   return (
     <RootContainer>
@@ -44,7 +50,13 @@ function App() {
         {/* Dashboard.... */}
         <Route path="/dashboard" element={<Dashboard></Dashboard>}>
           <Route index element={<MyProfile></MyProfile>}></Route>
-          <Route path="allUsers" element={<AllUsers></AllUsers>}></Route>
+
+          <Route path="allUsers" element={
+            <RequireAdmin>
+              <AllUsers></AllUsers>
+            </RequireAdmin>
+          }></Route>
+
           <Route
             path="payment/:paymentId"
             element={<Payment></Payment>}
@@ -52,7 +64,10 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      <ToastContainer />
     </RootContainer>
+
   );
 }
 
