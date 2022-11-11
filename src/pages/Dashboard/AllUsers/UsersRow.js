@@ -1,7 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
-const UsersRow = ({ user, index }) => {
-  const { _id, email } = user;
+const UsersRow = ({ user, index, refetch }) => {
+  const { _id, email, role } = user;
+
+  // Make (Admin)...
+  const makeAdmin = () => {
+    fetch(`http://localhost:5000/users/admin/${email}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          refetch();
+          toast.success("Successfully Make an Admin");
+        }
+      });
+  };
+
+  // Delete Users.....
+  const [users, setUsers] = useState([]);
+  console.log(users);
+  const handleDeleteUser = (id) => {
+    const proceed = window.confirm("Are you sure to Delete this User");
+    if (proceed) {
+      fetch(`http://localhost:5000/deleteUsers/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          const remaining = users.filter((user) => user._id !== id);
+          console.log(remaining);
+          refetch();
+          setUsers(remaining);
+        });
+    }
+  };
 
   return (
     <tr>
@@ -18,8 +59,25 @@ const UsersRow = ({ user, index }) => {
           </div>
         </div>
       </td>
-      <td>Zemlak, Daniel and Leannon</td>
-      <td>Purple</td>
+      <td className="font-bold">
+        <div>
+          {role !== "admin" ? (
+            <button onClick={makeAdmin} class="btn btn-xs text-warning">
+              Make Admin
+            </button>
+          ) : (
+            "ADMIN"
+          )}
+        </div>
+      </td>
+      <td>
+        <button
+          onClick={() => handleDeleteUser(_id)}
+          class="btn btn-xs text-warning"
+        >
+          Delete user
+        </button>
+      </td>
     </tr>
   );
 };

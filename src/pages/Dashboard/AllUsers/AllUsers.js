@@ -5,7 +5,11 @@ import UsersRow from "./UsersRow";
 
 const AllUsers = () => {
   // React Query....
-  const { data: users, isLoading } = useQuery("users", () =>
+  const {
+    data: users,
+    isLoading,
+    refetch,
+  } = useQuery("users", () =>
     fetch("http://localhost:5000/allUsers").then((res) => res.json())
   );
   if (isLoading) {
@@ -23,12 +27,17 @@ const AllUsers = () => {
               <th></th>
               <th>Email</th>
               <th>Create (Super Admin) & (Reataurant Vendor) </th>
-              <th>Favorite Color</th>
+              <th>Delete Users</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <UsersRow key={user._id} index={index} user={user}></UsersRow>
+              <UsersRow
+                key={user._id}
+                index={index}
+                user={user}
+                refetch={refetch}
+              ></UsersRow>
             ))}
           </tbody>
         </table>

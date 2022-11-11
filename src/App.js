@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "./App.css";
 import Blogs from "./pages/Blogs/Blogs";
 import AllUsers from "./pages/Dashboard/AllUsers/AllUsers";
+import AllVendors from "./pages/Dashboard/AllVendors/AllVendors";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import MyProfile from "./pages/Dashboard/MyProfile";
 import Home from "./pages/Home/Home";
@@ -13,6 +14,13 @@ import SignIn from "./pages/Register/SignIn";
 import SignUp from "./pages/Register/SignUp";
 import Payment from "./pages/Dashboard/Payment";
 import Merchant from "./pages/Merchant/Merchant";
+
+// Toastify...
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import RequireAdmin from "./pages/Register/RequireAdmin";
+import MakeVendor from "./pages/Dashboard/MakeVendor/MakeVendor";
 
 function App() {
   return (
@@ -44,7 +52,32 @@ function App() {
         {/* Dashboard.... */}
         <Route path="/dashboard" element={<Dashboard></Dashboard>}>
           <Route index element={<MyProfile></MyProfile>}></Route>
-          <Route path="allUsers" element={<AllUsers></AllUsers>}></Route>
+          <Route
+            path="makeVendor"
+            element={
+              <RequireAdmin>
+                <MakeVendor />
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="allVendors"
+            element={
+              <RequireAdmin>
+                <AllVendors />
+              </RequireAdmin>
+            }
+          ></Route>
+
+          <Route
+            path="allUsers"
+            element={
+              <RequireAdmin>
+                <AllUsers></AllUsers>
+              </RequireAdmin>
+            }
+          ></Route>
+
           <Route
             path="payment/:paymentId"
             element={<Payment></Payment>}
@@ -52,6 +85,8 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      <ToastContainer />
     </RootContainer>
   );
 }
