@@ -75,7 +75,10 @@ const MerchantStatus = ({ restaurantInfo, refetch }) => {
                   <div className="mask">
                     <div className="rounded-xl">
                       <img
-                        src="https://i.ibb.co/P4gYvWp/Disney-Logo.png"
+                        src={
+                          restaurantInfo.restaurantLogo ||
+                          "https://i.ibb.co/PhkSzrr/Wendys-Emblem.png"
+                        }
                         alt="Avatar Tailwind CSS Component"
                         className="object-contain h-16 w-24"
                       />
@@ -99,7 +102,13 @@ const MerchantStatus = ({ restaurantInfo, refetch }) => {
                 </span>
               </td>
               <td>
-                <span className="badge badge-warning gap-2 badge-md">
+                <span
+                  className={`badge badge-outline ${
+                    restaurantInfo.applicationStatus === "pending"
+                      ? "badge-warning"
+                      : "badge-primary"
+                  } gap-2 badge-lg font-bold`}
+                >
                   {restaurantInfo.applicationStatus === "pending"
                     ? "On Hold"
                     : "approved"}
@@ -117,7 +126,7 @@ const MerchantStatus = ({ restaurantInfo, refetch }) => {
                   <button
                     onClick={() => handleReApply()}
                     className="btn btn-outline btn-xs"
-                    disabled={!restaurantInfo.applicationStatus === "pending"}
+                    disabled={restaurantInfo.role === "vendor"}
                   >
                     Re-Apply
                   </button>

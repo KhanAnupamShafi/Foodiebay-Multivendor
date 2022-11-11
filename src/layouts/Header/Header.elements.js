@@ -54,6 +54,7 @@ export const NavLogo = styled(Link)`
   font-size: 2rem;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 export const ListItem = styled.li`

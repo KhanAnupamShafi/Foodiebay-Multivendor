@@ -33,7 +33,7 @@ const Merchant = () => {
       (res) => res.json()
     )
   );
-
+  console.log(restaurantInfo);
   const onSubmit = (data) => {
     const restaurantData = {
       ownerName: data.fName + " " + data.lName,
@@ -81,8 +81,7 @@ const Merchant = () => {
             <br />
             Try our easy, flexible corporate food delivery service today.
           </p>
-          {restaurantInfo?.applicationStatus === "pending" ||
-          application.acknowledged ? (
+          {restaurantInfo?.applicationStatus || application.acknowledged ? (
             <>
               <h1>Recieved Request</h1>
               <MerchantStatus
@@ -239,21 +238,24 @@ const CorporateContents = styled.div`
   }
   h3 {
     color: #707070;
-    font-size: 5rem;
+    font-size: 3rem;
+    font-weight: bold;
     font-family: "Uber", Arial, sans-serif;
     font-weight: 600;
     letter-spacing: 0.31px;
     margin: 0 0 32px;
     line-height: 60px;
     word-break: break-word;
+    margin-top: 64px;
   }
   p {
     color: #333;
-    font-family: "Uber", Arial, sans-serif;
+    /* font-family: "Uber", Arial, sans-serif; */
     font-weight: 400;
     letter-spacing: 0.1px;
     line-height: 24px;
-    margin: 0 0 32px;
+    margin-top: 32px;
+    padding-bottom: 30px;
   }
 `;
 const CorporateContentForm = styled.div`
