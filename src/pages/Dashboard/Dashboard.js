@@ -133,27 +133,32 @@ const Dashboard = () => {
                   <span>My Profile</span>
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  className={(navData) =>
-                    navData.isActive ? "active" : "linkstyle"
-                  }
-                  to="/dashboard/makeVendor"
-                >
-                  <Restaurant width={26} />
-                  <span>Make Vendor</span>
-                </NavLink>
-              </li>
-              <li>
-                {admin && (
+
+              {admin && (
+                <li>
+                  <NavLink
+                    className={(navData) =>
+                      navData.isActive ? "active" : "linkstyle"
+                    }
+                    to="/dashboard/makeVendor"
+                  >
+                    <Restaurant width={26} />
+                    <span>Make Vendor</span>
+                  </NavLink>
+                </li>
+              )}
+
+              {admin && (
+                <li>
                   <NavLink to="/merchants">
                     <ClipboardCheck width={26} />
                     <span>Vendor Status</span>
                   </NavLink>
-                )}
-              </li>
-              <li>
-                {admin && (
+                </li>
+              )}
+
+              {admin && (
+                <li>
                   <NavLink
                     className={(navData) =>
                       navData.isActive ? "active" : "linkstyle"
@@ -163,10 +168,11 @@ const Dashboard = () => {
                     <HouseChimneyUser width={26} />
                     <span> All Vendors</span>
                   </NavLink>
-                )}
-              </li>
-              <li>
-                {admin && (
+                </li>
+              )}
+
+              {admin && (
+                <li>
                   <NavLink
                     className={(navData) =>
                       navData.isActive ? "active" : "linkstyle"
@@ -176,8 +182,8 @@ const Dashboard = () => {
                     <UserGroup width={26} />
                     <span>All Users</span>
                   </NavLink>
-                )}
-              </li>
+                </li>
+              )}
             </div>
           </DashboarLinks>
         </div>
