@@ -26,7 +26,7 @@ const UsersRow = ({ user, index, refetch }) => {
 
   // Delete Users.....
   const [users, setUsers] = useState([]);
-  console.log(users);
+  // console.log(users);
   const handleDeleteUser = (id) => {
     const proceed = window.confirm("Are you sure to Delete this User");
     if (proceed) {

@@ -15,15 +15,18 @@ import useAdmin from "../../hooks/useAdmin";
 
 import styled, { keyframes } from "styled-components";
 import { DashboardCustomize, Restaurant } from "styled-icons/material";
-import { RestartAlt } from "styled-icons/material-twotone";
 import { HouseChimneyUser } from "styled-icons/fa-solid";
 import { UserGroup } from "styled-icons/heroicons-outline";
 import { ClipboardCheck } from "styled-icons/heroicons-solid";
+import useVendorAccess from "../../hooks/useVendor";
+import { Dish } from "styled-icons/boxicons-regular";
 
 const Dashboard = () => {
   const [user] = useAuthState(auth);
 
   const [admin] = useAdmin(user);
+  const [vendorAdmin] = useVendorAccess(user);
+  // console.log(vendorAdmin, "vendor");
   return (
     <>
       <div className="drawer drawer-mobile  bg-lightOrange pt-2 md:pt-1 pb-1 px-1 mt-0 font-uber">
@@ -96,6 +99,12 @@ const Dashboard = () => {
                         <p className="text-right text-xs">Admin</p>
                       </div>
                     )}
+                    {vendorAdmin && (
+                      <div className="flex items-center justify-end pt-1 font-bold">
+                        <AdminPanelSettings color="#473125" width={24} />
+                        <p className="text-right text-xs">Vendor Admin</p>
+                      </div>
+                    )}
                   </li>
                   <li className="flex-1 md:flex-none hidden md:block md:mr-3">
                     <ProfileImage>
@@ -140,7 +149,7 @@ const Dashboard = () => {
                     className={(navData) =>
                       navData.isActive ? "active" : "linkstyle"
                     }
-                    to="/dashboard/makeVendor"
+                    to="/dashboard/make_vendor"
                   >
                     <Restaurant width={26} />
                     <span>Make Vendor</span>
@@ -163,7 +172,7 @@ const Dashboard = () => {
                     className={(navData) =>
                       navData.isActive ? "active" : "linkstyle"
                     }
-                    to="/dashboard/allVendors"
+                    to="/dashboard/all_vendor"
                   >
                     <HouseChimneyUser width={26} />
                     <span> All Vendors</span>
@@ -177,10 +186,23 @@ const Dashboard = () => {
                     className={(navData) =>
                       navData.isActive ? "active" : "linkstyle"
                     }
-                    to="/dashboard/allUsers"
+                    to="/dashboard/all_user"
                   >
                     <UserGroup width={26} />
                     <span>All Users</span>
+                  </NavLink>
+                </li>
+              )}
+              {vendorAdmin && (
+                <li>
+                  <NavLink
+                    className={(navData) =>
+                      navData.isActive ? "active" : "linkstyle"
+                    }
+                    to="/dashboard/menu_list"
+                  >
+                    <Dish width={26} />
+                    <span>Menu List</span>
                   </NavLink>
                 </li>
               )}

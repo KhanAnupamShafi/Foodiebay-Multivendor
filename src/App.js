@@ -21,6 +21,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAdmin from "./pages/Register/RequireAdmin";
 import MakeVendor from "./pages/Dashboard/MakeVendor/MakeVendor";
+import RequireVendor from "./pages/Register/RequireVendor";
 
 function App() {
   return (
@@ -50,10 +51,17 @@ function App() {
         <Route path="signin" element={<SignIn />} />
 
         {/* Dashboard.... */}
-        <Route path="/dashboard" element={<Dashboard></Dashboard>}>
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard></Dashboard>
+            </RequireAuth>
+          }
+        >
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route
-            path="makeVendor"
+            path="make_vendor"
             element={
               <RequireAdmin>
                 <MakeVendor />
@@ -61,7 +69,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="allVendors"
+            path="all_vendor"
             element={
               <RequireAdmin>
                 <AllVendors />
@@ -70,11 +78,19 @@ function App() {
           ></Route>
 
           <Route
-            path="allUsers"
+            path="all_user"
             element={
               <RequireAdmin>
                 <AllUsers></AllUsers>
               </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="menu_list"
+            element={
+              <RequireVendor>
+                <AllUsers></AllUsers>
+              </RequireVendor>
             }
           ></Route>
 

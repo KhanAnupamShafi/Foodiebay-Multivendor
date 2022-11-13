@@ -3,18 +3,18 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate, useLocation } from "react-router-dom";
 import Loading from "../../components/Shared/Loading/Loading";
 import auth from "../../firebase.init";
-import useAdmin from "../../hooks/useAdmin";
+import useVendorAccess from "../../hooks/useVendor";
 
-const RequireAdmin = ({ children }) => {
+const RequireVendor = ({ children }) => {
   const [user, loading] = useAuthState(auth);
-  const [admin, adminLoading] = useAdmin(user);
+  const [vendorAdmin, vendorAdminLoader] = useVendorAccess(user);
   const location = useLocation();
 
-  if (loading || adminLoading) {
+  if (loading || vendorAdminLoader) {
     return <Loading></Loading>;
   }
 
-  if (!user || !admin) {
+  if (!user || !vendorAdmin) {
     signOut(auth);
     return <Navigate to="/signin" state={{ from: location }} replace />;
   }
@@ -22,4 +22,4 @@ const RequireAdmin = ({ children }) => {
   return children;
 };
 
-export default RequireAdmin;
+export default RequireVendor;

@@ -33,7 +33,7 @@ const Merchant = () => {
       (res) => res.json()
     )
   );
-  console.log(restaurantInfo);
+  // console.log(restaurantInfo);
   const onSubmit = (data) => {
     const restaurantData = {
       ownerName: data.fName + " " + data.lName,
