@@ -30,6 +30,7 @@ import { ShoppingCartOutline } from "@styled-icons/evaicons-outline/ShoppingCart
 
 const Header = () => {
   const [user] = useAuthState(auth);
+  const photo = user?.photoURL;
   // console.log(user);
   const logout = () => {
     signOut(auth);
@@ -137,7 +138,8 @@ const Header = () => {
               <ProfileImage>
                 <img
                   src={user?.photoURL ? user.photoURL : DefaultPic}
-                  alt="..."
+                  alt="profile avatar"
+                  referrerPolicy="no-referrer"
                   className="shadow rounded-full max-w-full h-auto align-middle border-none"
                 />
               </ProfileImage>

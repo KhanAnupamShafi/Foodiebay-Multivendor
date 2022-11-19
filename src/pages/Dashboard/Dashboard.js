@@ -20,6 +20,7 @@ import { UserGroup } from "styled-icons/heroicons-outline";
 import { ClipboardCheck } from "styled-icons/heroicons-solid";
 import useVendorAccess from "../../hooks/useVendor";
 import { Dish } from "styled-icons/boxicons-regular";
+import VendorLinks from "./VendorLinks";
 
 const Dashboard = () => {
   const [user] = useAuthState(auth);
@@ -111,6 +112,7 @@ const Dashboard = () => {
                       <img
                         src={user?.photoURL ? user.photoURL : DefaultPic}
                         alt="..."
+                        referrerPolicy="no-referrer"
                         className="shadow rounded-full max-w-full h-auto align-middle border-none"
                       />
                     </ProfileImage>
@@ -193,19 +195,7 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
               )}
-              {vendorAdmin && (
-                <li>
-                  <NavLink
-                    className={(navData) =>
-                      navData.isActive ? "active" : "linkstyle"
-                    }
-                    to="/dashboard/menu_list"
-                  >
-                    <Dish width={26} />
-                    <span>Menu List</span>
-                  </NavLink>
-                </li>
-              )}
+              {vendorAdmin && <VendorLinks />}
             </div>
           </DashboarLinks>
         </div>

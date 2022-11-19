@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React from "react";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
@@ -19,8 +20,13 @@ const MakeVendor = () => {
   }
 
   const handleApprove = (email) => {
+    const restaurantId = nanoid();
     fetch(`http://localhost:5000/restaurant/${email}`, {
       method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ restaurantId }),
     })
       .then((res) => {
         if (res.status === 403) {

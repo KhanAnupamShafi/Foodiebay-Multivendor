@@ -22,6 +22,8 @@ import "react-toastify/dist/ReactToastify.css";
 import RequireAdmin from "./pages/Register/RequireAdmin";
 import MakeVendor from "./pages/Dashboard/MakeVendor/MakeVendor";
 import RequireVendor from "./pages/Register/RequireVendor";
+import MenuList from "./pages/Dashboard/MenuList/MenuList";
+import AddMenu from "./pages/Dashboard/AddMenu/AddMenu";
 
 function App() {
   return (
@@ -89,7 +91,15 @@ function App() {
             path="menu_list"
             element={
               <RequireVendor>
-                <AllUsers></AllUsers>
+                <MenuList></MenuList>
+              </RequireVendor>
+            }
+          ></Route>
+          <Route
+            path="add_menu"
+            element={
+              <RequireVendor>
+                <AddMenu></AddMenu>
               </RequireVendor>
             }
           ></Route>
