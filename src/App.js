@@ -24,6 +24,7 @@ import MakeVendor from "./pages/Dashboard/MakeVendor/MakeVendor";
 import RequireVendor from "./pages/Register/RequireVendor";
 import MenuList from "./pages/Dashboard/MenuList/MenuList";
 import AddMenu from "./pages/Dashboard/AddMenu/AddMenu";
+import Restaurant from "./pages/Restaurant/Restaurant";
 
 function App() {
   return (
@@ -48,7 +49,10 @@ function App() {
             </RequireAuth>
           }
         ></Route>
-
+        <Route
+          path="restaurant/:restaurantId"
+          element={<Restaurant></Restaurant>}
+        ></Route>
         <Route path="signup" element={<SignUp />} />
         <Route path="signin" element={<SignIn />} />
 

@@ -3,12 +3,15 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import auth from "../../firebase.init";
 import BD from "../../assets/Form/bangladesh-flag-icon.svg";
+import BG from "../../assets/Merchant/merchant_img.png";
 import { Location } from "styled-icons/entypo";
 import { useForm } from "react-hook-form";
 import { format } from "date-fns";
 import { useQuery } from "react-query";
 import MerchantStatus from "./MerchantStatus";
 import { useNavigate } from "react-router-dom";
+import { Logo, NavLogo } from "../../layouts/Header/Header.elements";
+import headerLogo from "../../assets/Header/Logo2.png";
 
 const Merchant = () => {
   const [user] = useAuthState(auth);
@@ -40,6 +43,7 @@ const Merchant = () => {
       contact: data.mobile,
       email: user?.email,
       restaurantName: data.restaurant,
+      restaurantType: data.type,
       restaurantBanner: data.banner,
       restaurantLogo: data.logo,
       restaurantAddress: data.address,
@@ -72,9 +76,12 @@ const Merchant = () => {
   return (
     <MerchantSecion>
       <CorporateApplyContainer>
-        <Overlay />
+        <Overlay></Overlay>
         <CorporateContents>
-          <h3>Get in touch with our dedicated support today!</h3>
+          <NavLogo to="/">
+            <Logo src={headerLogo} alt="Company Logo" />
+          </NavLogo>
+          <h3>START GROWING YOUR BUSINESS TODAY</h3>
           <p>
             Let your employees focus on what's important. We'll take care of the
             food they love.
@@ -151,6 +158,18 @@ const Merchant = () => {
                   />
                 </div>
                 <div className="form-control w-full max-w-xs pt-5">
+                  <label className="input-group">
+                    <span>Type</span>
+                    <input
+                      required
+                      {...register("type", {})}
+                      type="text"
+                      placeholder="eg. Convenience, Snacks"
+                      className="input input-bordered w-full max-w-xs"
+                    />
+                  </label>
+                </div>
+                <div className="form-control w-full max-w-xs pt-5">
                   <input
                     // required
                     {...register("banner", {})}
@@ -216,6 +235,7 @@ const Overlay = styled.div`
   height: 50%;
   background-color: #fef4f7;
   border-radius: 16px;
+  text-align: left;
 `;
 
 const CorporateApplyContainer = styled.div`
@@ -223,12 +243,27 @@ const CorporateApplyContainer = styled.div`
   position: relative;
   margin: 0 24px;
   width: 100%;
+  position: sticky;
+  bottom: 0px;
+  a {
+    padding: 20px;
+    img {
+      width: 110px;
+      border-radius: 10px;
+    }
+  }
+
+  background-image: url(${BG});
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100%;
   @media screen and (max-width: 1024px) {
     padding: 8px 5%;
   }
 `;
 
 const CorporateContents = styled.div`
+  padding-top: 10px;
   width: 100%;
   text-align: center;
   position: relative;
@@ -246,7 +281,7 @@ const CorporateContents = styled.div`
     margin: 0 0 32px;
     line-height: 60px;
     word-break: break-word;
-    margin-top: 64px;
+    margin-top: 20px;
   }
   p {
     color: #333;

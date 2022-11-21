@@ -5,6 +5,8 @@ import video from "../../assets/Banner/FoodVideo.mp4";
 import Banner from "../../components/Banner/Banner";
 import HeroImg from "../../assets/Banner/hero_image.png";
 import BusinessBanner from "../../components/BusinessBanner/BusinessBanner";
+import TopSection from "../../components/TopSection/TopSection";
+import VendorList from "../../components/VendorList/VendorList";
 const Home = () => {
   return (
     <>
@@ -16,13 +18,15 @@ const Home = () => {
         <Header />
         <Banner />
       </Container>
+      <TopSection />
+      <VendorList />
     </>
   );
 };
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 105vh;
   background-image: linear-gradient(rgba(12, 3, 51, 0.3), rgba(12, 3, 51, 0.3));
   position: relative;
   display: flex;
