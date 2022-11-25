@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useVendorAccess = (user) => {
-  console.log(user, "useVender User data");
+  // console.log(user, "useVender User data");
   const [vendorAdmin, setVendorAdmin] = useState(false);
   const [vendorAdminLoader, setVendorAdminLoader] = useState(true);
   useEffect(() => {
@@ -11,7 +11,7 @@ const useVendorAccess = (user) => {
       fetch(`http://localhost:5000/vendor/${email}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("data inside useVendor", data);
+          // console.log("data inside useVendor", data);
           setVendorAdmin(data.vendorAdmin);
           setVendorAdminLoader(false);
         });

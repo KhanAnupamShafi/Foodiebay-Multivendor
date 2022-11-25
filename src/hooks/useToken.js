@@ -6,7 +6,7 @@ const useToken = (user) => {
   useEffect(() => {
     // console.log('User information inside use Token',user)
     const email = user?.user?.email;
-    console.log(email);
+    // console.log(email);
 
     const currentUser = { email: email };
     if (email) {
@@ -19,7 +19,7 @@ const useToken = (user) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log("data inside usetoken", data);
+          // console.log("data inside usetoken", data);
         });
     }
   }, [user]);

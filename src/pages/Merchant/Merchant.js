@@ -12,9 +12,11 @@ import MerchantStatus from "./MerchantStatus";
 import { useNavigate } from "react-router-dom";
 import { Logo, NavLogo } from "../../layouts/Header/Header.elements";
 import headerLogo from "../../assets/Header/Logo2.png";
+import { useEffect } from "react";
 
 const Merchant = () => {
   const [user] = useAuthState(auth);
+  const [date, setDate] = useState("");
   const [application, setApplication] = useState({});
   console.log(application);
   const {
@@ -24,9 +26,13 @@ const Merchant = () => {
     reset,
   } = useForm();
 
-  const date = new Date();
-  const formattedDate = format(date, "PP");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const myDate = new Date();
+    const formattedDate = format(myDate, "PP");
+    setDate(formattedDate);
+  }, []);
   const {
     data: restaurantInfo,
     isLoading,
@@ -36,7 +42,7 @@ const Merchant = () => {
       (res) => res.json()
     )
   );
-  // console.log(restaurantInfo);
+  console.log(restaurantInfo);
   const onSubmit = (data) => {
     const restaurantData = {
       ownerName: data.fName + " " + data.lName,
@@ -48,7 +54,8 @@ const Merchant = () => {
       restaurantLogo: data.logo,
       restaurantAddress: data.address,
       applicationStatus: "pending",
-      date: formattedDate,
+      apply_date: date,
+      restaurant_id: restaurantInfo?.restaurant_id || "",
     };
     // console.log(restaurantInfo);
     fetch(`http://localhost:5000/restaurant/${user.email}`, {
@@ -101,6 +108,20 @@ const Merchant = () => {
               <CorporateForm onSubmit={handleSubmit(onSubmit)}>
                 <h4>Your Details</h4>
                 <div className="pb-5">
+                  {restaurantInfo?.restaurant_id && (
+                    <div className="form-control w-full max-w-xs">
+                      <label className="label">
+                        <span className="label-text">Restaurant ID</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={restaurantInfo?.restaurant_id}
+                        placeholder="You can't touch this"
+                        className="input input-bordered w-full max-w-xs"
+                        disabled
+                      />
+                    </div>
+                  )}
                   <div className="form-control w-full max-w-xs">
                     <label className="label">
                       <span className="label-text">Email</span>

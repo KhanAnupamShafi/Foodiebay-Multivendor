@@ -185,9 +185,9 @@ const Header = () => {
             </UserProfile>
           </div>
           <div className="divider divider-horizontal p-0 m-0"></div>
-          <div className="grid z-10 flex-grow  bg-slate-300  place-items-center p-1">
+          <div className="grid z-10 flex-grow  bg-slate-300  place-items-center">
             <CartBtn>
-              <ShoppingCartOutline width={42} />
+              <ShoppingCartOutline width={32} height={30} />
             </CartBtn>
           </div>
         </UserNavContainer>

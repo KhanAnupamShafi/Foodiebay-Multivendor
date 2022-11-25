@@ -23,17 +23,17 @@ const VendorList = () => {
       <VendorListHeader>Popular restaurants</VendorListHeader>
       <RestaurantList>
         {vendors.map((restaurant) => (
-          <ListItem key={restaurant._id}>
+          <ListItem key={restaurant?._id}>
             <Link to={`/restaurant/${restaurant.restaurant_id}`}>
               <ImageTop background={restaurant.restaurantBanner}>
                 <RestaurantInfo>
                   <CompanyLogo
-                    src="https://res.cloudinary.com/delivery-com/image/fetch/f_auto/https%3A%2F%2Fstatic.delivery.com%2Fmerchant_logo.php%3Fid%3D111297%26v%3D1636550232"
+                    src={restaurant?.restaurantLogo}
                     alt="Merchant logo"
                   />
                   <CompanyDesc>
-                    <h3>{restaurant.restaurantName}</h3>
-                    <p>Ice cream, desserts, caffe, candy</p>
+                    <h3>{restaurant?.restaurantName}</h3>
+                    <p>{restaurant?.restaurantType}</p>
                   </CompanyDesc>
                 </RestaurantInfo>
               </ImageTop>
@@ -49,7 +49,9 @@ const VendorList = () => {
                   <span>(0)</span>
                 </div>
                 <div>
-                  <p>$$</p>
+                  <PriceRange>
+                    <p>৳৳</p>৳
+                  </PriceRange>
                 </div>
               </ImageRating>
               <MoreDetails>
@@ -196,6 +198,14 @@ const ImageRating = styled.div`
       position: relative;
       padding-right: 4px;
     }
+  }
+`;
+
+const PriceRange = styled.div`
+  color: #ffb413;
+  p {
+    color: #ffb413;
+    font-weight: bold;
   }
 `;
 const MoreDetails = styled.div`

@@ -66,7 +66,7 @@ const MerchantStatus = ({ restaurantInfo, refetch }) => {
               <td>
                 <div className="flex items-center space-x-3">
                   <label>
-                    <span>{restaurantInfo.date}</span>
+                    <span>{restaurantInfo?.apply_date}</span>
                   </label>
                 </div>
               </td>
@@ -76,7 +76,7 @@ const MerchantStatus = ({ restaurantInfo, refetch }) => {
                     <div className="rounded-xl">
                       <img
                         src={
-                          restaurantInfo.restaurantLogo ||
+                          restaurantInfo?.restaurantLogo ||
                           "https://i.ibb.co/PhkSzrr/Wendys-Emblem.png"
                         }
                         alt="Avatar Tailwind CSS Component"
@@ -86,30 +86,30 @@ const MerchantStatus = ({ restaurantInfo, refetch }) => {
                   </div>
                   <div>
                     <div className="font-bold">
-                      {restaurantInfo.restaurantName}
+                      {restaurantInfo?.restaurantName}
                     </div>
                     <div className="text-sm opacity-50">
-                      {restaurantInfo.restaurantAddress}
+                      {restaurantInfo?.restaurantAddress}
                     </div>
                   </div>
                 </div>
               </td>
               <td className="capitalize ">
-                {restaurantInfo.ownerName}
+                {restaurantInfo?.ownerName}
                 <br />
                 <span className="badge badge-ghost badge-sm">
-                  {restaurantInfo.email}
+                  {restaurantInfo?.email}
                 </span>
               </td>
               <td>
                 <span
                   className={`badge badge-outline ${
-                    restaurantInfo.applicationStatus === "pending"
+                    restaurantInfo?.applicationStatus === "pending"
                       ? "badge-warning"
                       : "badge-primary"
                   } gap-2 badge-lg font-bold`}
                 >
-                  {restaurantInfo.applicationStatus === "pending"
+                  {restaurantInfo?.applicationStatus === "pending"
                     ? "On Hold"
                     : "approved"}
                 </span>
@@ -118,7 +118,7 @@ const MerchantStatus = ({ restaurantInfo, refetch }) => {
                 <div
                   className="tooltip tooltip-top tooltip-primary"
                   data-tip={
-                    restaurantInfo.applicationStatus === "pending"
+                    restaurantInfo?.applicationStatus === "pending"
                       ? `Update Info`
                       : `Ask Admin to re-apply`
                   }
@@ -126,7 +126,7 @@ const MerchantStatus = ({ restaurantInfo, refetch }) => {
                   <button
                     onClick={() => handleReApply()}
                     className="btn btn-outline btn-xs"
-                    disabled={restaurantInfo.role === "vendor"}
+                    disabled={restaurantInfo?.role === "vendor"}
                   >
                     Re-Apply
                   </button>

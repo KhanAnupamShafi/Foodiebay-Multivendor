@@ -107,7 +107,7 @@ const AllVendors = () => {
                         : "approved"}
                     </span>
                   </td>
-                  <td className="py-1 px-3 ">{data.date}</td>
+                  <td className="py-1 px-3 ">{data.apply_date}</td>
                   <td className="py-1 px-3  text-center">
                     <button
                       onClick={() => handleRemove(data?.email)}

@@ -237,8 +237,9 @@ export const CartBtn = styled.div`
   font-size: 1.2rem;
   font-weight: 700;
   display: block;
-  min-width: 64px;
-  padding: 0 5px;
+  min-width: 36px;
+  border-radius: 5px;
+  padding: 0 3px;
   position: relative;
   z-index: 2;
   color: red;

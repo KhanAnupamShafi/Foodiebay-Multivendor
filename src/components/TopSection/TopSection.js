@@ -58,7 +58,7 @@ const TopSection = () => {
                       </div>
                     </Box>
                     <Info>
-                      <h4>Call Us For Booking</h4>
+                      <h4>Call Us For More Info</h4>
                       <p>+880 17654321</p>
                     </Info>
                   </InfoBox>

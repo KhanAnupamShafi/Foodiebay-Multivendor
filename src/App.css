@@ -74,6 +74,11 @@
   box-sizing: border-box;
   font-family: "Ubuntu", sans-serif;
 }
+nav-menu .active {
+  border-bottom: 2px solid rgb(235, 23, 0);
+  font-weight: 700;
+  text-shadow: 0 0 0.01px #333333;
+}
 input[type="number"] {
   -moz-appearance: textfield;
 }
