@@ -146,7 +146,7 @@ const AddMenu = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log("result", result);
+        // console.log("result", result);
         let data = {
           ...inputValue,
           category: { ...selectedValue },

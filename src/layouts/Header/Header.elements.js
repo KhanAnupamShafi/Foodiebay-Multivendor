@@ -43,7 +43,6 @@ export const UserNavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: start;
-  background-color: #e2e8f0;
   color: gray;
   padding: 4px;
   border-radius: 5px;
@@ -234,17 +233,16 @@ export const MobileIcon = styled.div`
 
 export const CartBtn = styled.div`
   cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: 700;
-  display: block;
-  min-width: 36px;
+
+  /* min-width: 35px; */
   border-radius: 5px;
-  padding: 0 3px;
-  position: relative;
-  z-index: 2;
-  color: red;
+
+  color: #c21760;
   transition: background-color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
     color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  svg {
+    background-color: #3333;
+  }
 `;
 export const UserProfile = styled.div`
   display: flex;

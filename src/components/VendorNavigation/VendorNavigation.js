@@ -4,7 +4,7 @@ import { Link, animateScroll as scroll } from "react-scroll";
 import styled from "styled-components";
 
 const VendorNavigation = ({ store }) => {
-  console.log(store);
+  // console.log(store);
   return (
     <VendorNav>
       <NavContainer>

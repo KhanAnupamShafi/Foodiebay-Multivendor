@@ -6,6 +6,7 @@ import { Close, Menu3, Time } from "styled-icons/remix-line";
 import MenuItems from "../../components/MenuItems/MenuItems";
 import Loading from "../../components/Shared/Loading/Loading";
 import VendorNavigation from "../../components/VendorNavigation/VendorNavigation";
+import CartSummary from "../../components/CartSummary/CartSummary";
 import Header from "../../layouts/Header/Header";
 import { MobileIcon } from "../../layouts/Header/Header.elements";
 import {
@@ -14,9 +15,9 @@ import {
   BannerBox,
   Box,
   BoxContainer,
+  CartBox,
   Container,
   DrawerContent,
-  DrawerSide,
   Grid,
   RestaurantContainer,
   Seperator,
@@ -30,6 +31,7 @@ import {
   VendorOpen,
   VendorTags,
 } from "./Restaurent.elements";
+import { useShoppingCart } from "use-shopping-cart";
 
 const Restaurant = () => {
   const { restaurantId } = useParams();
@@ -37,7 +39,10 @@ const Restaurant = () => {
   const closeCart = () => setClick(false);
   const [button, setButton] = useState(true);
   const [restaurantTags, setRestaurantTags] = useState([]);
+  const [showCart, setShowCart] = useState(true);
   const handleClick = () => setClick(!click);
+  const { cartCount, cartDetails } = useShoppingCart();
+  const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
 
   const url = `http://localhost:5000/restaurants/vendor/${restaurantId}`;
   const url2 = `http://localhost:5000/menu/${restaurantId}`;
@@ -52,13 +57,20 @@ const Restaurant = () => {
     refetch,
   } = useQuery(["menu", restaurantId], () =>
     fetch(url2).then((res) => res.json(), {
-      refetchOnWindowFocus: false,
-      enabled: false,
-      staleTime: Infinity,
+      // refetchOnWindowFocus: false,
+      // enabled: false,
+      // staleTime: Infinity,
       cacheTime: 0,
     })
   );
-
+  useEffect(() => {
+    if (cartCount) {
+      refetch();
+      if (restaurantId !== cartItems[0]?.restaurantInfo?.restaurant_id) {
+        setShowCart(false);
+      }
+    }
+  }, [cartCount, cartItems, restaurantId, refetch]);
   useEffect(() => {
     setRestaurantTags(restaurant?.restaurantType.split(", "));
   }, [restaurant]);
@@ -134,7 +146,12 @@ const Restaurant = () => {
                 </VendorInfo>
                 {/* restaurant content section */}
                 <VendorNavigation store={store} />
-                <MenuItems store={store} />
+                <MenuItems
+                  store={store}
+                  showCart={showCart}
+                  setShowCart={setShowCart}
+                  restaurantId={restaurantId}
+                />
 
                 <DrawerContent
                   onClick={handleClick}
@@ -154,20 +171,13 @@ const Restaurant = () => {
               </Box>
             </BoxContainer>
           </RestaurantContainer>
-          <Aside click={click} className="drawer mt-10">
-            <div>
-              <DrawerSide className="drawer-side bg-primary">
-                <ul className="menu p-4 w-80 bg-red-300 text-base-content">
-                  {/* <!-- Sidebar content here --> */}
-                  <li>
-                    <p>Sidebar Item 1</p>
-                  </li>
-                  <li>
-                    <p>Sidebar Item 2</p>
-                  </li>
-                </ul>
-              </DrawerSide>
-            </div>
+          <Aside click={click}>
+            <CartBox>
+              <CartSummary
+                restaurant={restaurant}
+                showCart={showCart}
+              ></CartSummary>
+            </CartBox>
           </Aside>
         </Grid>
       </Container>

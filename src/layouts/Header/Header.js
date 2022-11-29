@@ -27,11 +27,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
 import { ShoppingCartOutline } from "@styled-icons/evaicons-outline/ShoppingCartOutline";
+import { useShoppingCart } from "use-shopping-cart";
 
 const Header = () => {
   const [user] = useAuthState(auth);
-  const photo = user?.photoURL;
-  // console.log(user);
+
   const logout = () => {
     signOut(auth);
   };
@@ -39,7 +39,9 @@ const Header = () => {
   const [button, setButton] = useState(true);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-
+  const { cartCount, cartDetails } = useShoppingCart();
+  const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
+  console.log(cartItems[0]?.restaurantInfo?.restaurant_id);
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -132,8 +134,8 @@ const Header = () => {
       </NavContainer>
       <NavOverlay></NavOverlay>
       {user && (
-        <UserNavContainer>
-          <div className="grid z-10 flex-grow  bg-slate-200  place-items-center p-1">
+        <UserNavContainer className="bg-slate-100">
+          <div className="grid z-10 flex-grow place-items-center p-1">
             <UserProfile>
               <ProfileImage>
                 <img
@@ -185,10 +187,43 @@ const Header = () => {
             </UserProfile>
           </div>
           <div className="divider divider-horizontal p-0 m-0"></div>
-          <div className="grid z-10 flex-grow  bg-slate-300  place-items-center">
-            <CartBtn>
-              <ShoppingCartOutline width={32} height={30} />
-            </CartBtn>
+          <div className="grid z-10 flex-grow place-items-center">
+            {cartCount ? (
+              <Link
+                to={`/restaurant/${cartItems[0]?.restaurantInfo?.restaurant_id}`}
+                onClick={() => {
+                  window.reload();
+                }}
+              >
+                <CartBtn>
+                  <div className="indicator">
+                    <span className="indicator-bottom indicator-start indicator-item badge badge-error">
+                      {cartCount}
+                    </span>
+
+                    <ShoppingCartOutline
+                      className="grid bg-base-300 place-items-center"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                </CartBtn>
+              </Link>
+            ) : (
+              <CartBtn>
+                <div className="indicator">
+                  <span className="indicator-bottom indicator-start indicator-item badge badge-error">
+                    {cartCount}
+                  </span>
+
+                  <ShoppingCartOutline
+                    className="grid bg-base-300 place-items-center"
+                    width={40}
+                    height={40}
+                  />
+                </div>
+              </CartBtn>
+            )}
           </div>
         </UserNavContainer>
       )}

@@ -25,36 +25,42 @@ import RequireVendor from "./pages/Register/RequireVendor";
 import MenuList from "./pages/Dashboard/MenuList/MenuList";
 import AddMenu from "./pages/Dashboard/AddMenu/AddMenu";
 import Restaurant from "./pages/Restaurant/Restaurant";
+import Layout from "./layouts/Layout";
+import SingleItem from "./components/MenuItems/SingleItem";
 
 function App() {
   return (
     <RootContainer>
       <Routes>
-        <Route index path="/" element={<Home />} />
-        <Route path="home" element={<Home />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route
+            path="blog"
+            element={
+              <RequireAuth>
+                <Blogs></Blogs>
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="merchants"
+            element={
+              <RequireAuth>
+                <Merchant></Merchant>
+              </RequireAuth>
+            }
+          ></Route>
 
-        <Route
-          path="blog"
-          element={
-            <RequireAuth>
-              <Blogs></Blogs>
-            </RequireAuth>
-          }
-        ></Route>
-        <Route
-          path="merchants"
-          element={
-            <RequireAuth>
-              <Merchant></Merchant>
-            </RequireAuth>
-          }
-        ></Route>
-        <Route
-          path="restaurant/:restaurantId"
-          element={<Restaurant></Restaurant>}
-        ></Route>
-        <Route path="signup" element={<SignUp />} />
-        <Route path="signin" element={<SignIn />} />
+          <Route
+            path="restaurant/:restaurantId"
+            element={<Restaurant></Restaurant>}
+          ></Route>
+
+          <Route path="signup" element={<SignUp />} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
 
         {/* Dashboard.... */}
         <Route
@@ -113,7 +119,6 @@ function App() {
             element={<Payment></Payment>}
           ></Route>
         </Route>
-        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <ToastContainer />
