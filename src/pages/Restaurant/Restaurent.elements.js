@@ -10,11 +10,14 @@ export const Container = styled.div`
   }
   ${UserNavContainer} {
     position: fixed !important;
-    top: 122px;
-    right: 354px;
+    top: 30px;
+    right: 0px;
+    margin-left: auto;
+    /* margin-bottom: -102px; */
+    /* width: 152px; */
     background-image: none !important;
     padding-top: 0 !important;
-    z-index: 200;
+    /* z-index: 100; */
     @media only screen and (max-width: 960px) {
       right: 0;
     }
@@ -265,13 +268,15 @@ export const Seperator = styled.div`
 `;
 
 export const Aside = styled.aside`
+  /* margin-top: 102px; */
+  margin-bottom: -102px;
+  top: 110px;
   width: 352px;
   box-shadow: 0 0.3rem 2rem rgb(0 0 0 / 10%);
+  z-index: 300;
   @media screen and (max-width: 1184px) {
-    display: flex;
-    flex-direction: column;
     width: 100%;
-    /* height: 90vh; */
+    height: 90vh;
     position: absolute;
     top: 110px;
 

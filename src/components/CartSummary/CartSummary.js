@@ -7,11 +7,12 @@ import {} from "styled-icons/evil";
 import { Plus } from "styled-icons/feather";
 
 import { DeleteForever } from "styled-icons/material";
+import { Close } from "styled-icons/remix-line";
 import { useShoppingCart } from "use-shopping-cart";
 import CartSVG from "../../assets/Restaurant/CartSVG";
 import UseCheckout from "../../hooks/useCheckout";
 
-const CartSummary = ({ restaurant, showCart }) => {
+const CartSummary = ({ restaurant, showCart, setClick }) => {
   const {
     cartDetails,
     incrementItem,
@@ -46,6 +47,13 @@ const CartSummary = ({ restaurant, showCart }) => {
   // console.log(showCart);
   return (
     <CartSummaryContainer>
+      <label
+        className="btn btn-circle drawer-button md:hidden"
+        onClick={() => setClick(false)}
+      >
+        <Close size={24} />
+        {/* {!click ? <Menu3 size="48" /> : <Close size="48" />} */}
+      </label>
       <CartHeader>
         <span>Your cart from</span>
         <ChevronRight size={18} />

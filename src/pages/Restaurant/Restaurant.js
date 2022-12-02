@@ -40,7 +40,7 @@ const Restaurant = () => {
   const [button, setButton] = useState(true);
   const [restaurantTags, setRestaurantTags] = useState([]);
   const [showCart, setShowCart] = useState(true);
-  const handleClick = () => setClick(!click);
+  const handleClick = () => setClick(true);
   const { cartCount, cartDetails } = useShoppingCart();
   const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
 
@@ -145,6 +145,19 @@ const Restaurant = () => {
                   </VendorDetails>
                 </VendorInfo>
                 {/* restaurant content section */}
+                <DrawerContent className="drawer-content md:hidden">
+                  {/* <!-- Page content here --> */}
+                  <label
+                    htmlFor="my-drawer"
+                    className="p-2 btn btn-secondary"
+                    onClick={handleClick}
+                  >
+                    <span>
+                      Cart <Menu3 size="28" />
+                    </span>
+                  </label>
+                </DrawerContent>
+
                 <VendorNavigation store={store} />
                 <MenuItems
                   store={store}
@@ -152,22 +165,6 @@ const Restaurant = () => {
                   setShowCart={setShowCart}
                   restaurantId={restaurantId}
                 />
-
-                <DrawerContent
-                  onClick={handleClick}
-                  className="drawer-content h-screen"
-                >
-                  {/* <!-- Page content here --> */}
-                  <label
-                    htmlFor="my-drawer"
-                    className="btn btn-primary drawer-button"
-                  >
-                    Open drawer
-                  </label>
-                  <MobileIcon onClick={handleClick}>
-                    {!click ? <Menu3 size="48" /> : <Close size="48" />}
-                  </MobileIcon>
-                </DrawerContent>
               </Box>
             </BoxContainer>
           </RestaurantContainer>
@@ -176,6 +173,7 @@ const Restaurant = () => {
               <CartSummary
                 restaurant={restaurant}
                 showCart={showCart}
+                setClick={setClick}
               ></CartSummary>
             </CartBox>
           </Aside>

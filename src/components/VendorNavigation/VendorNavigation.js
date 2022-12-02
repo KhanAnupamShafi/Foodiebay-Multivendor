@@ -39,13 +39,14 @@ const VendorNav = styled.section`
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 200;
 `;
 const NavContainer = styled.div`
   padding-left: 24px;
   padding-right: 24px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 const DishMenu = styled.div`
   /* flex: 1 1 auto; */
