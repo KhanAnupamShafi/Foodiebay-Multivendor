@@ -30,7 +30,7 @@ const Dashboard = () => {
   // console.log(vendorAdmin, "vendor");
   return (
     <>
-      <div className="drawer drawer-mobile  bg-lightOrange pt-2 md:pt-1 pb-1 px-1 mt-0 font-uber">
+      <div className="drawer drawer-mobile  bg-lightOrange pt-2 md:pt-1 pb-1 px-1 mt-0 font-sans">
         <input id="dashboard-menu" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content p-1 md:p-4 z-20">
           {/* <!-- Page content here --> */}
@@ -74,7 +74,7 @@ const Dashboard = () => {
                 <ul className="list-reset flex justify-between flex-1 md:flex-none items-center">
                   <li className="flex-2 md:flex-none md:mr-3 ">
                     <div className="relative inline-block w-full">
-                      <button className="drop-button text-base-900 rounded py-2 px-2 bg-softOrange">
+                      <button className="drop-button bg-lightOrange text-base-900 rounded py-2 px-2 border-solid border-2 border-softOrange">
                         <Emoji>
                           <span
                             className="pr-1 emoji wave"

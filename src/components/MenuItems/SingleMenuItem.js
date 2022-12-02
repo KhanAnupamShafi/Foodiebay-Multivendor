@@ -10,7 +10,7 @@ const SingleMenuItem = ({ food, setMenuItem }) => {
   const price = formatProductPrice(food);
   // console.log(food._id);
   const handleClick = (params) => {
-    // console.log(price);
+    console.log(price);
   };
   return (
     <>

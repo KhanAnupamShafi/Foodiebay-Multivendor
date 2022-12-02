@@ -57,7 +57,7 @@ const Restaurant = () => {
     refetch,
   } = useQuery(["menu", restaurantId], () =>
     fetch(url2).then((res) => res.json(), {
-      // refetchOnWindowFocus: false,
+      refetchOnWindowFocus: false,
       // enabled: false,
       // staleTime: Infinity,
       cacheTime: 0,
@@ -65,7 +65,7 @@ const Restaurant = () => {
   );
   useEffect(() => {
     if (cartCount) {
-      refetch();
+      // refetch();
       if (restaurantId !== cartItems[0]?.restaurantInfo?.restaurant_id) {
         setShowCart(false);
       }

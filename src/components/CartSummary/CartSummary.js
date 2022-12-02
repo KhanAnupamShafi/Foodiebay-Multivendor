@@ -9,19 +9,47 @@ import { Plus } from "styled-icons/feather";
 import { DeleteForever } from "styled-icons/material";
 import { useShoppingCart } from "use-shopping-cart";
 import CartSVG from "../../assets/Restaurant/CartSVG";
+import UseCheckout from "../../hooks/useCheckout";
 
 const CartSummary = ({ restaurant, showCart }) => {
-  const { cartDetails, incrementItem, decrementItem, cartCount } =
-    useShoppingCart();
-
+  const {
+    cartDetails,
+    incrementItem,
+    decrementItem,
+    cartCount,
+    totalPrice,
+    redirectToCheckout,
+  } = useShoppingCart();
+  const handleCheckout = UseCheckout();
   const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
-  console.log(showCart);
+
+  async function handleClick(event) {
+    // event.preventDefault();
+
+    await fetch("http://localhost:5000/checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ items: cartItems }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((result) => {
+        if (result.url) {
+          window.location.assign(result.url);
+        }
+      });
+  }
+  console.log(cartItems);
+  // console.log(showCart);
   return (
     <CartSummaryContainer>
       <CartHeader>
         <span>Your cart from</span>
         <ChevronRight size={18} />
-        <p>{restaurant.restaurantName} </p>
+        <p>{restaurant?.restaurantName} </p>
       </CartHeader>
       {!cartCount || !showCart ? (
         <EmptyCart>
@@ -33,18 +61,18 @@ const CartSummary = ({ restaurant, showCart }) => {
         </EmptyCart>
       ) : (
         <CartCheckout>
-          <Link>
+          <button type="button" onClick={handleCheckout}>
             <CheckoutStyled>
               <span>
                 <span>
                   <div>
                     <p>Checkout</p>
-                    <p>Tk 500</p>
+                    <p>Tk {totalPrice}</p>
                   </div>
                 </span>
               </span>
             </CheckoutStyled>
-          </Link>
+          </button>
         </CartCheckout>
       )}
 
@@ -180,10 +208,11 @@ const EmptyCart = styled.div`
   }
 `;
 const CartCheckout = styled.div`
+  width: 100%;
   padding: 0px 16px;
   margin-bottom: 16px;
 
-  a {
+  button {
     position: relative;
     max-width: 100%;
     margin: 0px;

@@ -8,7 +8,13 @@ import ScrollToTop from "./utils/scrollToTop";
 import { loadStripe } from "@stripe/stripe-js";
 import { CartProvider } from "use-shopping-cart";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const stripePromise = loadStripe(
@@ -17,7 +23,7 @@ const stripePromise = loadStripe(
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    <CartProvider mode="checkout-session" currency="USD">
+    <CartProvider mode="checkout-session" stripe={stripePromise} currency="USD">
       <BrowserRouter>
         <React.StrictMode>
           <ScrollToTop />

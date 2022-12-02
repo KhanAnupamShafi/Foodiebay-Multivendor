@@ -27,6 +27,8 @@ import AddMenu from "./pages/Dashboard/AddMenu/AddMenu";
 import Restaurant from "./pages/Restaurant/Restaurant";
 import Layout from "./layouts/Layout";
 import SingleItem from "./components/MenuItems/SingleItem";
+import Result from "./pages/Result/Result";
+import AllOrders from "./pages/Dashboard/AllOrders/AllOrders";
 
 function App() {
   return (
@@ -48,6 +50,14 @@ function App() {
             element={
               <RequireAuth>
                 <Merchant></Merchant>
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="result"
+            element={
+              <RequireAuth>
+                <Result></Result>
               </RequireAuth>
             }
           ></Route>
@@ -110,6 +120,14 @@ function App() {
             element={
               <RequireVendor>
                 <AddMenu></AddMenu>
+              </RequireVendor>
+            }
+          ></Route>
+          <Route
+            path="all_order"
+            element={
+              <RequireVendor>
+                <AllOrders></AllOrders>
               </RequireVendor>
             }
           ></Route>

@@ -41,7 +41,7 @@ const Header = () => {
   const closeMobileMenu = () => setClick(false);
   const { cartCount, cartDetails } = useShoppingCart();
   const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
-  console.log(cartItems[0]?.restaurantInfo?.restaurant_id);
+  // console.log(cartItems[0]?.restaurantInfo?.restaurant_id);
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -168,7 +168,7 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/orders" className="p-0">
+                    <Link to="/dashboard" className="p-0">
                       <button className="btn btn-ghost btn-block">
                         Orders
                       </button>

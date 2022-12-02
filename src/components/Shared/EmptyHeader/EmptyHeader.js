@@ -23,7 +23,7 @@ const EmptyHeader = (props) => {
             </h2>
 
             <h2 className="my-3">
-              <span className="text-xl opacity-50">
+              <span className="text-lg opacity-50">
                 {/* When you place your first order, it will appear here */}
                 {subtitle}
               </span>
