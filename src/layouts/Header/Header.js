@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-scroll";
+import { NavLink } from "react-router-dom";
 import DefaultPic from "../../assets/Login/default_pic.jpg";
 import headerLogo from "../../assets/Header/Logo1.png";
 import { ChevronDown } from "@styled-icons/entypo/ChevronDown";
@@ -75,9 +76,15 @@ const Header = () => {
               </NavLink>
             </ListItem>
             <ListItem>
-              <NavLink to="/restaurants" onClick={closeMobileMenu}>
+              <Link
+                to="restaurants"
+                spy={true}
+                smooth={true}
+                duration={500}
+                onClick={closeMobileMenu}
+              >
                 Restaurants
-              </NavLink>
+              </Link>
             </ListItem>
             <ListItem>
               <NavLink to="/contact" onClick={closeMobileMenu}>
@@ -104,9 +111,9 @@ const Header = () => {
                         Sign Out
                       </RegisterBtn>
                     ) : (
-                      <Link to="/signup">
+                      <NavLink to="/signup">
                         <RegisterBtn>Sign Up</RegisterBtn>
-                      </Link>
+                      </NavLink>
                     )}
                   </ListItem>
                 </>
@@ -115,17 +122,17 @@ const Header = () => {
           </NavMenu>
         </LeftNav>
         <RightNav>
-          <Link to="/signup">
+          <NavLink to="/signup">
             <BookingBtn>Book A table</BookingBtn>
-          </Link>
+          </NavLink>
           {user ? (
             <RegisterBtn user onClick={logout}>
               Sign Out
             </RegisterBtn>
           ) : (
-            <Link to="/signup">
+            <NavLink to="/signup">
               <RegisterBtn>Sign Up</RegisterBtn>
-            </Link>
+            </NavLink>
           )}
         </RightNav>
         <MobileIcon onClick={handleClick}>
@@ -161,18 +168,18 @@ const Header = () => {
                   className="dropdown-content mt-4 menu p-2 gap-2 shadow bg-slate-100 rounded w-52"
                 >
                   <li>
-                    <Link to="/dashboard" className="p-0">
+                    <NavLink to="/dashboard" className="p-0">
                       <button className="btn btn-ghost btn-block">
                         Profile
                       </button>
-                    </Link>
+                    </NavLink>
                   </li>
                   <li>
-                    <Link to="/dashboard" className="p-0">
+                    <NavLink to="/dashboard" className="p-0">
                       <button className="btn btn-ghost btn-block">
                         Orders
                       </button>
-                    </Link>
+                    </NavLink>
                   </li>
                   <li>
                     <button
@@ -189,7 +196,7 @@ const Header = () => {
           <div className="divider divider-horizontal p-0 m-0"></div>
           <div className="grid z-10 flex-grow place-items-center">
             {cartCount ? (
-              <Link
+              <NavLink
                 to={`/restaurant/${cartItems[0]?.restaurantInfo?.restaurant_id}`}
                 onClick={() => {
                   window.reload();
@@ -208,7 +215,7 @@ const Header = () => {
                     />
                   </div>
                 </CartBtn>
-              </Link>
+              </NavLink>
             ) : (
               <CartBtn>
                 <div className="indicator">

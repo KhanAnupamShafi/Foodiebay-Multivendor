@@ -42,7 +42,7 @@ const useCheckout = () => {
     //     console.log("Error during checkout : ", error);
     // });
 
-    if (session?.checkoutSession && user) {
+    if (session?.checkoutSession && user?.email) {
       console.log("this is session", session);
       // redirectToCheckout({ sessionId: session?.checkoutSession?.id });
       window.location.assign(session?.checkoutSession?.url);

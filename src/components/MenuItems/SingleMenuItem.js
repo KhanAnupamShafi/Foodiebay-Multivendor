@@ -7,10 +7,10 @@ import DefaultImg from "../../assets/Restaurant/default_dish_pic.svg";
 import formatProductPrice from "../../utils/formatProductPrice";
 
 const SingleMenuItem = ({ food, setMenuItem }) => {
-  const price = formatProductPrice(food);
+  // const price = formatProductPrice(food);
   // console.log(food._id);
   const handleClick = (params) => {
-    console.log(price);
+    // console.log(price);
   };
   return (
     <>
@@ -33,7 +33,7 @@ const SingleMenuItem = ({ food, setMenuItem }) => {
             <ProductPrice>
               <div>
                 <p>
-                  Tk 150 <span>Tk 200</span>
+                  Tk 200 <span>Tk 200</span>
                 </p>
               </div>
             </ProductPrice>

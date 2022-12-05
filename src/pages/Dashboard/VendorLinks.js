@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FoodMenu } from "styled-icons/boxicons-regular";
 import { Dish } from "styled-icons/boxicons-solid";
+import { FoodBank } from "styled-icons/material";
 import { DeliveryDining } from "styled-icons/material-rounded";
 
 const VendorLinks = () => {
@@ -33,6 +34,15 @@ const VendorLinks = () => {
         >
           <DeliveryDining width={26} />
           <span>Order Delivery</span>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={(navData) => (navData.isActive ? "active" : "linkstyle")}
+          to="/dashboard/table_book"
+        >
+          <FoodBank width={26} />
+          <span>Table Booking</span>
         </NavLink>
       </li>
     </>

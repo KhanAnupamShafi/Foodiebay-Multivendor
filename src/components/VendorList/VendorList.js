@@ -19,7 +19,7 @@ const VendorList = () => {
   }
 
   return (
-    <VendorContainer>
+    <VendorContainer id="restaurants">
       <VendorListHeader>Popular restaurants</VendorListHeader>
       <RestaurantList>
         {vendors.map((restaurant) => (

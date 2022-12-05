@@ -118,7 +118,12 @@ export const VendorInfo = styled.div`
     font-variant-ligatures: no-common-ligatures;
   }
 `;
+
+export const BookingButton = styled.button``;
 export const VendorButton = styled.div`
+  ${BookingButton} {
+    margin-left: 12px;
+  }
   button {
     position: relative;
     max-width: 100%;

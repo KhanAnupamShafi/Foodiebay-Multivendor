@@ -29,6 +29,8 @@ import Layout from "./layouts/Layout";
 import SingleItem from "./components/MenuItems/SingleItem";
 import Result from "./pages/Result/Result";
 import AllOrders from "./pages/Dashboard/AllOrders/AllOrders";
+import Booking from "./pages/Booking/Booking";
+import TableBook from "./pages/Dashboard/TableBook/TableBook";
 
 function App() {
   return (
@@ -66,6 +68,7 @@ function App() {
             path="restaurant/:restaurantId"
             element={<Restaurant></Restaurant>}
           ></Route>
+          <Route path="booking/:id" element={<Booking></Booking>}></Route>
 
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
@@ -120,6 +123,14 @@ function App() {
             element={
               <RequireVendor>
                 <AddMenu></AddMenu>
+              </RequireVendor>
+            }
+          ></Route>
+          <Route
+            path="table_book"
+            element={
+              <RequireVendor>
+                <TableBook></TableBook>
               </RequireVendor>
             }
           ></Route>

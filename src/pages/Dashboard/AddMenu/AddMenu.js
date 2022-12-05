@@ -102,33 +102,6 @@ const AddMenu = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // let data2 = {
-    //   ...inputValue,
-    //   category: { ...selectedValue },
-    //   ingredients: tags,
-
-    //   restaurantInfo,
-    // };
-
-    // if (data2?.category.__isNew__) {
-    //   const categoryInfo = {
-    //     value: data2.category.value,
-    //     label: data2.category.label,
-    //   };
-    //   fetch(`http://localhost:5000/category`, {
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "application/json",
-    //     },
-    //     body: JSON.stringify(categoryInfo),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((result) => {
-    //       if (result.success) {
-    //         toast.success(`New Category Added Successfully`);
-    //       }
-    //     });
-    // }
 
     const uri = `https://api.imgbb.com/1/upload?key=${imageAPI}`;
     const formData = new FormData();
@@ -152,6 +125,7 @@ const AddMenu = () => {
           category: { ...selectedValue },
           ingredients: tags,
           image: result.data.url,
+          currency: "USD",
           restaurantInfo,
         };
         // console.log("data", data);

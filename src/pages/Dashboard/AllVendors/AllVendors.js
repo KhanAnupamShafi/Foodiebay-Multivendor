@@ -18,7 +18,7 @@ const AllVendors = () => {
   }
 
   const handleRemove = (email) => {
-    fetch(`http://localhost:5000/restaurant/vendor/${email}`, {
+    fetch(`http://localhost:5000/vendor/${email}`, {
       method: "DELETE",
     })
       .then((res) => {

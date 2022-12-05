@@ -10,6 +10,7 @@ module.exports = {
         lightOrange: "#FEEFE7",
         softOrange: "#FBCDB4",
       },
+      opacity: ["disabled"],
     },
     daisyui: {
       themes: [
@@ -23,7 +24,7 @@ module.exports = {
       ],
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("@tailwindcss/forms")],
   corePlugins: {
     preflight: false,
   },

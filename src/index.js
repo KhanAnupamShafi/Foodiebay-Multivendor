@@ -11,7 +11,7 @@ import { CartProvider } from "use-shopping-cart";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
     },
   },
 });

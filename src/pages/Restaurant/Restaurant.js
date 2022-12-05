@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { InfoOutline } from "styled-icons/evaicons-outline";
 import { Close, Menu3, Time } from "styled-icons/remix-line";
 import MenuItems from "../../components/MenuItems/MenuItems";
@@ -8,11 +8,12 @@ import Loading from "../../components/Shared/Loading/Loading";
 import VendorNavigation from "../../components/VendorNavigation/VendorNavigation";
 import CartSummary from "../../components/CartSummary/CartSummary";
 import Header from "../../layouts/Header/Header";
-import { MobileIcon } from "../../layouts/Header/Header.elements";
+import { BookingBtn, MobileIcon } from "../../layouts/Header/Header.elements";
 import {
   Adressbar,
   Aside,
   BannerBox,
+  BookingButton,
   Box,
   BoxContainer,
   CartBox,
@@ -32,6 +33,7 @@ import {
   VendorTags,
 } from "./Restaurent.elements";
 import { useShoppingCart } from "use-shopping-cart";
+import { Group } from "styled-icons/boxicons-regular";
 
 const Restaurant = () => {
   const { restaurantId } = useParams();
@@ -90,6 +92,7 @@ const Restaurant = () => {
                 <BannerBox>
                   <VendorBanner>
                     <img
+                      crossorigin="anonymous"
                       src={restaurant?.restaurantBanner}
                       alt="Vendor Banner"
                     />
@@ -141,6 +144,17 @@ const Restaurant = () => {
                           </span>
                         </span>
                       </button>
+
+                      <Link to={`/booking/${restaurant.restaurant_id}`}>
+                        <BookingButton>
+                          <span>
+                            <span>
+                              <Group size="20" />
+                              Book A Table
+                            </span>
+                          </span>
+                        </BookingButton>
+                      </Link>
                     </VendorButton>
                   </VendorDetails>
                 </VendorInfo>

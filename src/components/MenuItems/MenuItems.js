@@ -6,6 +6,7 @@ import SingleMenuItem from "./SingleMenuItem";
 
 const MenuItems = ({ store, showCart, setShowCart, refetch, restaurantId }) => {
   const [menuItem, setMenuItem] = useState(null);
+  console.log(store);
   return (
     <MenuWrapper>
       {store?.menu.map((category, index) => (

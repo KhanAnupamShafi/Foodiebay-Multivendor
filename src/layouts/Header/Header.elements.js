@@ -70,6 +70,7 @@ export const ListItem = styled.li`
   }
 
   a {
+    cursor: pointer;
     text-decoration: none;
     color: #fff;
     font-size: 18px;
