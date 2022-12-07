@@ -20,10 +20,14 @@ const SingleMenuItem = ({ food, setMenuItem }) => {
           <ItemDetails>
             <ItemData>
               <h3>{food.name}</h3>
-              <p>
-                Chicken Dumpling fried and served with home-made sauce mild or
-                spicy.
-              </p>
+              {!food.desc ? (
+                <p>
+                  Chicken Dumpling fried and served with home-made sauce mild or
+                  spicy.
+                </p>
+              ) : (
+                <p>{food.desc}</p>
+              )}
             </ItemData>
             <ItemPic>
               <DishPhoto image={food.image}></DishPhoto>
@@ -32,8 +36,11 @@ const SingleMenuItem = ({ food, setMenuItem }) => {
           <PriceContainer>
             <ProductPrice>
               <div>
-                <p>
-                  Tk 200 <span>Tk 200</span>
+                <p className="mt-1">
+                  Tk {food.price}{" "}
+                  <span>
+                    Tk {food.offer ? food.price : food.offer + food.price}
+                  </span>
                 </p>
               </div>
             </ProductPrice>

@@ -31,6 +31,7 @@ import Result from "./pages/Result/Result";
 import AllOrders from "./pages/Dashboard/AllOrders/AllOrders";
 import Booking from "./pages/Booking/Booking";
 import TableBook from "./pages/Dashboard/TableBook/TableBook";
+import ManageItems from "./pages/Dashboard/ManageItems/ManageItems";
 
 function App() {
   return (
@@ -139,6 +140,14 @@ function App() {
             element={
               <RequireVendor>
                 <AllOrders></AllOrders>
+              </RequireVendor>
+            }
+          ></Route>
+          <Route
+            path="manage_items"
+            element={
+              <RequireVendor>
+                <ManageItems></ManageItems>
               </RequireVendor>
             }
           ></Route>

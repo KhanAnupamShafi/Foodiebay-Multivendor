@@ -12,7 +12,7 @@ const stripePromise = loadStripe(
 
 const Payment = () => {
   const { paymentId } = useParams();
-  const url = `http://localhost:5000/productForPayment/${paymentId}`;
+  const url = `https://foodiebay.onrender.com/productForPayment/${paymentId}`;
   // React query...
   const { data: product, isLoading } = useQuery(["payment", paymentId], () =>
     fetch(url).then((res) => res.json())

@@ -46,8 +46,8 @@ const Restaurant = () => {
   const { cartCount, cartDetails } = useShoppingCart();
   const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
 
-  const url = `http://localhost:5000/restaurants/vendor/${restaurantId}`;
-  const url2 = `http://localhost:5000/menu/${restaurantId}`;
+  const url = `https://foodiebay.onrender.com/restaurants/vendor/${restaurantId}`;
+  const url2 = `https://foodiebay.onrender.com/menu/${restaurantId}`;
   // React query...
   const { data: restaurant, isLoading: restaurantLoading } = useQuery(
     ["restaurant", restaurantId],
@@ -92,7 +92,7 @@ const Restaurant = () => {
                 <BannerBox>
                   <VendorBanner>
                     <img
-                      crossorigin="anonymous"
+                      crossOrigin="anonymous"
                       src={restaurant?.restaurantBanner}
                       alt="Vendor Banner"
                     />
@@ -145,7 +145,7 @@ const Restaurant = () => {
                         </span>
                       </button>
 
-                      <Link to={`/booking/${restaurant.restaurant_id}`}>
+                      <Link to={`/booking/${restaurant?.restaurant_id}`}>
                         <BookingButton>
                           <span>
                             <span>

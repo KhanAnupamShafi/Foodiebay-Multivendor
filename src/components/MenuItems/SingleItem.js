@@ -43,10 +43,7 @@ const SingleItem = ({ menuItem, setShowCart, restaurantId }) => {
                 <h3>{menuItem.name}</h3>
                 <span>TK {menuItem.price}</span>
               </div>
-              <p>
-                You've been selected for a chance to get one year of
-                subscription to use Wikipedia for free!
-              </p>
+              <p>{menuItem.desc}</p>
             </ItemName>
             <AddOnsMenu>
               <MenuHeader>

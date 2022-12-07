@@ -8,7 +8,7 @@ const useVendorAccess = (user) => {
     const email = user?.email;
 
     if (email) {
-      fetch(`http://localhost:5000/vendor/${email}`)
+      fetch(`https://foodiebay.onrender.com/vendor/${email}`)
         .then((res) => res.json())
         .then((data) => {
           // console.log("data inside useVendor", data);

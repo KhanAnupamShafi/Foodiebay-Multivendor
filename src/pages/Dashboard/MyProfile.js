@@ -11,7 +11,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/order?email=${user.email}`)
+      fetch(`https://foodiebay.onrender.com/order?email=${user.email}`)
         .then((res) => {
           return res.json();
         })

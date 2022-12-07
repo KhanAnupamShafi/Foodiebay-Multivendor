@@ -29,7 +29,9 @@ const Booking = () => {
     isLoading,
     refetch,
   } = useQuery(["tables", id], () =>
-    fetch(`http://localhost:5000/table/${id}`).then((res) => res.json())
+    fetch(`https://foodiebay.onrender.com/table/${id}`).then((res) =>
+      res.json()
+    )
   );
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const Booking = () => {
   const onSubmit = (data) => {
     let bookingData = { ...data, id: table[0]?.id, email: user?.email };
     console.log(bookingData);
-    const uri = `http://localhost:5000/table/${id}`;
+    const uri = `https://foodiebay.onrender.com/table/${id}`;
     fetch(uri, {
       method: "POST",
       headers: { "content-type": "application/json" },

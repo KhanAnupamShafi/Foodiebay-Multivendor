@@ -8,9 +8,9 @@ import auth from "../../../firebase.init";
 const AllOrders = () => {
   const [user] = useAuthState(auth);
   const { data: restaurantInfo } = useQuery(["Restaurant", user.email], () =>
-    fetch(`http://localhost:5000/restaurant?restaurantId=${user.email}`).then(
-      (res) => res.json()
-    )
+    fetch(
+      `https://foodiebay.onrender.com/restaurant?restaurantId=${user.email}`
+    ).then((res) => res.json())
   );
 
   const {
@@ -18,9 +18,9 @@ const AllOrders = () => {
     isLoading,
     refetch,
   } = useQuery([`orders`, restaurantInfo?.restaurant_id], () =>
-    fetch(`http://localhost:5000/order/${restaurantInfo?.restaurant_id}`).then(
-      (res) => res.json()
-    )
+    fetch(
+      `https://foodiebay.onrender.com/order/${restaurantInfo?.restaurant_id}`
+    ).then((res) => res.json())
   );
 
   if (isLoading) {
@@ -29,7 +29,7 @@ const AllOrders = () => {
   const handleDelivery = (id) => {
     console.log(id);
 
-    fetch(`http://localhost:5000/deliver/${id}`, {
+    fetch(`https://foodiebay.onrender.com/deliver/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

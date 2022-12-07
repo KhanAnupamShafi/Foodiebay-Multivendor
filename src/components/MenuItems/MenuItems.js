@@ -6,7 +6,7 @@ import SingleMenuItem from "./SingleMenuItem";
 
 const MenuItems = ({ store, showCart, setShowCart, refetch, restaurantId }) => {
   const [menuItem, setMenuItem] = useState(null);
-  console.log(store);
+  // console.log(store);
   return (
     <MenuWrapper>
       {store?.menu.map((category, index) => (
@@ -28,7 +28,7 @@ const MenuItems = ({ store, showCart, setShowCart, refetch, restaurantId }) => {
             <p>Most ordered right now.</p>
             <DishContainer>
               {store?.items
-                .filter((item) => item.category.label === category)
+                .filter((item) => item?.category?.label === category)
                 .map((food) => (
                   <SingleMenuItem
                     key={food._id}
@@ -57,6 +57,7 @@ const MenuWrapper = styled.section`
   overflow: hidden;
   position: relative;
   margin-top: 16px;
+  margin-bottom: 300px;
 `;
 const DishSection = styled.section`
   display: flex;

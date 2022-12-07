@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FoodMenu } from "styled-icons/boxicons-regular";
 import { Dish } from "styled-icons/boxicons-solid";
-import { FoodBank } from "styled-icons/material";
+import { Delete, FoodBank } from "styled-icons/material";
 import { DeliveryDining } from "styled-icons/material-rounded";
 
 const VendorLinks = () => {
@@ -45,6 +45,15 @@ const VendorLinks = () => {
           <span>Table Booking</span>
         </NavLink>
       </li>
+      <li>
+                <NavLink
+                    className={(navData) => (navData.isActive ? "active" : "linkstyle")}
+                    to="/dashboard/manage_items"
+                >
+                    <Delete width={26} />
+                    <span>Manage Items</span>
+                </NavLink>
+            </li>
     </>
   );
 };

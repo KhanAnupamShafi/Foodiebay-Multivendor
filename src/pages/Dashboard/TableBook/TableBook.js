@@ -21,9 +21,9 @@ const TableBook = () => {
     isLoading,
     refetch,
   } = useQuery(["Restaurant", user?.email], () =>
-    fetch(`http://localhost:5000/restaurant?restaurantId=${user?.email}`).then(
-      (res) => res.json()
-    )
+    fetch(
+      `https://foodiebay.onrender.com/restaurant?restaurantId=${user?.email}`
+    ).then((res) => res.json())
   );
 
   if (isLoading) {
@@ -34,7 +34,7 @@ const TableBook = () => {
     id: nanoid(),
   };
   const handleAddTable = () => {
-    const uri = `http://localhost:5000/table-add/${user.email}`;
+    const uri = `https://foodiebay.onrender.com/table-add/${user.email}`;
     fetch(uri, {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -51,7 +51,7 @@ const TableBook = () => {
         }
       });
   };
-  const uri = `http://localhost:5000/table/${restaurantInfo?.restaurant_id}`;
+  const uri = `https://foodiebay.onrender.com/table/${restaurantInfo?.restaurant_id}`;
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -132,7 +132,7 @@ const TableBook = () => {
           </button>
         </div>
       </div>
-      {restaurantInfo?.tables.length < 1 && (
+      {restaurantInfo?.tables?.length < 1 && (
         <EmptyHeader
           title="No Table Exists"
           subtitle="You Can Add table by clicking the 'ADD TABLE' button"
@@ -140,7 +140,7 @@ const TableBook = () => {
       )}
       <div className="flex flex-wrap items-center justify-center xl:justify-start basis-full bg-center bg-cover mx-auto">
         {/* <!-- tABLE --> */}
-        {restaurantInfo?.tables.map((table) => (
+        {restaurantInfo?.tables?.map((table) => (
           <div key={table.id} className=" z-10">
             <div className="bg-black opacity-80 inset-0 z-0"></div>
             <div className="flex flex-col">
