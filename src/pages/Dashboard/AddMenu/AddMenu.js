@@ -57,7 +57,7 @@ const AddMenu = () => {
   const [selectedValue, setSelectedValue] = useState(null);
   const [tags, setTags] = useState([]);
   const [file, setFile] = useState([]);
-  const getData = async (inputValue) => {
+  const getData = async () => {
     let res = await axios.get("https://foodiebay.onrender.com/category");
     return res.data;
   };
@@ -78,7 +78,7 @@ const AddMenu = () => {
   const handleChange = (value) => {
     setSelectedValue(value);
   };
-
+  console.log(selectedValue);
   // const loadOptions = (inputValue) => {
   //   return fetch(`https://foodiebay.onrender.com/products`).then((res) => res.json());
   // };
@@ -227,7 +227,7 @@ const AddMenu = () => {
                   defaultOptions
                   isSearchable
                   value={selectedValue}
-                  loadOptions={loadOptions}
+                  // loadOptions={loadOptions}
                   // onInputChange={handleInputChange}
                   onChange={handleChange}
                   styles={customStyles}

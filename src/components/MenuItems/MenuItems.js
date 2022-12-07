@@ -87,6 +87,7 @@ const BoxFlex = styled.div`
   h2 {
     font-weight: 700;
     font-size: 1.6rem;
+    font-family: "Ubuntu", sans-serif;
   }
 `;
 const DishContainer = styled.ul`

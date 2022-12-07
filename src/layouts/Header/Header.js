@@ -198,9 +198,9 @@ const Header = () => {
             {cartCount ? (
               <NavLink
                 to={`/restaurant/${cartItems[0]?.restaurantInfo?.restaurant_id}`}
-                onClick={() => {
-                  window.reload();
-                }}
+                // onClick={() => {
+                //   window.reload();
+                // }}
               >
                 <CartBtn>
                   <div className="indicator">

@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CartAdd } from "styled-icons/boxicons-solid";
-import { formatCurrencyString } from "use-shopping-cart";
 import DefaultImg from "../../assets/Restaurant/default_dish_pic.svg";
-import formatProductPrice from "../../utils/formatProductPrice";
 
 const SingleMenuItem = ({ food, setMenuItem }) => {
   // const price = formatProductPrice(food);
@@ -36,11 +34,13 @@ const SingleMenuItem = ({ food, setMenuItem }) => {
           <PriceContainer>
             <ProductPrice>
               <div>
-                <p className="mt-1">
-                  Tk {food.price}{" "}
-                  <span>
-                    Tk {food.offer ? food.price : food.offer + food.price}
-                  </span>
+                <p className="mt-1 ">
+                  Tk {food.price}
+                  {!food.offer ? (
+                    <span></span>
+                  ) : (
+                    <span className="pl-1">Tk {food.offer + food.price}</span>
+                  )}
                 </p>
               </div>
             </ProductPrice>
@@ -111,8 +111,9 @@ const ItemData = styled.div`
   p {
     color: #767676;
     font-weight: 300;
-    line-height: 1.25;
+    line-height: 1.45;
     margin-top: 10px;
+    font-family: "Ubuntu", sans-serif;
   }
 `;
 const ItemPic = styled.picture`

@@ -76,6 +76,7 @@ const CategoryName = styled.li`
     display: flex;
     font-size: 1rem;
     font-weight: 300;
+    font-family: "Ubuntu", sans-serif;
     height: 64px;
     justify-content: center;
     letter-spacing: 0.1px;
