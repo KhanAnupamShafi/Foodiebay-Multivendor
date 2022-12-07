@@ -10,7 +10,9 @@ const AllVendors = () => {
     isLoading,
     refetch,
   } = useQuery([`restaurants`], () =>
-    fetch(`http://localhost:5000/restaurants/vendor`).then((res) => res.json())
+    fetch(`https://foodiebay.onrender.com/restaurants/vendor`).then((res) =>
+      res.json()
+    )
   );
 
   if (isLoading) {
@@ -18,7 +20,7 @@ const AllVendors = () => {
   }
 
   const handleRemove = (email) => {
-    fetch(`http://localhost:5000/vendor/${email}`, {
+    fetch(`https://foodiebay.onrender.com/vendor/${email}`, {
       method: "DELETE",
     })
       .then((res) => {

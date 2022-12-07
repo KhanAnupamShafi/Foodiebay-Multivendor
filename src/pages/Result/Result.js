@@ -29,9 +29,9 @@ const Result = () => {
     "Result",
     () =>
       sessionId
-        ? axios(`http://localhost:5000/checkout-sessions/${sessionId}`).then(
-            (res) => res.data
-          )
+        ? axios(
+            `https://foodiebay.onrender.com/checkout-sessions/${sessionId}`
+          ).then((res) => res.data)
         : null,
     {
       onSuccess: (data) => {
@@ -53,7 +53,7 @@ const Result = () => {
             totalPrice,
           };
 
-          fetch("http://localhost:5000/order", {
+          fetch("https://foodiebay.onrender.com/order", {
             method: "PUT",
             headers: {
               "content-type": "application/json",

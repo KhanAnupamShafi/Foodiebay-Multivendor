@@ -38,9 +38,9 @@ const Merchant = () => {
     isLoading,
     refetch,
   } = useQuery(["Restaurant", user.email], () =>
-    fetch(`http://localhost:5000/restaurant?restaurantId=${user.email}`).then(
-      (res) => res.json()
-    )
+    fetch(
+      `https://foodiebay.onrender.com/restaurant?restaurantId=${user.email}`
+    ).then((res) => res.json())
   );
   console.log(restaurantInfo);
   const onSubmit = (data) => {
@@ -58,7 +58,7 @@ const Merchant = () => {
       restaurant_id: restaurantInfo?.restaurant_id || "",
     };
     // console.log(restaurantInfo);
-    fetch(`http://localhost:5000/restaurant/${user.email}`, {
+    fetch(`https://foodiebay.onrender.com/restaurant/${user.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

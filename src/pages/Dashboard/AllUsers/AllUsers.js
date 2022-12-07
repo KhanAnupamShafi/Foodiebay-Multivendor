@@ -10,7 +10,7 @@ const AllUsers = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("http://localhost:5000/allUsers").then((res) => res.json())
+    fetch("https://foodiebay.onrender.com/allUsers").then((res) => res.json())
   );
   if (isLoading) {
     return <Loading></Loading>;

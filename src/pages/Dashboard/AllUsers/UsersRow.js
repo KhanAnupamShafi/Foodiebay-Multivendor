@@ -6,7 +6,7 @@ const UsersRow = ({ user, index, refetch }) => {
 
   // Make (Admin)...
   const makeAdmin = () => {
-    fetch(`http://localhost:5000/users/admin/${email}`, {
+    fetch(`https://foodiebay.onrender.com/users/admin/${email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -30,7 +30,7 @@ const UsersRow = ({ user, index, refetch }) => {
   const handleDeleteUser = (id) => {
     const proceed = window.confirm("Are you sure to Delete this User");
     if (proceed) {
-      fetch(`http://localhost:5000/deleteUsers/${id}`, {
+      fetch(`https://foodiebay.onrender.com/deleteUsers/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

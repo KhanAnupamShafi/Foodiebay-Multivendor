@@ -16,13 +16,13 @@ const useCheckout = () => {
   // console.log(user);
   async function handleCheckout() {
     const session = await axios
-      .post("http://localhost:5000/checkout-sessions", cartDetails)
+      .post("https://foodiebay.onrender.com/checkout-sessions", cartDetails)
       .then((res) => res.data)
       .catch((error) => {
         toast.error("checkout failed");
         console.log("Error during checkout : ", error);
       });
-    // const session = await fetch("http://localhost:5000/checkout-sessions", {
+    // const session = await fetch("https://foodiebay.onrender.com/checkout-sessions", {
     //   method: "POST",
     //   headers: {
     //     "Content-Type": "application/json",

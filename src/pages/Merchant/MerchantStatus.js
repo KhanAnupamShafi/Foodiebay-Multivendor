@@ -19,7 +19,7 @@ const MerchantStatus = ({ restaurantInfo, refetch }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `http://localhost:5000/restaurant?restaurantId=${restaurantInfo?.email}`,
+          `https://foodiebay.onrender.com/restaurant?restaurantId=${restaurantInfo?.email}`,
           {
             method: "DELETE",
           }

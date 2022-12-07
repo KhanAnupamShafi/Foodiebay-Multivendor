@@ -11,7 +11,9 @@ const VendorList = () => {
     isLoading,
     refetch,
   } = useQuery([`restaurants`], () =>
-    fetch(`http://localhost:5000/restaurants/vendor`).then((res) => res.json())
+    fetch(`https://foodiebay.onrender.com/restaurants/vendor`).then((res) =>
+      res.json()
+    )
   );
 
   if (isLoading) {

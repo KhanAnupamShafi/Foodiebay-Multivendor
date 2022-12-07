@@ -58,7 +58,7 @@ const AddMenu = () => {
   const [tags, setTags] = useState([]);
   const [file, setFile] = useState([]);
   const getData = async (inputValue) => {
-    let res = await axios.get("http://localhost:5000/category");
+    let res = await axios.get("https://foodiebay.onrender.com/category");
     return res.data;
   };
 
@@ -80,7 +80,7 @@ const AddMenu = () => {
   };
 
   // const loadOptions = (inputValue) => {
-  //   return fetch(`http://localhost:5000/products`).then((res) => res.json());
+  //   return fetch(`https://foodiebay.onrender.com/products`).then((res) => res.json());
   // };
   function capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);
@@ -95,9 +95,9 @@ const AddMenu = () => {
     });
   };
   const { data: restaurantInfo } = useQuery(["Restaurant", user.email], () =>
-    fetch(`http://localhost:5000/restaurant?restaurantId=${user.email}`).then(
-      (res) => res.json()
-    )
+    fetch(
+      `https://foodiebay.onrender.com/restaurant?restaurantId=${user.email}`
+    ).then((res) => res.json())
   );
 
   const onSubmit = (e) => {
@@ -128,14 +128,14 @@ const AddMenu = () => {
           currency: "USD",
           restaurantInfo,
         };
-        // console.log("data", data);
+        console.log("data", data);
 
         if (data?.category.__isNew__) {
           const categoryInfo = {
             value: data.category.value,
             label: data.category.label,
           };
-          fetch(`http://localhost:5000/category`, {
+          fetch(`https://foodiebay.onrender.com/category`, {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -150,7 +150,7 @@ const AddMenu = () => {
             });
         }
         if (result.success) {
-          fetch(`http://localhost:5000/meal`, {
+          fetch(`https://foodiebay.onrender.com/meal`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -27,7 +27,7 @@ const CartSummary = ({ restaurant, showCart, setClick }) => {
   async function handleClick(event) {
     // event.preventDefault();
 
-    await fetch("http://localhost:5000/checkout-session", {
+    await fetch("https://foodiebay.onrender.com/checkout-session", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
