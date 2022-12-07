@@ -165,7 +165,7 @@ const CartSummaryContainer = styled.div`
   overflow-y: auto;
   padding-top: 24px;
   right: 0;
-  z-index: 900;
+  z-index: 40;
 `;
 const CartHeader = styled.div`
   max-width: 100%;

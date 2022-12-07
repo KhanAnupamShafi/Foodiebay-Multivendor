@@ -278,7 +278,7 @@ export const Aside = styled.aside`
   top: 110px;
   width: 352px;
   box-shadow: 0 0.3rem 2rem rgb(0 0 0 / 10%);
-  z-index: 300;
+  z-index: 30;
   @media screen and (max-width: 1184px) {
     width: 100%;
     height: 90vh;
