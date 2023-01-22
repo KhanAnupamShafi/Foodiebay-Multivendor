@@ -29,7 +29,7 @@ const ManageItems = () => {
   // Delete Menus.....
   // console.log(users);
   const handleDelete = (id) => {
-    const proceed = window.confirm("Are you sure to Delete this User");
+    const proceed = window.confirm("Are you sure to Delete this Item");
     if (proceed) {
       fetch(`https://foodiebay.onrender.com/deleteMenus/${id}`, {
         method: "DELETE",

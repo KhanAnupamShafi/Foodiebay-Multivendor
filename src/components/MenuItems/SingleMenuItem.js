@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CartAdd } from "styled-icons/boxicons-solid";
 import DefaultImg from "../../assets/Restaurant/default_dish_pic.svg";
+import { Fade } from "react-awesome-reveal";
 
 const SingleMenuItem = ({ food, setMenuItem }) => {
   // const price = formatProductPrice(food);
@@ -14,41 +15,43 @@ const SingleMenuItem = ({ food, setMenuItem }) => {
     <>
       <ListItem htmlFor="single-menu-item" onClick={() => setMenuItem(food)}>
         <button></button>
-        <li>
-          <ItemDetails>
-            <ItemData>
-              <h3>{food.name}</h3>
-              {!food.desc ? (
-                <p>
-                  Chicken Dumpling fried and served with home-made sauce mild or
-                  spicy.
-                </p>
-              ) : (
-                <p>{food.desc}</p>
-              )}
-            </ItemData>
-            <ItemPic>
-              <DishPhoto image={food.image}></DishPhoto>
-            </ItemPic>
-          </ItemDetails>
-          <PriceContainer>
-            <ProductPrice>
-              <div>
-                <p className="mt-1 ">
-                  Tk {food.price}
-                  {!food.offer ? (
-                    <span></span>
-                  ) : (
-                    <span className="pl-1">Tk {food.offer + food.price}</span>
-                  )}
-                </p>
-              </div>
-            </ProductPrice>
-            <AddCartBtn onClick={handleClick}>
-              <CartAdd size={24} />
-            </AddCartBtn>
-          </PriceContainer>
-        </li>
+        <Fade cascade damping={0.1}>
+          <li>
+            <ItemDetails>
+              <ItemData>
+                <h3>{food.name}</h3>
+                {!food.desc ? (
+                  <p>
+                    Chicken Dumpling fried and served with home-made sauce mild
+                    or spicy.
+                  </p>
+                ) : (
+                  <p title={food.desc}>{food.desc.slice(0, 100)}</p>
+                )}
+              </ItemData>
+              <ItemPic>
+                <DishPhoto image={food.image}></DishPhoto>
+              </ItemPic>
+            </ItemDetails>
+            <PriceContainer>
+              <ProductPrice>
+                <div>
+                  <p className="mt-1 ">
+                    Tk {food.price}
+                    {!food.offer ? (
+                      <span></span>
+                    ) : (
+                      <span className="pl-1">Tk {food.offer + food.price}</span>
+                    )}
+                  </p>
+                </div>
+              </ProductPrice>
+              <AddCartBtn onClick={handleClick}>
+                <CartAdd size={24} />
+              </AddCartBtn>
+            </PriceContainer>
+          </li>
+        </Fade>
       </ListItem>
     </>
   );

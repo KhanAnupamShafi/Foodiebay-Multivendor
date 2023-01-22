@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { QrCodeScan } from "styled-icons/bootstrap";
 import { UserNavContainer } from "../../layouts/Header/Header.elements";
 
 export const Container = styled.div`
@@ -121,9 +122,11 @@ export const VendorInfo = styled.div`
 
 export const BookingButton = styled.button``;
 export const VendorButton = styled.div`
-  ${BookingButton} {
-    margin-left: 12px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+
   button {
     position: relative;
     max-width: 100%;
@@ -207,7 +210,7 @@ export const Adressbar = styled.div`
 
   p {
     font-weight: 300;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: rgb(118, 118, 118);
     vertical-align: baseline;
   }
@@ -229,8 +232,8 @@ export const Adressbar = styled.div`
   }
 `;
 export const VendorOpen = styled.div`
-  background-color: #fcc54c;
-  color: #2b3035;
+  background-color: ${(props) => (props.open ? "#25A55C" : "#fcc54c; ")};
+  /* color: #2b3035; */
   border-radius: 8px;
   height: 24px;
   margin: 0 4px;
@@ -242,6 +245,7 @@ export const VendorOpen = styled.div`
   justify-content: center;
   align-items: center;
   p {
+    color: #fff;
     font-family: "Uber", sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
@@ -318,3 +322,10 @@ export const Grid = styled.div`
   width: 100%;
   display: flex;
 `;
+
+export const QrCodeScanStyled = styled(QrCodeScan)`
+  color: red;
+  /* background: #fff; */
+`;
+
+// import { QrCodeScan } from "styled-icons/bootstrap";

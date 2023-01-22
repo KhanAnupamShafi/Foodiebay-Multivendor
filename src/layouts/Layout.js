@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import Footer from "./Footer/Footer";
+import Test from "./NewFooter/Test";
 
 function Layout() {
   return (
@@ -10,6 +11,7 @@ function Layout() {
       <Outlet />
 
       <Footer />
+      <Test />
     </>
   );
 }

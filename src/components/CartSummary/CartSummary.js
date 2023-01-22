@@ -43,7 +43,7 @@ const CartSummary = ({ restaurant, showCart, setClick }) => {
         }
       });
   }
-  console.log(cartItems);
+  // console.log(cartItems);
   // console.log(showCart);
   return (
     <CartSummaryContainer>

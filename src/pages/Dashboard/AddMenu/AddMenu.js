@@ -11,6 +11,7 @@ import { useQuery } from "react-query";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Col,
@@ -61,7 +62,7 @@ const AddMenu = () => {
     let res = await axios.get("https://foodiebay.onrender.com/category");
     return res.data;
   };
-
+  const navigate = useNavigate();
   // handle input change event
 
   const handleInputChange = (e) => {
@@ -161,6 +162,7 @@ const AddMenu = () => {
             .then((data) => {
               if (data.success) {
                 toast.success(`Item Added Successfully`);
+                navigate("/dashboard/manage_items");
               } else {
                 toast.error(`Failed to add the product`);
               }
@@ -227,7 +229,7 @@ const AddMenu = () => {
                   defaultOptions
                   isSearchable
                   value={selectedValue}
-                  // loadOptions={loadOptions}
+                  loadOptions={loadOptions}
                   // onInputChange={handleInputChange}
                   onChange={handleChange}
                   styles={customStyles}

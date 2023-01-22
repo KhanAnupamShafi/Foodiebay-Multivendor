@@ -62,7 +62,7 @@ const MenuWrapper = styled.section`
 const DishSection = styled.section`
   display: flex;
   flex-direction: column;
-  margin-top: 16px;
+  margin-top: 26px;
   background: #fff;
 `;
 const DishCategory = styled.section`

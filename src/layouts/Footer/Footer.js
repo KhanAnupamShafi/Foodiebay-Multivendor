@@ -63,7 +63,7 @@ const Footer = () => {
                     <li>
                       <a
                         className="text-gray-600 hover:text-gray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/presentation?ref=njs-profile"
+                        href="https://github.com/KhanAnupamShafi/"
                       >
                         About Us
                       </a>
@@ -71,7 +71,7 @@ const Footer = () => {
                     <li>
                       <a
                         className="text-gray-600 hover:text-gray-800 font-semibold block pb-2 text-sm"
-                        href="https://blog.creative-tim.com?ref=njs-profile"
+                        href="https://github.com/KhanAnupamShafi/"
                       >
                         Blog
                       </a>
@@ -79,17 +79,17 @@ const Footer = () => {
                     <li>
                       <a
                         className="text-gray-600 hover:text-gray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.github.com/creativetimofficial?ref=njs-profile"
+                        href="https://github.com/KhanAnupamShafi/"
                       >
                         Github
                       </a>
                     </li>
                     <li>
                       <a
-                        className="text-gray-600 hover:text-gray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile"
+                        className="https://github.com/KhanAnupamShafi/"
+                        href="https://github.com/KhanAnupamShafi/"
                       >
-                        Free Products
+                        Super Deals !
                       </a>
                     </li>
                   </ul>
@@ -102,7 +102,7 @@ const Footer = () => {
                     <li>
                       <a
                         className="text-gray-600 hover:text-gray-800 font-semibold block pb-2 text-sm"
-                        href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile"
+                        href="https://github.com/KhanAnupamShafi/"
                       >
                         MIT License
                       </a>
@@ -110,7 +110,7 @@ const Footer = () => {
                     <li>
                       <a
                         className="text-gray-600 hover:text-gray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/terms?ref=njs-profile"
+                        href="https://github.com/KhanAnupamShafi/"
                       >
                         Terms &amp; Conditions
                       </a>
@@ -118,7 +118,7 @@ const Footer = () => {
                     <li>
                       <a
                         className="text-gray-600 hover:text-gray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/privacy?ref=njs-profile"
+                        href="https://github.com/KhanAnupamShafi/"
                       >
                         Privacy Policy
                       </a>
@@ -126,7 +126,7 @@ const Footer = () => {
                     <li>
                       <a
                         className="text-gray-600 hover:text-gray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/contact-us?ref=njs-profile"
+                        href="https://github.com/KhanAnupamShafi/"
                       >
                         Contact Us
                       </a>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { StarFill } from "styled-icons/octicons";
 import Loading from "../Shared/Loading/Loading";
+import { Slide } from "react-awesome-reveal";
 
 const VendorList = () => {
   const {
@@ -26,63 +27,65 @@ const VendorList = () => {
       <RestaurantList>
         {vendors.map((restaurant) => (
           <ListItem key={restaurant?._id}>
-            <Link to={`/restaurant/${restaurant.restaurant_id}`}>
-              <ImageTop background={restaurant.restaurantBanner}>
-                <RestaurantInfo>
-                  <CompanyLogo
-                    src={restaurant?.restaurantLogo}
-                    alt="Merchant logo"
-                  />
-                  <CompanyDesc>
-                    <h3>{restaurant?.restaurantName}</h3>
-                    <p>{restaurant?.restaurantType}</p>
-                  </CompanyDesc>
-                </RestaurantInfo>
-              </ImageTop>
-              <ImageRating>
-                <div>
-                  <span>
-                    <StarFill width={20} />
-                    <StarFill width={20} />
-                    <StarFill width={20} />
-                    <StarFill width={20} />
-                    <StarFill width={20} />
-                  </span>
-                  <span>(0)</span>
-                </div>
-                <div>
-                  <PriceRange>
-                    <p>৳৳</p>৳
-                  </PriceRange>
-                </div>
-              </ImageRating>
-              <MoreDetails>
-                <Time>
+            <Slide cascade damping={0.1}>
+              <Link to={`/restaurant/${restaurant.restaurant_id}`}>
+                <ImageTop background={restaurant.restaurantBanner}>
+                  <RestaurantInfo>
+                    <CompanyLogo
+                      src={restaurant?.restaurantLogo}
+                      alt="Merchant logo"
+                    />
+                    <CompanyDesc>
+                      <h3>{restaurant?.restaurantName}</h3>
+                      <p>{restaurant?.restaurantType}</p>
+                    </CompanyDesc>
+                  </RestaurantInfo>
+                </ImageTop>
+                <ImageRating>
                   <div>
-                    <span>Opens</span>
+                    <span>
+                      <StarFill width={20} />
+                      <StarFill width={20} />
+                      <StarFill width={20} />
+                      <StarFill width={20} />
+                      <StarFill width={20} />
+                    </span>
+                    <span>(0)</span>
                   </div>
-                  <span>10:00 am</span>
-                </Time>
-                <Delivery>
                   <div>
-                    <span>45-60min</span>
+                    <PriceRange>
+                      <p>৳৳</p>৳
+                    </PriceRange>
                   </div>
-                  <span>Est. time</span>
-                </Delivery>
-                <MinSpend>
-                  <div>
-                    <span>Tk 100</span>
-                  </div>
-                  <span>Minimum</span>
-                </MinSpend>
-                <Fee>
-                  <div>
-                    <span>Tk 40</span>
-                  </div>
-                  <span>Delivery Fee</span>
-                </Fee>
-              </MoreDetails>
-            </Link>
+                </ImageRating>
+                <MoreDetails>
+                  <Time>
+                    <div>
+                      <span>Opens</span>
+                    </div>
+                    <span>10:00 am</span>
+                  </Time>
+                  <Delivery>
+                    <div>
+                      <span>45-60min</span>
+                    </div>
+                    <span>Est. time</span>
+                  </Delivery>
+                  <MinSpend>
+                    <div>
+                      <span>Tk 100</span>
+                    </div>
+                    <span>Minimum</span>
+                  </MinSpend>
+                  <Fee>
+                    <div>
+                      <span>Tk 40</span>
+                    </div>
+                    <span>Delivery Fee</span>
+                  </Fee>
+                </MoreDetails>
+              </Link>
+            </Slide>
           </ListItem>
         ))}
       </RestaurantList>
@@ -139,9 +142,16 @@ const ImageTop = styled.div`
   height: 172px;
   border-radius: 3px;
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
   background-position: center;
   margin-bottom: 10px;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-size: 120%;
+  }
 `;
 const RestaurantInfo = styled.div`
   background: linear-gradient(

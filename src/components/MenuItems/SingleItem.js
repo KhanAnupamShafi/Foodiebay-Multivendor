@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { Plus } from "styled-icons/boxicons-regular";
@@ -6,13 +6,23 @@ import { useShoppingCart } from "use-shopping-cart";
 import DefaultImg from "../../assets/Restaurant/default_dish_pic.svg";
 
 const SingleItem = ({ menuItem, setShowCart, restaurantId }) => {
-  const [isChecked, setIsChecked] = React.useState(true);
+  console.log(menuItem);
+  // const [isChecked, setIsChecked] = React.useState(true);
   const { addItem, cartDetails, formattedTotalPrice, totalPrice, clearCart } =
     useShoppingCart();
 
   const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
-  // console.log({ totalPrice, formattedTotalPrice, cartDetails });
-  // console.log(cartItems[0].restaurantInfo._id);
+  const [checkedState, setCheckedState] = useState(
+    new Array(menuItem?.ingredients.length).fill(false)
+  );
+
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+  };
   const handleAddToCart = () => {
     setShowCart(true);
     if (restaurantId !== cartItems[0]?.restaurantInfo?.restaurant_id) {
@@ -43,7 +53,15 @@ const SingleItem = ({ menuItem, setShowCart, restaurantId }) => {
                 <h3>{menuItem.name}</h3>
                 <span>TK {menuItem.price}</span>
               </div>
-              <p>{menuItem.desc}</p>
+
+              {!menuItem.desc ? (
+                <p>
+                  Chicken Dumpling fried and served with home-made sauce mild or
+                  spicy.
+                </p>
+              ) : (
+                <p>{menuItem.desc}</p>
+              )}
             </ItemName>
             <AddOnsMenu>
               <MenuHeader>
@@ -53,29 +71,28 @@ const SingleItem = ({ menuItem, setShowCart, restaurantId }) => {
                     <span>Optional</span>
                   </div>
                 </h3>
-                <p>Select up to 3</p>
+                <p>Select up to {menuItem?.ingredients.length}</p>
               </MenuHeader>
             </AddOnsMenu>
-            <AddOnOptions>
-              <label htmlFor="topping 025089108">
-                <input
-                  type="checkbox"
-                  id="checkboxid"
-                  name="topping - 0"
-                  value="25089108"
-                  // onChange={() => setChecked(!checked)}
-                  onChange={(event) =>
-                    setIsChecked(event.currentTarget.checked)
-                  }
-                  checked={isChecked}
-                />
+            {menuItem?.ingredients?.map((topping, index) => (
+              <AddOnOptions key={index}>
+                <label htmlFor={index}>
+                  <input
+                    type="checkbox"
+                    id={`custom-checkbox-${index}`}
+                    name={topping?.label}
+                    value={topping?.label}
+                    onChange={() => handleOnChange(index)}
+                    checked={checkedState[index]}
+                  />
 
-                <OptionLabel htmlFor="checkboxid">
-                  {" "}
-                  <Option>Chedder Cheese</Option>
-                </OptionLabel>
-              </label>
-            </AddOnOptions>
+                  <OptionLabel htmlFor={`custom-checkbox-${index}`}>
+                    {" "}
+                    <Option>{topping?.label}</Option>
+                  </OptionLabel>
+                </label>
+              </AddOnOptions>
+            ))}
             <AddToCartSection>
               <QuantityModifier>
                 <button type="button">

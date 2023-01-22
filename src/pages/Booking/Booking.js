@@ -72,6 +72,13 @@ const Booking = () => {
       });
   };
 
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+  };
   return (
     <>
       <Container>
@@ -215,6 +222,7 @@ const Booking = () => {
                           </p>
                           <input
                             type="date"
+                            min={disablePastDate()}
                             className={`w-full h-12 text-xl rounded-lg ${
                               errors.reserveDate &&
                               " focus:border-red-500 focus:ring-red-500 border-red-500"
@@ -401,7 +409,7 @@ const Booking = () => {
                 <div>
                   {table?.length < 1 && (
                     <span className="text-sm text-red-500">
-                      Sorry there is no seat available right now
+                      Sorry there is no table available right now
                     </span>
                   )}
                 </div>
