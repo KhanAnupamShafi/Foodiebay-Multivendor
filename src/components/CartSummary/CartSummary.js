@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { Minus } from "styled-icons/boxicons-regular";
-import { ChevronRight } from "styled-icons/boxicons-solid";
-import {} from "styled-icons/evil";
-import { Plus } from "styled-icons/feather";
+import React from 'react';
+import styled from 'styled-components';
+import { Minus } from 'styled-icons/boxicons-regular';
+import { ChevronRight } from 'styled-icons/boxicons-solid';
+import {} from 'styled-icons/evil';
+import { Plus } from 'styled-icons/feather';
 
-import { DeleteForever } from "styled-icons/material";
-import { Close } from "styled-icons/remix-line";
-import { useShoppingCart } from "use-shopping-cart";
-import CartSVG from "../../assets/Restaurant/CartSVG";
-import UseCheckout from "../../hooks/useCheckout";
+import { DeleteForever } from 'styled-icons/material';
+import { Close } from 'styled-icons/remix-line';
+import { useShoppingCart } from 'use-shopping-cart';
+import CartSVG from '../../assets/Restaurant/CartSVG';
+import UseCheckout from '../../hooks/useCheckout';
 
 const CartSummary = ({ restaurant, showCart, setClick }) => {
   const {
@@ -22,15 +21,17 @@ const CartSummary = ({ restaurant, showCart, setClick }) => {
     redirectToCheckout,
   } = useShoppingCart();
   const handleCheckout = UseCheckout();
-  const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
-
+  const cartItems = Object.keys(cartDetails).map(
+    (key) => cartDetails[key]
+  );
+  // session checkout
   async function handleClick(event) {
     // event.preventDefault();
 
-    await fetch("https://foodiebay.onrender.com/checkout-session", {
-      method: "POST",
+    await fetch('https://foodiebay.onrender.com/checkout-session', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ items: cartItems }),
     })
@@ -49,8 +50,7 @@ const CartSummary = ({ restaurant, showCart, setClick }) => {
     <CartSummaryContainer>
       <label
         className="btn btn-circle drawer-button md:hidden"
-        onClick={() => setClick(false)}
-      >
+        onClick={() => setClick(false)}>
         <Close size={24} />
         {/* {!click ? <Menu3 size="48" /> : <Close size="48" />} */}
       </label>
@@ -96,7 +96,7 @@ const CartSummary = ({ restaurant, showCart, setClick }) => {
                   <ImageGrid>
                     <ImageContainer>
                       <picture>
-                        {" "}
+                        {' '}
                         <img src={item.image} alt="cart items" />
                       </picture>
                     </ImageContainer>
@@ -117,15 +117,17 @@ const CartSummary = ({ restaurant, showCart, setClick }) => {
                             {item.quantity === 1 ? (
                               <button
                                 type="button"
-                                onClick={() => decrementItem(item.sku)}
-                              >
+                                onClick={() =>
+                                  decrementItem(item.sku)
+                                }>
                                 <DeleteForever size={24} />
                               </button>
                             ) : (
                               <button
                                 type="button"
-                                onClick={() => decrementItem(item.sku)}
-                              >
+                                onClick={() =>
+                                  decrementItem(item.sku)
+                                }>
                                 <Minus size={24} />
                               </button>
                             )}
@@ -136,8 +138,7 @@ const CartSummary = ({ restaurant, showCart, setClick }) => {
                           <IconBox>
                             <button
                               type="button"
-                              onClick={() => incrementItem(item.sku)}
-                            >
+                              onClick={() => incrementItem(item.sku)}>
                               <Plus size={24} />
                             </button>
                           </IconBox>
