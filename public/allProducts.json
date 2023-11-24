@@ -1,44 +1,44 @@
 [
-    {
-        "_id":1,
-        "productName":"mobile",
-        "price":22443,
-        "description":"",
-        "quantity":180 
-    },
-    {
-        "_id":2,
-        "productName":"book",
-        "price":156,
-        "description":"",
-        "quantity":789
-    },
-    {
-        "_id":3,
-        "productName":"pen",
-        "price":20,
-        "description":"",
-        "quantity":300
-    },
-    {
-        "_id":4,
-        "productName":"table",
-        "price":5000,
-        "description":"",
-        "quantity":17
-    },
-    {
-        "_id":5,
-        "productName":"helmet",
-        "price":1200,
-        "description":"",
-        "quantity":10
-    },
-    {
-        "_id":6,
-        "productName":"computer",
-        "price":45000,
-        "description":"",
-        "quantity":8
-    }
+  {
+    "_id": 1,
+    "productName": "mobile",
+    "price": 22443,
+    "description": "",
+    "quantity": 180
+  },
+  {
+    "_id": 2,
+    "productName": "book",
+    "price": 156,
+    "description": "",
+    "quantity": 111
+  },
+  {
+    "_id": 3,
+    "productName": "pen",
+    "price": 20,
+    "description": "",
+    "quantity": 300
+  },
+  {
+    "_id": 4,
+    "productName": "table",
+    "price": 5000,
+    "description": "",
+    "quantity": 17
+  },
+  {
+    "_id": 5,
+    "productName": "helmet",
+    "price": 1200,
+    "description": "",
+    "quantity": 10
+  },
+  {
+    "_id": 6,
+    "productName": "computer",
+    "price": 45000,
+    "description": "",
+    "quantity": 8
+  }
 ]
