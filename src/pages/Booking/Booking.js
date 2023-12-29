@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Header from "../../layouts/Header/Header";
-import { Container } from "../Restaurant/Restaurent.elements";
-import ReservationImg from "../../assets/Restaurant/reservation_1.jpg";
-import { useForm } from "react-hook-form";
-import { Dish } from "styled-icons/boxicons-regular";
-import { Person } from "styled-icons/bootstrap";
-import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { toast } from "react-toastify";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
-import { Link } from "react-scroll";
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import { Person } from 'styled-icons/bootstrap';
+import { Dish } from 'styled-icons/boxicons-regular';
+import ReservationImg from '../../assets/Restaurant/reservation_1.jpg';
+import auth from '../../firebase.init';
+import Header from '../../layouts/Header/Header';
+import { Container } from '../Restaurant/Restaurent.elements';
 
 const Booking = () => {
   const { id } = useParams();
@@ -28,10 +27,10 @@ const Booking = () => {
     data: tableInfo,
     isLoading,
     refetch,
-  } = useQuery(["tables", id], () =>
-    fetch(`https://foodiebay.onrender.com/table/${id}`).then((res) =>
-      res.json()
-    )
+  } = useQuery(['tables', id], () =>
+    fetch(
+      `https://foodiebay-multivendor-server-production.up.railway.app/table/${id}`
+    ).then((res) => res.json())
   );
 
   useEffect(() => {
@@ -52,12 +51,16 @@ const Booking = () => {
 
   // handle submit
   const onSubmit = (data) => {
-    let bookingData = { ...data, id: table[0]?.id, email: user?.email };
+    let bookingData = {
+      ...data,
+      id: table[0]?.id,
+      email: user?.email,
+    };
     console.log(bookingData);
-    const uri = `https://foodiebay.onrender.com/table/${id}`;
+    const uri = `https://foodiebay-multivendor-server-production.up.railway.app/table/${id}`;
     fetch(uri, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify(bookingData),
     })
       .then((res) => res.json())
@@ -74,10 +77,10 @@ const Booking = () => {
 
   const disablePastDate = () => {
     const today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
     const yyyy = today.getFullYear();
-    return yyyy + "-" + mm + "-" + dd;
+    return yyyy + '-' + mm + '-' + dd;
   };
   return (
     <>
@@ -123,12 +126,18 @@ const Booking = () => {
                       <div className="text-sm breadcrumbs">
                         <ul className="justify-center text-gray-100">
                           <li>
-                            <a> {bookingStat?.customer?.reserveDate}</a>
+                            <a>
+                              {' '}
+                              {bookingStat?.customer?.reserveDate}
+                            </a>
                           </li>
                           <li>
                             <a> {bookingStat?.customer?.time}</a>
                           </li>
-                          <li> {bookingStat?.customer?.guest} guests</li>
+                          <li>
+                            {' '}
+                            {bookingStat?.customer?.guest} guests
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -151,13 +160,13 @@ const Booking = () => {
                         type="radio"
                         className={`w-6 h-6 ${
                           errors.tableType &&
-                          " focus:border-red-500 focus:ring-red-500 border-red-500"
+                          ' focus:border-red-500 focus:ring-red-500 border-red-500'
                         }`}
                         value="Family Dining<"
-                        {...register("tableType", {
+                        {...register('tableType', {
                           required: {
                             value: true,
-                            message: "Trip type is required",
+                            message: 'Trip type is required',
                           },
                         })}
                       />
@@ -171,17 +180,19 @@ const Booking = () => {
                         type="radio"
                         className={`w-6 h-6 ${
                           errors.tableType &&
-                          " focus:border-red-500 focus:ring-red-500 border-red-500"
+                          ' focus:border-red-500 focus:ring-red-500 border-red-500'
                         }`}
                         value="Booths"
-                        {...register("tableType", {
+                        {...register('tableType', {
                           required: {
                             value: true,
-                            message: "Trip type is required",
+                            message: 'Trip type is required',
                           },
                         })}
                       />
-                      <p className="ttext-lg font-bold uppercase">Booths</p>
+                      <p className="ttext-lg font-bold uppercase">
+                        Booths
+                      </p>
                     </div>
 
                     <div className="flex items-center space-x-2">
@@ -189,17 +200,19 @@ const Booking = () => {
                         type="radio"
                         className={`w-6 h-6 ${
                           errors.tableType &&
-                          " focus:border-red-500 focus:ring-red-500 border-red-500"
+                          ' focus:border-red-500 focus:ring-red-500 border-red-500'
                         }`}
                         value="Outdoor"
-                        {...register("tableType", {
+                        {...register('tableType', {
                           required: {
                             value: true,
-                            message: "Trip type is required",
+                            message: 'Trip type is required',
                           },
                         })}
                       />
-                      <p className="text-md font-bold uppercase">Outdoor</p>
+                      <p className="text-md font-bold uppercase">
+                        Outdoor
+                      </p>
                     </div>
                   </div>
                   <div>
@@ -225,12 +238,13 @@ const Booking = () => {
                             min={disablePastDate()}
                             className={`w-full h-12 text-xl rounded-lg ${
                               errors.reserveDate &&
-                              " focus:border-red-500 focus:ring-red-500 border-red-500"
+                              ' focus:border-red-500 focus:ring-red-500 border-red-500'
                             }`}
-                            {...register("reserveDate", {
+                            {...register('reserveDate', {
                               required: {
                                 value: true,
-                                message: "Reservation date is required",
+                                message:
+                                  'Reservation date is required',
                               },
                             })}
                           />
@@ -257,15 +271,14 @@ const Booking = () => {
                       <select
                         className={`w-full h-12 text-xl pl-16 rounded-lg align-middle ${
                           errors.time &&
-                          " focus:border-red-500 focus:ring-red-500 border-red-500"
+                          ' focus:border-red-500 focus:ring-red-500 border-red-500'
                         }`}
-                        {...register("time", {
+                        {...register('time', {
                           required: {
                             value: true,
-                            message: "Booking time is required",
+                            message: 'Booking time is required',
                           },
-                        })}
-                      >
+                        })}>
                         <option value="" defaultValue disabled hidden>
                           --Select Time--
                         </option>
@@ -273,23 +286,23 @@ const Booking = () => {
                           12:00 am - 1:00 pm
                         </option>
                         <option value="1:00 pm - 2:00 pm">
-                          {" "}
+                          {' '}
                           1:00 pm - 2:00 pm
                         </option>
                         <option value="2:00 pm - 3:00 pm">
-                          {" "}
+                          {' '}
                           2:00 pm - 3:00 pm
                         </option>
                         <option value="4:00 pm - 5:00 pm">
-                          {" "}
+                          {' '}
                           4:00 pm - 5:00 pm
                         </option>
                         <option value="6:00 pm - 7:00 pm">
-                          {" "}
+                          {' '}
                           6:00 pm - 7:00 pm
                         </option>
                         <option value="7:00 pm - 8:00 pm">
-                          {" "}
+                          {' '}
                           7:00 pm - 8:00 pm
                         </option>
                       </select>
@@ -314,13 +327,12 @@ const Booking = () => {
                         </p>
                         <select
                           className="w-full h-12 rounded-lg text-xl pl-16"
-                          {...register("guest", {
+                          {...register('guest', {
                             required: {
                               value: true,
-                              message: "Trip type is required",
+                              message: 'Trip type is required',
                             },
-                          })}
-                        >
+                          })}>
                           <option>1</option>
                           <option>2</option>
                           <option>3</option>
@@ -347,12 +359,12 @@ const Booking = () => {
                         type="text"
                         className={`w-full h-12 mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 rounded-lg focus:ring-0 focus:border-black ${
                           errors.name &&
-                          "focus:border-red-500 focus:ring-red-500 border-red-500"
+                          'focus:border-red-500 focus:ring-red-500 border-red-500'
                         }`}
-                        {...register("name", {
+                        {...register('name', {
                           required: {
                             value: true,
-                            message: "name is required",
+                            message: 'name is required',
                           },
                         })}
                       />
@@ -377,12 +389,12 @@ const Booking = () => {
                         type="tel"
                         className={`w-full h-12 mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 rounded-lg focus:ring-0 focus:border-black ${
                           errors.mobile &&
-                          "focus:border-red-500 focus:ring-red-500 border-red-500"
+                          'focus:border-red-500 focus:ring-red-500 border-red-500'
                         }`}
-                        {...register("mobile", {
+                        {...register('mobile', {
                           required: {
                             value: true,
-                            message: "Reservation date is required",
+                            message: 'Reservation date is required',
                           },
                         })}
                       />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
 
 const useVendorAccess = (user) => {
   // console.log(user, "useVender User data");
@@ -8,7 +8,9 @@ const useVendorAccess = (user) => {
     const email = user?.email;
 
     if (email) {
-      fetch(`https://foodiebay.onrender.com/vendor/${email}`)
+      fetch(
+        `https://foodiebay-multivendor-server-production.up.railway.app/vendor/${email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           // console.log("data inside useVendor", data);

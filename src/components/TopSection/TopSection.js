@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { ArrowRight } from "styled-icons/fa-solid";
-import Pattern1 from "../../assets/Banner/category_pattern4.png";
-import Layer1 from "../../assets/Banner/category_pattern2.png";
-import WelcomeImage from "../../assets/Banner/welcome_image.png";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { ArrowRight } from 'styled-icons/fa-solid';
+import Layer1 from '../../assets/Banner/category_pattern2.png';
+import Pattern1 from '../../assets/Banner/category_pattern4.png';
+import WelcomeImage from '../../assets/Banner/welcome_image.png';
 
 const TopSection = () => {
   return (
@@ -26,16 +26,16 @@ const TopSection = () => {
               <h3>Welcome</h3>
               <h2>Discover Cuisines</h2>
               <Description>
-                <p>
-                  It’s about the journey, not the destination. It's the food{" "}
-                  <br /> and groceries you love, delivered. You prepare the
-                  food,
+                <p className="hidden lg:block">
+                  It’s about the journey, not the destination. It's
+                  the food <br /> and groceries you love, delivered.
+                  You prepare the food,
                   <br /> we handle the rest
                 </p>
                 <ButtonAction>
                   <Link to="/">
                     <Button>
-                      <span> About us</span>{" "}
+                      <span> About us</span>{' '}
                       <ArrowRight className="font-bold" width={20} />
                     </Button>
                   </Link>
@@ -46,14 +46,12 @@ const TopSection = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           width="19"
                           height="19"
-                          viewBox="0 0 19 19"
-                        >
+                          viewBox="0 0 19 19">
                           <path
                             fill="#e7272d"
                             d="M22.444 17.694a11.991 11.991 0 01-3.768-.6 1.077 1.077 0 00-1.077.253l-2.322 2.322a15.912 15.912 0 01-6.956-6.946l2.322-2.333a1.036 1.036 0 00.264-1.066 11.991 11.991 0 01-.6-3.768A1.059 1.059 0 009.25 4.5H5.556A1.059 1.059 0 004.5 5.556a18.055 18.055 0 006.968 14.2A17.662 17.662 0 0022.444 23.5a1.059 1.059 0 001.056-1.056V18.75a1.059 1.059 0 00-1.056-1.056zM14 4.5v10.556l3.167-3.167H23.5V4.5z"
                             data-name="Icon material-perm-phone-msg"
-                            transform="translate(-4.5 -4.5)"
-                          ></path>
+                            transform="translate(-4.5 -4.5)"></path>
                         </svg>
                       </div>
                     </Box>
@@ -117,7 +115,8 @@ const Wrap = styled.div`
   flex-wrap: wrap;
   align-content: flex-start;
   background-color: #222222;
-  transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+  transition: background 0.3s, border 0.3s, border-radius 0.3s,
+    box-shadow 0.3s;
   margin: -100px 0px 0px 0px;
   padding: 150px 200px 100px 145px;
   @media only screen and (max-width: 1624px) {
@@ -136,7 +135,7 @@ const Wrap = styled.div`
     padding: 150px 60px 100px 260px;
   }
   @media only screen and (max-width: 1024px) {
-    padding: 100px 15px 100px 15px;
+    padding: 50px 15px 100px 15px;
   }
 `;
 const Content = styled.div`
@@ -156,7 +155,7 @@ const Content = styled.div`
     margin: 0px 0px 15px 0px;
     font-style: italic;
     &:before {
-      content: "";
+      content: '';
       background-color: #e7272d;
       width: 80px;
       height: 2px;
@@ -166,7 +165,7 @@ const Content = styled.div`
       z-index: 2;
     }
     &:after {
-      content: "";
+      content: '';
       height: 2px;
       background-color: #e7272d;
       width: 0px;
@@ -175,7 +174,7 @@ const Content = styled.div`
   }
 
   h2 {
-    font-family: "Uber", sans-serif;
+    font-family: 'Uber', sans-serif;
     color: #ffffff;
     font-size: 81px;
     font-weight: 900;

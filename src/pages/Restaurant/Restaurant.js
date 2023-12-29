@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { InfoOutline } from "styled-icons/evaicons-outline";
-import { Close, Menu3, Time } from "styled-icons/remix-line";
-import MenuItems from "../../components/MenuItems/MenuItems";
-import Loading from "../../components/Shared/Loading/Loading";
-import VendorNavigation from "../../components/VendorNavigation/VendorNavigation";
-import CartSummary from "../../components/CartSummary/CartSummary";
-import Header from "../../layouts/Header/Header";
-import QRCode from "qrcode.react";
+import { format } from 'date-fns';
+import QRCode from 'qrcode.react';
+import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { Group } from 'styled-icons/boxicons-regular';
+import { InfoOutline } from 'styled-icons/evaicons-outline';
+import { Menu3, Time } from 'styled-icons/remix-line';
+import { useShoppingCart } from 'use-shopping-cart';
+import CartSummary from '../../components/CartSummary/CartSummary';
+import MenuItems from '../../components/MenuItems/MenuItems';
+import Loading from '../../components/Shared/Loading/Loading';
+import VendorNavigation from '../../components/VendorNavigation/VendorNavigation';
+import Header from '../../layouts/Header/Header';
 import {
   Adressbar,
   Aside,
@@ -32,10 +35,7 @@ import {
   VendorLogo,
   VendorOpen,
   VendorTags,
-} from "./Restaurent.elements";
-import { useShoppingCart } from "use-shopping-cart";
-import { Group } from "styled-icons/boxicons-regular";
-import { format } from "date-fns";
+} from './Restaurent.elements';
 
 const Restaurant = () => {
   const { restaurantId } = useParams();
@@ -46,29 +46,31 @@ const Restaurant = () => {
   const [showCart, setShowCart] = useState(true);
   const handleClick = () => setClick(true);
   const { cartCount, cartDetails } = useShoppingCart();
-  const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
-  const [time, setTime] = useState("");
+  const cartItems = Object.keys(cartDetails).map(
+    (key) => cartDetails[key]
+  );
+  const [time, setTime] = useState('');
   const location = useLocation();
 
   useEffect(() => {
     const localtime = new Date();
-    setTime(format(localtime, "HH"));
+    setTime(format(localtime, 'HH'));
   }, []);
   let qrURL = `${window.location.origin + location.pathname}`;
 
   console.log(qrURL);
-  const url = `https://foodiebay.onrender.com/restaurants/vendor/${restaurantId}`;
-  const url2 = `https://foodiebay.onrender.com/menu/${restaurantId}`;
+  const url = `https://foodiebay-multivendor-server-production.up.railway.app/restaurants/vendor/${restaurantId}`;
+  const url2 = `https://foodiebay-multivendor-server-production.up.railway.app/menu/${restaurantId}`;
   // React query...
   const { data: restaurant, isLoading: restaurantLoading } = useQuery(
-    ["restaurant", restaurantId],
+    ['restaurant', restaurantId],
     () => fetch(url).then((res) => res.json())
   );
   const {
     data: store,
     isLoading: menuLoading,
     refetch,
-  } = useQuery(["menu", restaurantId], () =>
+  } = useQuery(['menu', restaurantId], () =>
     fetch(url2).then((res) => res.json(), {
       refetchOnWindowFocus: false,
       // enabled: false,
@@ -79,13 +81,15 @@ const Restaurant = () => {
   useEffect(() => {
     if (cartCount) {
       // refetch();
-      if (restaurantId !== cartItems[0]?.restaurantInfo?.restaurant_id) {
+      if (
+        restaurantId !== cartItems[0]?.restaurantInfo?.restaurant_id
+      ) {
         setShowCart(false);
       }
     }
   }, [cartCount, cartItems, restaurantId, refetch]);
   useEffect(() => {
-    setRestaurantTags(restaurant?.restaurantType.split(", "));
+    setRestaurantTags(restaurant?.restaurantType.split(', '));
   }, [restaurant]);
 
   if (restaurantLoading || menuLoading) {
@@ -98,9 +102,9 @@ const Restaurant = () => {
     // Generate download with use canvas and stream
     const canvas = document.getElementById(`${qrURL}`);
     const pngUrl = canvas
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    let downloadLink = document.createElement("a");
+      .toDataURL('image/png')
+      .replace('image/png', 'image/octet-stream');
+    let downloadLink = document.createElement('a');
     downloadLink.href = pngUrl;
     downloadLink.download = `${restaurant?.restaurantName}.png`;
     document.body.appendChild(downloadLink);
@@ -154,7 +158,8 @@ const Restaurant = () => {
                       <Adressbar>
                         <Time size="15" />
                         <>
-                          {10 < parseInt(time) && parseInt(time) < 23 ? (
+                          {10 < parseInt(time) &&
+                          parseInt(time) < 23 ? (
                             <>
                               <VendorOpen open>
                                 <p>Open</p>
@@ -189,7 +194,7 @@ const Restaurant = () => {
                           id={qrURL}
                           value={qrURL}
                           size={290}
-                          level={"H"}
+                          level={'H'}
                           includeMargin={true}
                         />
                       </div>
@@ -202,7 +207,8 @@ const Restaurant = () => {
                         </span>
                       </button>
 
-                      <Link to={`/booking/${restaurant?.restaurant_id}`}>
+                      <Link
+                        to={`/booking/${restaurant?.restaurant_id}`}>
                         <BookingButton>
                           <span>
                             <span>
@@ -221,8 +227,7 @@ const Restaurant = () => {
                   <label
                     htmlFor="my-drawer"
                     className="p-2 btn btn-secondary"
-                    onClick={handleClick}
-                  >
+                    onClick={handleClick}>
                     <span>
                       Cart <Menu3 size="28" />
                     </span>
@@ -244,8 +249,7 @@ const Restaurant = () => {
               <CartSummary
                 restaurant={restaurant}
                 showCart={showCart}
-                setClick={setClick}
-              ></CartSummary>
+                setClick={setClick}></CartSummary>
             </CartBox>
           </Aside>
         </Grid>

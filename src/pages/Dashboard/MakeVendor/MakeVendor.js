@@ -1,10 +1,10 @@
-import { nanoid } from "nanoid";
-import React from "react";
-import { useQuery } from "react-query";
-import { toast } from "react-toastify";
+import { nanoid } from 'nanoid';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 
-import EmptyHeader from "../../../components/Shared/EmptyHeader/EmptyHeader";
-import Loading from "../../../components/Shared/Loading/Loading";
+import EmptyHeader from '../../../components/Shared/EmptyHeader/EmptyHeader';
+import Loading from '../../../components/Shared/Loading/Loading';
 
 const MakeVendor = () => {
   const {
@@ -12,9 +12,9 @@ const MakeVendor = () => {
     isLoading,
     refetch,
   } = useQuery([`restaurants`], () =>
-    fetch(`https://foodiebay.onrender.com/restaurants`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://foodiebay-multivendor-server-production.up.railway.app/restaurants`
+    ).then((res) => res.json())
   );
 
   if (isLoading) {
@@ -23,13 +23,16 @@ const MakeVendor = () => {
 
   const handleApprove = (email) => {
     const restaurantId = nanoid();
-    fetch(`https://foodiebay.onrender.com/restaurant/${email}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ restaurantId }),
-    })
+    fetch(
+      `https://foodiebay-multivendor-server-production.up.railway.app/restaurant/${email}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ restaurantId }),
+      }
+    )
       .then((res) => {
         if (res.status === 403) {
           toast.error(`Forbidden Request`);
@@ -80,19 +83,17 @@ const MakeVendor = () => {
               {restaurants.map((data) => (
                 <tr
                   key={data._id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                >
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <th
                     scope="row"
-                    className="py-1 px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
+                    className="py-1 px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <div className="flex items-center space-x-3">
                       <div className="mask bg-accent">
                         <div className="rounded-xl">
                           <img
                             src={
                               data.restaurantLogo ||
-                              "https://i.ibb.co/PhkSzrr/Wendys-Emblem.png"
+                              'https://i.ibb.co/PhkSzrr/Wendys-Emblem.png'
                             }
                             alt="Avatar Tailwind CSS Component"
                             className="object-contain h-16 w-24"
@@ -112,17 +113,16 @@ const MakeVendor = () => {
                   </td>
                   <td className="py-1 px-3 ">
                     <span className="badge badge-warning gap-2 badge-md">
-                      {data.applicationStatus === "pending"
-                        ? "On Hold"
-                        : "approved"}
+                      {data.applicationStatus === 'pending'
+                        ? 'On Hold'
+                        : 'approved'}
                     </span>
                   </td>
                   <td className="py-1 px-3 ">{data.date}</td>
                   <td className="py-1 px-3  text-center">
                     <button
                       onClick={() => handleApprove(data?.email)}
-                      className="btn btn-sm bg-primary rounded-full"
-                    >
+                      className="btn btn-sm bg-primary rounded-full">
                       Approve?
                     </button>
                   </td>

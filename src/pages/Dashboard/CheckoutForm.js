@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  CardElement,
+  useElements,
+  useStripe,
+} from '@stripe/react-stripe-js';
+import React, { useEffect, useState } from 'react';
 
 const CheckoutForm = ({ product }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [cardError, setCardError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [clientSecret, setClientSecret] = useState("");
+  const [cardError, setCardError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [clientSecret, setClientSecret] = useState('');
 
-  const [transactionId, setTransactionId] = useState("");
+  const [transactionId, setTransactionId] = useState('');
 
   const { _id, productName, price } = product;
-  console.log("price inside checkoutForm", price, productName);
+  console.log('price inside checkoutForm', price, productName);
 
   useEffect(() => {
-    fetch("https://foodiebay.onrender.com/create-payment-intent", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ price }),
-    })
+    fetch(
+      'https://foodiebay-multivendor-server-production.up.railway.app/create-payment-intent',
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ price }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data?.clientSecret) {
@@ -43,16 +50,18 @@ const CheckoutForm = ({ product }) => {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card,
-    });
+    const { error, paymentMethod } = await stripe.createPaymentMethod(
+      {
+        type: 'card',
+        card,
+      }
+    );
 
     if (error) {
       console.log(error);
     }
-    setCardError(error?.message || "");
-    setSuccess("");
+    setCardError(error?.message || '');
+    setSuccess('');
 
     // confirm card payment...
     const { paymentIntent, error: intentError } =
@@ -68,11 +77,11 @@ const CheckoutForm = ({ product }) => {
     if (intentError) {
       setCardError(intentError?.message);
     } else {
-      setCardError("");
+      setCardError('');
 
       console.log(paymentIntent);
       setTransactionId(paymentIntent.id);
-      setSuccess("congrates !! your payment is complete");
+      setSuccess('congrates !! your payment is complete');
 
       const payment = {
         productName: productName,
@@ -80,13 +89,16 @@ const CheckoutForm = ({ product }) => {
         tarnsactionId: paymentIntent.id,
       };
 
-      fetch(`https://foodiebay.onrender.com/payment-transactionId/${_id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(payment),
-      })
+      fetch(
+        `https://foodiebay-multivendor-server-production.up.railway.app/payment-transactionId/${_id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(payment),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -101,14 +113,14 @@ const CheckoutForm = ({ product }) => {
           options={{
             style: {
               base: {
-                fontSize: "16px",
-                color: "#424770",
-                "::placeholder": {
-                  color: "#aab7c4",
+                fontSize: '16px',
+                color: '#424770',
+                '::placeholder': {
+                  color: '#aab7c4',
                 },
               },
               invalid: {
-                color: "#9e2146",
+                color: '#9e2146',
               },
             },
           }}
@@ -116,8 +128,7 @@ const CheckoutForm = ({ product }) => {
         <button
           className="text-black btn btn-sm btn-warning"
           type="submit"
-          disabled={!stripe || !clientSecret}
-        >
+          disabled={!stripe || !clientSecret}>
           Pay
         </button>
       </form>
@@ -126,9 +137,11 @@ const CheckoutForm = ({ product }) => {
         <div className="text-green-500">
           <p>{success}</p>
           <p>
-            {" "}
-            Your tarnsaction ID:{" "}
-            <span className="text-orange-500 font-bold">{transactionId}</span>
+            {' '}
+            Your tarnsaction ID:{' '}
+            <span className="text-orange-500 font-bold">
+              {transactionId}
+            </span>
           </p>
         </div>
       )}

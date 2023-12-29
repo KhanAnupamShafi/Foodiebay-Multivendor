@@ -1,25 +1,30 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const UsersRow = ({ user, index, refetch }) => {
   const { _id, email, role } = user;
 
   // Make (Admin)...
   const makeAdmin = () => {
-    fetch(`https://foodiebay.onrender.com/users/admin/${email}`, {
-      method: "PUT",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        "content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://foodiebay-multivendor-server-production.up.railway.app/users/admin/${email}`,
+      {
+        method: 'PUT',
+        headers: {
+          authorization: `Bearer ${localStorage.getItem(
+            'accessToken'
+          )}`,
+          'content-type': 'application/json',
+        },
+      }
+    )
       .then((res) => res.json())
 
       .then((data) => {
         console.log(data);
         if (data.modifiedCount > 0) {
           refetch();
-          toast.success("Successfully Make an Admin");
+          toast.success('Successfully Make an Admin');
         }
       });
   };
@@ -28,11 +33,16 @@ const UsersRow = ({ user, index, refetch }) => {
   const [users, setUsers] = useState([]);
   // console.log(users);
   const handleDeleteUser = (id) => {
-    const proceed = window.confirm("Are you sure to Delete this User");
+    const proceed = window.confirm(
+      'Are you sure to Delete this User'
+    );
     if (proceed) {
-      fetch(`https://foodiebay.onrender.com/deleteUsers/${id}`, {
-        method: "DELETE",
-      })
+      fetch(
+        `https://foodiebay-multivendor-server-production.up.railway.app/deleteUsers/${id}`,
+        {
+          method: 'DELETE',
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -61,20 +71,21 @@ const UsersRow = ({ user, index, refetch }) => {
       </td>
       <td className="font-bold">
         <div>
-          {role !== "admin" ? (
-            <button onClick={makeAdmin} class="btn btn-xs text-warning">
+          {role !== 'admin' ? (
+            <button
+              onClick={makeAdmin}
+              class="btn btn-xs text-warning">
               Make Admin
             </button>
           ) : (
-            "ADMIN"
+            'ADMIN'
           )}
         </div>
       </td>
       <td>
         <button
           onClick={() => handleDeleteUser(_id)}
-          class="btn btn-xs text-warning"
-        >
+          class="btn btn-xs text-warning">
           Delete user
         </button>
       </td>

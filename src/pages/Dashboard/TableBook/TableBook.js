@@ -1,18 +1,17 @@
-import { nanoid } from "nanoid";
-import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
-import { toast } from "react-toastify";
-import EmptyTable from "../../../assets/Restaurant/table.jpg";
-import BookedTable from "../../../assets/Restaurant/reserved.jpg";
-import Loading from "../../../components/Shared/Loading/Loading";
-import EmptyHeader from "../../../components/Shared/EmptyHeader/EmptyHeader";
+import { nanoid } from 'nanoid';
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
+import BookedTable from '../../../assets/Restaurant/reserved.jpg';
+import EmptyTable from '../../../assets/Restaurant/table.jpg';
+import EmptyHeader from '../../../components/Shared/EmptyHeader/EmptyHeader';
+import Loading from '../../../components/Shared/Loading/Loading';
 
-import auth from "../../../firebase.init";
-import { Time } from "styled-icons/remix-line";
-import { Delete } from "styled-icons/feather";
-import { DeleteOff } from "styled-icons/fluentui-system-regular";
-import Swal from "sweetalert2";
+import { DeleteOff } from 'styled-icons/fluentui-system-regular';
+import { Time } from 'styled-icons/remix-line';
+import Swal from 'sweetalert2';
+import auth from '../../../firebase.init';
 
 const TableBook = () => {
   const [user] = useAuthState(auth);
@@ -20,9 +19,9 @@ const TableBook = () => {
     data: restaurantInfo,
     isLoading,
     refetch,
-  } = useQuery(["Restaurant", user?.email], () =>
+  } = useQuery(['Restaurant', user?.email], () =>
     fetch(
-      `https://foodiebay.onrender.com/restaurant?restaurantId=${user?.email}`
+      `https://foodiebay-multivendor-server-production.up.railway.app/restaurant?restaurantId=${user?.email}`
     ).then((res) => res.json())
   );
 
@@ -34,10 +33,10 @@ const TableBook = () => {
     id: nanoid(),
   };
   const handleAddTable = () => {
-    const uri = `https://foodiebay.onrender.com/table-add/${user.email}`;
+    const uri = `https://foodiebay-multivendor-server-production.up.railway.app/table-add/${user.email}`;
     fetch(uri, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify(table),
     })
       .then((res) => res.json())
@@ -51,23 +50,23 @@ const TableBook = () => {
         }
       });
   };
-  const uri = `https://foodiebay.onrender.com/table/${restaurantInfo?.restaurant_id}`;
+  const uri = `https://foodiebay-multivendor-server-production.up.railway.app/table/${restaurantInfo?.restaurant_id}`;
   const handleDelete = (id) => {
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: "warning",
-      iconColor: "#e7272d",
-      background: "#FEF4F7",
+      icon: 'warning',
+      iconColor: '#e7272d',
+      background: '#FEF4F7',
       showCancelButton: true,
-      confirmButtonColor: "#3084dd",
-      cancelButtonColor: "#e7272d",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: '#3084dd',
+      cancelButtonColor: '#e7272d',
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(uri, {
-          method: "DELETE",
-          headers: { "content-type": "application/json" },
+          method: 'DELETE',
+          headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ id }),
         })
           .then((res) => res.json())
@@ -81,27 +80,27 @@ const TableBook = () => {
             }
           });
       } else {
-        Swal.fire("Process canceled");
+        Swal.fire('Process canceled');
       }
     });
   };
 
   const handleCancelBooking = (id) => {
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: "warning",
-      iconColor: "#e7272d",
-      background: "#FEF4F7",
+      icon: 'warning',
+      iconColor: '#e7272d',
+      background: '#FEF4F7',
       showCancelButton: true,
-      confirmButtonColor: "#3084dd",
-      cancelButtonColor: "#e7272d",
-      confirmButtonText: "Yes, cancel it!",
+      confirmButtonColor: '#3084dd',
+      cancelButtonColor: '#e7272d',
+      confirmButtonText: 'Yes, cancel it!',
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(uri, {
-          method: "PATCH",
-          headers: { "content-type": "application/json" },
+          method: 'PATCH',
+          headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ id }),
         })
           .then((res) => res.json())
@@ -115,7 +114,7 @@ const TableBook = () => {
             }
           });
       } else {
-        Swal.fire("Process canceled");
+        Swal.fire('Process canceled');
       }
     });
   };
@@ -126,8 +125,7 @@ const TableBook = () => {
         <div className="flex-1 inline-flex justify-center items-center">
           <button
             onClick={handleAddTable}
-            className="flex-no-shrink btn btn-wide bg-green-400 hover:bg-green-500 px-5 ml-4 py-2 text-xs shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-300 hover:border-green-500 text-white rounded-full transition ease-in duration-300"
-          >
+            className="flex-no-shrink btn btn-wide bg-green-400 hover:bg-green-500 px-5 ml-4 py-2 text-xs shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-300 hover:border-green-500 text-white rounded-full transition ease-in duration-300">
             Add Table
           </button>
         </div>
@@ -154,8 +152,7 @@ const TableBook = () => {
                     />
                     <button
                       onClick={() => handleDelete(table?.id)}
-                      className="absolute -right-2 bottom-2 cursor-pointer -ml-3 text-white p-1 text-xs bg-red-400 hover:bg-red-500 font-medium tracking-wider rounded-full transition ease-in duration-300"
-                    >
+                      className="absolute -right-2 bottom-2 cursor-pointer -ml-3 text-white p-1 text-xs bg-red-400 hover:bg-red-500 font-medium tracking-wider rounded-full transition ease-in duration-300">
                       <DeleteOff size={20} />
                     </button>
                   </div>
@@ -165,15 +162,17 @@ const TableBook = () => {
                         <div className="flex items-center">
                           <div className="flex flex-col">
                             <div className="w-full text-left flex-none text-lg text-gray-200 font-bold leading-none">
-                              {table?.customer?.name || "No customer"}
+                              {table?.customer?.name || 'No customer'}
                             </div>
                             <div className="flex-auto text-gray-400 my-1">
                               <span className="mr-3 ml-1">
-                                {table?.customer?.mobile || "---mobile no---"}
+                                {table?.customer?.mobile ||
+                                  '---mobile no---'}
                               </span>
                               <span className="mr-3 border-r border-gray-600 align-middle max-h-0"></span>
                               <span className="">
-                                {table?.customer?.reserveDate || "xxxx-xx-xx"}
+                                {table?.customer?.reserveDate ||
+                                  'xxxx-xx-xx'}
                               </span>
                             </div>
                           </div>
@@ -182,9 +181,10 @@ const TableBook = () => {
                       <div className="flex-1 inline-flex justify-end items-center">
                         {table?.customer ? (
                           <button
-                            onClick={() => handleCancelBooking(table?.id)}
-                            className="flex-no-shrink btn btn-primary hover:bg-green-500 px-10 ml-4 py-2 text-xs shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-300 hover:border-green-500 text-white rounded-full transition ease-in duration-300"
-                          >
+                            onClick={() =>
+                              handleCancelBooking(table?.id)
+                            }
+                            className="flex-no-shrink btn btn-primary hover:bg-green-500 px-10 ml-4 py-2 text-xs shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-300 hover:border-green-500 text-white rounded-full transition ease-in duration-300">
                             --Reserved--
                           </button>
                         ) : (
@@ -201,16 +201,18 @@ const TableBook = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 mr-2"
                           viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
+                          fill="currentColor">
                           <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
                         </svg>
-                        <p className="">{table?.customer?.guest} Guest</p>
+                        <p className="">
+                          {table?.customer?.guest} Guest
+                        </p>
                       </div>
                       <div className="inline-flex items-center">
                         <Time size={20} />
                         <p className="">
-                          {table?.customer?.time || "00:00 am - 00:00 pm"}
+                          {table?.customer?.time ||
+                            '00:00 am - 00:00 pm'}
                         </p>
                       </div>
                     </div>

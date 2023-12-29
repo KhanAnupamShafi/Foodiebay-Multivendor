@@ -1,16 +1,18 @@
-import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
-import { toast } from "react-toastify";
-import Loading from "../../../components/Shared/Loading/Loading";
-import auth from "../../../firebase.init";
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
+import Loading from '../../../components/Shared/Loading/Loading';
+import auth from '../../../firebase.init';
 
 const AllOrders = () => {
   const [user] = useAuthState(auth);
-  const { data: restaurantInfo } = useQuery(["Restaurant", user.email], () =>
-    fetch(
-      `https://foodiebay.onrender.com/restaurant?restaurantId=${user.email}`
-    ).then((res) => res.json())
+  const { data: restaurantInfo } = useQuery(
+    ['Restaurant', user.email],
+    () =>
+      fetch(
+        `https://foodiebay-multivendor-server-production.up.railway.app/restaurant?restaurantId=${user.email}`
+      ).then((res) => res.json())
   );
 
   const {
@@ -19,7 +21,7 @@ const AllOrders = () => {
     refetch,
   } = useQuery([`orders`, restaurantInfo?.restaurant_id], () =>
     fetch(
-      `https://foodiebay.onrender.com/order/${restaurantInfo?.restaurant_id}`
+      `https://foodiebay-multivendor-server-production.up.railway.app/order/${restaurantInfo?.restaurant_id}`
     ).then((res) => res.json())
   );
 
@@ -29,12 +31,15 @@ const AllOrders = () => {
   const handleDelivery = (id) => {
     console.log(id);
 
-    fetch(`https://foodiebay.onrender.com/deliver/${id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://foodiebay-multivendor-server-production.up.railway.app/deliver/${id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 403) {
           toast.error(`Forbidden Request`);
@@ -93,7 +98,10 @@ const AllOrders = () => {
                         </p>
                         <p className="text-gray-500 font-light whitespace-no-wrap font-bold text-left mt-1">
                           email:
-                          <span className="text-xs"> {order?.email}</span>
+                          <span className="text-xs">
+                            {' '}
+                            {order?.email}
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -104,7 +112,7 @@ const AllOrders = () => {
                       {order.cartItems.map((item) => (
                         <div key={item._id} className="text-left">
                           <p className="text-slate-600 whitespace-no-wrap font-bold">
-                            {item.name}{" "}
+                            {item.name}{' '}
                           </p>
                           <span className="text-gray-900 text-xs opacity-50">
                             (Qty: {item.quantity})
@@ -137,9 +145,10 @@ const AllOrders = () => {
                       <span
                         aria-hidden
                         className={`absolute inset-0 opacity-50 rounded-full ${
-                          order?.delivered ? "bg-green-200" : "bg-yellow-200"
-                        }`}
-                      ></span>
+                          order?.delivered
+                            ? 'bg-green-200'
+                            : 'bg-yellow-200'
+                        }`}></span>
                       {order?.delivered ? (
                         <span className="relative">Delivered</span>
                       ) : (
@@ -151,13 +160,13 @@ const AllOrders = () => {
                     <span className="relative inline-block px-2 py-2 font-semibold text-pink-900 leading-tight">
                       <span
                         aria-hidden
-                        className="absolute inset-0 bg-slate-300 opacity-50 rounded-full"
-                      ></span>
+                        className="absolute inset-0 bg-slate-300 opacity-50 rounded-full"></span>
                       <span className="relative">
                         <button
-                          onClick={() => handleDelivery(order?.order_id)}
-                          className="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-3 bg-gray-100 rounded-full hover:bg-green-200 focus:outline-none"
-                        >
+                          onClick={() =>
+                            handleDelivery(order?.order_id)
+                          }
+                          className="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-3 bg-gray-100 rounded-full hover:bg-green-200 focus:outline-none">
                           Deliver Now
                         </button>
                       </span>

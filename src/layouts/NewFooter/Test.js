@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import LogoFooter from "./logo_footer.png";
-import Payment from "./payment.png";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Facebook,
-  Twitter,
   Instagram,
-  Youtube,
   Pinterest,
-} from "styled-icons/fa-brands";
+  Twitter,
+  Youtube,
+} from 'styled-icons/fa-brands';
+import LogoFooter from '../../assets/Header/Logo.png';
+import Payment from './payment.png';
 
 const Test = () => {
   return (
@@ -21,9 +21,9 @@ const Test = () => {
                 <img
                   src={LogoFooter}
                   width="144"
-                  height="45"
+                  height="65"
                   alt="logo"
-                  className="max-w-full object-cover align-middle mb-4"
+                  className="max-w-full object-contain align-middle mb-4"
                 />
               </Link>
               <div className="widget-body p-0 text-[#333] text-start">
@@ -32,13 +32,12 @@ const Test = () => {
                 </p>
                 <a
                   href="tel:18005707777"
-                  className="text-[#333] leading-4 mb-4 font-bold no-underline text-2xl"
-                >
+                  className="text-[#333] leading-4 mb-4 font-bold no-underline text-2xl">
                   1-800-570-7777
                 </a>
                 <p className="leading-9 mb-7 font-light mb-8 max-w-sm">
-                  Register now to get updates on pronot get up icons &amp;
-                  coupons ster now toon.
+                  Register now to get updates on pronot get up icons
+                  &amp; coupons ster now toon.
                 </p>
                 <div className="inline-flex">
                   <a href="/" className="my-0.5 mr-2.5">
@@ -62,7 +61,9 @@ const Test = () => {
           </li>
           <li className="flex-auto w-2/4 sm:w-2/4 lg:w-1/5  px-2.5">
             <div className="widget mb-14 ">
-              <h3 className="text-lg text-[#333] mb-8 text-start">Company</h3>
+              <h3 className="text-lg text-[#333] mb-8 text-start">
+                Company
+              </h3>
               <ul className="text--[#666] text-start">
                 <li className="leading-4 mb-6">
                   <Link to="/" className="text-[#666]">
@@ -181,7 +182,8 @@ const Test = () => {
       <div className="block lg:flex items-center text-[#666] py-12">
         <div className="flex justify-center lg:justify-start items-center">
           <p className="copyright">
-            Copyright © 2021 Wolmart Store. All Rights Reserved.
+            Copyright © {new Date().getFullYear()} Foodiebay.com All
+            Rights Reserved.
           </p>
         </div>
         <div className="footer-right flex flex-1 flex-col lg:flex-row justify-center lg:justify-end items-center">

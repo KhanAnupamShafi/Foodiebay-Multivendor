@@ -1,15 +1,15 @@
-import axios from "axios";
-import { format } from "date-fns";
-import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
-import { Link, useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
-import styled from "styled-components";
-import { CreditCard } from "styled-icons/boxicons-regular";
-import { useShoppingCart } from "use-shopping-cart";
-import Loading from "../../components/Shared/Loading/Loading";
-import auth from "../../firebase.init";
+import axios from 'axios';
+import { format } from 'date-fns';
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
+import { Link, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import { CreditCard } from 'styled-icons/boxicons-regular';
+import { useShoppingCart } from 'use-shopping-cart';
+import Loading from '../../components/Shared/Loading/Loading';
+import auth from '../../firebase.init';
 
 const useQueryString = () => {
   return new URLSearchParams(useLocation().search);
@@ -18,24 +18,27 @@ const useQueryString = () => {
 const Result = () => {
   const queryString = useQueryString();
   const [user] = useAuthState(auth);
-  const { cartDetails, cartCount, totalPrice, clearCart } = useShoppingCart();
-  const sessionId = queryString.get("session_id");
-  const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
+  const { cartDetails, cartCount, totalPrice, clearCart } =
+    useShoppingCart();
+  const sessionId = queryString.get('session_id');
+  const cartItems = Object.keys(cartDetails).map(
+    (key) => cartDetails[key]
+  );
 
   const date = new Date();
-  const formattedDate = format(date, "PP");
+  const formattedDate = format(date, 'PP');
   // console.log(cartItems);
   const { data, isLoading, isError } = useQuery(
-    "Result",
+    'Result',
     () =>
       sessionId
         ? axios(
-            `https://foodiebay.onrender.com/checkout-sessions/${sessionId}`
+            `https://foodiebay-multivendor-server-production.up.railway.app/checkout-sessions/${sessionId}`
           ).then((res) => res.data)
         : null,
     {
       onSuccess: (data) => {
-        if (data.status === "complete" && cartCount > 0) {
+        if (data.status === 'complete' && cartCount > 0) {
           const orderData = {
             user: user?.displayName,
             email: user?.email,
@@ -53,13 +56,16 @@ const Result = () => {
             totalPrice,
           };
 
-          fetch("https://foodiebay.onrender.com/order", {
-            method: "PUT",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(orderData),
-          })
+          fetch(
+            'https://foodiebay-multivendor-server-production.up.railway.app/order',
+            {
+              method: 'PUT',
+              headers: {
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify(orderData),
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
@@ -94,22 +100,20 @@ const Result = () => {
         <div className="py-10 text-center">
           <Link
             to="/"
-            className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"
-          >
+            className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
             GO Home
           </Link>
         </div>
       </div>
     );
-  console.log("checkout", data);
+  console.log('checkout', data);
   return (
     <div className="bg-gray-100 h-screen">
       <Checked className="bg-white p-6  md:mx-auto">
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 130.2 130.2"
-        >
+          viewBox="0 0 130.2 130.2">
           <circle
             className="path circle"
             fill="none"
@@ -162,8 +166,7 @@ const Result = () => {
           <div className="py-10 text-center">
             <Link
               to="/"
-              className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"
-            >
+              className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
               GO BACK
             </Link>
           </div>

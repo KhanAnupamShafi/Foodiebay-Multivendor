@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useAdmin = (user) => {
   const [admin, setAdmin] = useState(false);
@@ -7,12 +7,15 @@ const useAdmin = (user) => {
   useEffect(() => {
     const email = user?.email;
     if (email) {
-      fetch(`https://foodiebay.onrender.com/admin/${email}`, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      })
+      fetch(
+        `https://foodiebay-multivendor-server-production.up.railway.app/admin/${email}`,
+        {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           // console.log("data inside useAdmin", data);

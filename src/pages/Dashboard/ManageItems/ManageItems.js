@@ -1,23 +1,22 @@
-import { XboxConsoleDimensions } from "@styled-icons/fluentui-system-filled/XboxConsole";
-import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
-import Loading from "../../../components/Shared/Loading/Loading";
-import auth from "../../../firebase.init";
+import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
+import Loading from '../../../components/Shared/Loading/Loading';
+import auth from '../../../firebase.init';
 
 const ManageItems = () => {
   const [user] = useAuthState(auth);
   const [menu, setMenus] = useState([]);
   console.log(user);
-  console.log("user email", user?.email);
+  console.log('user email', user?.email);
   const {
     data: menus,
     isLoading,
     refetch,
   } = useQuery([`menus`], () =>
-    fetch(`https://foodiebay.onrender.com/menus/${user?.email}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://foodiebay-multivendor-server-production.up.railway.app/menus/${user?.email}`
+    ).then((res) => res.json())
   );
 
   console.log(menus);
@@ -29,11 +28,16 @@ const ManageItems = () => {
   // Delete Menus.....
   // console.log(users);
   const handleDelete = (id) => {
-    const proceed = window.confirm("Are you sure to Delete this Item");
+    const proceed = window.confirm(
+      'Are you sure to Delete this Item'
+    );
     if (proceed) {
-      fetch(`https://foodiebay.onrender.com/deleteMenus/${id}`, {
-        method: "DELETE",
-      })
+      fetch(
+        `https://foodiebay-multivendor-server-production.up.railway.app/deleteMenus/${id}`,
+        {
+          method: 'DELETE',
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -73,19 +77,17 @@ const ManageItems = () => {
             {menus?.map((data) => (
               <tr
                 key={data._id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th
                   scope="row"
-                  className="py-1 px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
+                  className="py-1 px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   <div className="flex items-center space-x-3">
                     <div className="mask bg-accent">
                       <div className="rounded-xl">
                         <img
                           src={
                             data.image ||
-                            "https://i.ibb.co/PhkSzrr/Wendys-Emblem.png"
+                            'https://i.ibb.co/PhkSzrr/Wendys-Emblem.png'
                           }
                           alt="Avatar Tailwind CSS Component"
                           className="object-contain h-16 w-24"
@@ -107,8 +109,7 @@ const ManageItems = () => {
                 <td className="py-1 px-3  text-center">
                   <button
                     onClick={() => handleDelete(data?._id)}
-                    className="btn btn-sm bg-warning btn-outline rounded-full"
-                  >
+                    className="btn btn-sm bg-warning btn-outline rounded-full">
                     Remove Menu?
                   </button>
                 </td>

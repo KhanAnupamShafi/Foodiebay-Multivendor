@@ -1,8 +1,6 @@
-import { Outlet } from "react-router-dom";
-import styled from "styled-components";
+import { Outlet } from 'react-router-dom';
 
-import Footer from "./Footer/Footer";
-import Test from "./NewFooter/Test";
+import Test from './NewFooter/Test';
 
 function Layout() {
   return (
@@ -10,7 +8,7 @@ function Layout() {
       {/* An <Outlet> renders whatever child route is currently active in App.js */}
       <Outlet />
 
-      <Footer />
+      {/* <Footer /> */}
       <Test />
     </>
   );

@@ -1,10 +1,10 @@
-import React from "react";
-import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { StarFill } from "styled-icons/octicons";
-import Loading from "../Shared/Loading/Loading";
-import { Slide } from "react-awesome-reveal";
+import React from 'react';
+import { Slide } from 'react-awesome-reveal';
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { StarFill } from 'styled-icons/octicons';
+import SkeletonLoading from '../Shared/Loading/SkeletonLoader';
 
 const VendorList = () => {
   const {
@@ -12,18 +12,19 @@ const VendorList = () => {
     isLoading,
     refetch,
   } = useQuery([`restaurants`], () =>
-    fetch(`https://foodiebay.onrender.com/restaurants/vendor`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://foodiebay-multivendor-server-production.up.railway.app/restaurants/vendor`
+    ).then((res) => res.json())
   );
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <SkeletonLoading />;
   }
 
   return (
     <VendorContainer id="restaurants">
       <VendorListHeader>Popular restaurants</VendorListHeader>
+
       <RestaurantList>
         {vendors.map((restaurant) => (
           <ListItem key={restaurant?._id}>
@@ -95,7 +96,7 @@ const VendorList = () => {
 
 export default VendorList;
 
-const VendorContainer = styled.div`
+export const VendorContainer = styled.div`
   max-width: 1280px;
   margin: auto;
   text-align: left;

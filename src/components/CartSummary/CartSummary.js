@@ -28,13 +28,16 @@ const CartSummary = ({ restaurant, showCart, setClick }) => {
   async function handleClick(event) {
     // event.preventDefault();
 
-    await fetch('https://foodiebay.onrender.com/checkout-session', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ items: cartItems }),
-    })
+    await fetch(
+      'https://foodiebay-multivendor-server-production.up.railway.app/checkout-session',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items: cartItems }),
+      }
+    )
       .then((res) => {
         return res.json();
       })

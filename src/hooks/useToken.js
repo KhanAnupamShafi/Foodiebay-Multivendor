@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useToken = (user) => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     // console.log('User information inside use Token',user)
@@ -10,13 +10,16 @@ const useToken = (user) => {
 
     const currentUser = { email: email };
     if (email) {
-      fetch(`https://foodiebay.onrender.com/users/${email}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(currentUser),
-      })
+      fetch(
+        `https://foodiebay-multivendor-server-production.up.railway.app/users/${email}`,
+        {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(currentUser),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           // console.log("data inside usetoken", data);

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import EmptyHeader from "../../components/Shared/EmptyHeader/EmptyHeader";
-import auth from "../../firebase.init";
-import MyOrders from "./MyOrders/MyOrders";
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import EmptyHeader from '../../components/Shared/EmptyHeader/EmptyHeader';
+import auth from '../../firebase.init';
+import MyOrders from './MyOrders/MyOrders';
 
 const MyProfile = () => {
   const [user] = useAuthState(auth);
@@ -11,7 +11,9 @@ const MyProfile = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`https://foodiebay.onrender.com/order?email=${user.email}`)
+      fetch(
+        `https://foodiebay-multivendor-server-production.up.railway.app/order?email=${user.email}`
+      )
         .then((res) => {
           return res.json();
         })
@@ -34,7 +36,9 @@ const MyProfile = () => {
       <div className="bg-white p-8 rounded-md w-full">
         <div className=" flex items-center justify-between pb-6">
           <div>
-            <h2 className="text-gray-600 font-semibold">Items Order</h2>
+            <h2 className="text-gray-600 font-semibold">
+              Items Order
+            </h2>
             <span className="text-xs">All food item</span>
           </div>
           <div className="flex items-center justify-between">
@@ -43,8 +47,7 @@ const MyProfile = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 text-gray-400"
                 viewBox="0 0 20 20"
-                fill="currentColor"
-              >
+                fill="currentColor">
                 <path
                   fillRule="evenodd"
                   d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"

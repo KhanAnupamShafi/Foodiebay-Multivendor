@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import axios from "axios";
-import AsyncCreatableSelect from "react-select/async-creatable";
-import CreatableSelect from "react-select/creatable";
-import makeAnimated from "react-select/animated";
-import styled from "styled-components";
-import { Dollar } from "styled-icons/open-iconic";
-import { Scissors } from "styled-icons/bootstrap";
-import { customAlphabet } from "nanoid";
-import { useQuery } from "react-query";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../../firebase.init";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { customAlphabet } from 'nanoid';
+import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import makeAnimated from 'react-select/animated';
+import AsyncCreatableSelect from 'react-select/async-creatable';
+import CreatableSelect from 'react-select/creatable';
+import { toast } from 'react-toastify';
+import { Scissors } from 'styled-icons/bootstrap';
+import { Dollar } from 'styled-icons/open-iconic';
+import FormButtonGroup from '../../../components/Shared/FormButtonGroup/FormButtonGroup';
+import auth from '../../../firebase.init';
 import {
   Box,
   Col,
@@ -22,20 +22,19 @@ import {
   FormContainer,
   InputGroup,
   Row,
-} from "./AddMenu.elements";
-import FormButtonGroup from "../../../components/Shared/FormButtonGroup/FormButtonGroup";
+} from './AddMenu.elements';
 
 const ingredientOptions = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-  { value: "cheese", label: "Cheese" },
-  { value: "pepperoni", label: "Pepperoni" },
-  { value: "sausage", label: "Sausage" },
-  { value: "bacon", label: "Bacon" },
-  { value: "egg", label: "Egg" },
-  { value: "onions", label: "Onions" },
-  { value: "bbq", label: "BBQ Sauce" },
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+  { value: 'cheese', label: 'Cheese' },
+  { value: 'pepperoni', label: 'Pepperoni' },
+  { value: 'sausage', label: 'Sausage' },
+  { value: 'bacon', label: 'Bacon' },
+  { value: 'egg', label: 'Egg' },
+  { value: 'onions', label: 'Onions' },
+  { value: 'bbq', label: 'BBQ Sauce' },
 ];
 const customStyles = {
   menu: (provided, state) => ({
@@ -46,20 +45,22 @@ const customStyles = {
 
 const AddMenu = () => {
   const [user] = useAuthState(auth);
-  const nanoid = customAlphabet("1234567890", 10);
+  const nanoid = customAlphabet('1234567890', 10);
   const imageAPI = `271c9489ae5aa7d1092687fcd00d617b`;
   const [inputValue, setValue] = useState({
-    sku: "sku_" + nanoid(10),
-    name: "",
+    sku: 'sku_' + nanoid(10),
+    name: '',
     price: 0,
     offer: 0,
-    desc: "",
+    desc: '',
   });
   const [selectedValue, setSelectedValue] = useState(null);
   const [tags, setTags] = useState([]);
   const [file, setFile] = useState([]);
   const getData = async () => {
-    let res = await axios.get("https://foodiebay.onrender.com/category");
+    let res = await axios.get(
+      'https://foodiebay-multivendor-server-production.up.railway.app/category'
+    );
     return res.data;
   };
   const navigate = useNavigate();
@@ -69,7 +70,9 @@ const AddMenu = () => {
     setValue((oldValues) => ({
       ...oldValues,
       [e.target.name]:
-        e.target.type === "number" ? parseInt(e.target.value) : e.target.value,
+        e.target.type === 'number'
+          ? parseInt(e.target.value)
+          : e.target.value,
     }));
   };
   const handleOnFileChange = (e) => {
@@ -81,7 +84,7 @@ const AddMenu = () => {
   };
   console.log(selectedValue);
   // const loadOptions = (inputValue) => {
-  //   return fetch(`https://foodiebay.onrender.com/products`).then((res) => res.json());
+  //   return fetch(`https://foodiebay-multivendor-server-production.up.railway.app/products`).then((res) => res.json());
   // };
   function capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);
@@ -95,10 +98,12 @@ const AddMenu = () => {
         .map((t) => ({ value: t._id, label: capitalize(t.label) }));
     });
   };
-  const { data: restaurantInfo } = useQuery(["Restaurant", user.email], () =>
-    fetch(
-      `https://foodiebay.onrender.com/restaurant?restaurantId=${user.email}`
-    ).then((res) => res.json())
+  const { data: restaurantInfo } = useQuery(
+    ['Restaurant', user.email],
+    () =>
+      fetch(
+        `https://foodiebay-multivendor-server-production.up.railway.app/restaurant?restaurantId=${user.email}`
+      ).then((res) => res.json())
   );
 
   const onSubmit = (e) => {
@@ -108,14 +113,14 @@ const AddMenu = () => {
     const formData = new FormData();
 
     if (selectedValue === null) {
-      alert("Category must be filled out");
+      alert('Category must be filled out');
       return false;
     }
 
-    formData.append("image", file);
+    formData.append('image', file);
 
     fetch(uri, {
-      method: "POST",
+      method: 'POST',
       body: formData,
     })
       .then((res) => res.json())
@@ -126,23 +131,26 @@ const AddMenu = () => {
           category: { ...selectedValue },
           ingredients: tags,
           image: result.data.url,
-          currency: "USD",
+          currency: 'USD',
           restaurantInfo,
         };
-        console.log("data", data);
+        console.log('data', data);
 
         if (data?.category.__isNew__) {
           const categoryInfo = {
             value: data.category.value,
             label: data.category.label,
           };
-          fetch(`https://foodiebay.onrender.com/category`, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(categoryInfo),
-          })
+          fetch(
+            `https://foodiebay-multivendor-server-production.up.railway.app/category`,
+            {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify(categoryInfo),
+            }
+          )
             .then((res) => res.json())
             .then((result) => {
               if (result.success) {
@@ -151,18 +159,21 @@ const AddMenu = () => {
             });
         }
         if (result.success) {
-          fetch(`https://foodiebay.onrender.com/meal`, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(data),
-          })
+          fetch(
+            `https://foodiebay-multivendor-server-production.up.railway.app/meal`,
+            {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               if (data.success) {
                 toast.success(`Item Added Successfully`);
-                navigate("/dashboard/manage_items");
+                navigate('/dashboard/manage_items');
               } else {
                 toast.error(`Failed to add the product`);
               }
@@ -178,15 +189,15 @@ const AddMenu = () => {
     ...theme,
     colors: {
       ...theme.colors,
-      primary25: "#FFDCCA",
-      primary: "#C27061",
-      neutral0: "hsl(0, 0%, 99%)",
-      neutral10: "hsl(0, 100%, 95%)",
-      neutral15: "hsl(24, 100%, 99%)",
-      neutral20: "hsl(210, 34%, 65%)",
-      neutral50: "hsl(210, 9%, 31%)",
-      neutral60: "hsl(9, 57%, 49%)",
-      neutral90: "hsl(9, 57%, 49%)",
+      primary25: '#FFDCCA',
+      primary: '#C27061',
+      neutral0: 'hsl(0, 0%, 99%)',
+      neutral10: 'hsl(0, 100%, 95%)',
+      neutral15: 'hsl(24, 100%, 99%)',
+      neutral20: 'hsl(210, 34%, 65%)',
+      neutral50: 'hsl(210, 9%, 31%)',
+      neutral60: 'hsl(9, 57%, 49%)',
+      neutral90: 'hsl(9, 57%, 49%)',
     },
   });
   return (
@@ -297,8 +308,7 @@ const AddMenu = () => {
                   name="desc"
                   id="desc"
                   value={inputValue.desc}
-                  onChange={handleInputChange}
-                ></textarea>
+                  onChange={handleInputChange}></textarea>
               </div>
               <FileInput>
                 <h4 className="box-title mt-10">Uploaded Image</h4>

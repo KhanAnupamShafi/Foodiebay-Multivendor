@@ -1,21 +1,22 @@
-import React from "react";
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
-import Loading from "../../components/Shared/Loading/Loading";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "./CheckoutForm";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import Loading from '../../components/Shared/Loading/Loading';
+import CheckoutForm from './CheckoutForm';
 
 const stripePromise = loadStripe(
-  "pk_test_51JwnwsAhRvIuSrv7SUBvBMIECkmBpCOapiW0GXIRiTIUnk8Y7ltilJ88fpezd1mZMbikl8eIExIqJca3gG7VD6km00NLErVXan"
+  'pk_test_51JwnwsAhRvIuSrv7SUBvBMIECkmBpCOapiW0GXIRiTIUnk8Y7ltilJ88fpezd1mZMbikl8eIExIqJca3gG7VD6km00NLErVXan'
 );
 
 const Payment = () => {
   const { paymentId } = useParams();
-  const url = `https://foodiebay.onrender.com/productForPayment/${paymentId}`;
+  const url = `https://foodiebay-multivendor-server-production.up.railway.app/productForPayment/${paymentId}`;
   // React query...
-  const { data: product, isLoading } = useQuery(["payment", paymentId], () =>
-    fetch(url).then((res) => res.json())
+  const { data: product, isLoading } = useQuery(
+    ['payment', paymentId],
+    () => fetch(url).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading></Loading>;
@@ -26,17 +27,19 @@ const Payment = () => {
         <div className="card-body">
           <h2 className="text-red-500">Payment Area</h2>
           <p className="text-red-500">
-            {" "}
-            <span className="text-yellow-500">payment ID</span> :{paymentId}
+            {' '}
+            <span className="text-yellow-500">payment ID</span> :
+            {paymentId}
           </p>
           <p className="text-red-500 font-bold text-2xl">
-            {" "}
-            <span className="text-yellow-500">Name</span> :{" "}
+            {' '}
+            <span className="text-yellow-500">Name</span> :{' '}
             {product.productName}
           </p>
           <p className="text-red-500">
-            {" "}
-            <span className="text-yellow-500">Price</span> : ${product.price}
+            {' '}
+            <span className="text-yellow-500">Price</span> : $
+            {product.price}
           </p>
         </div>
       </div>
@@ -45,8 +48,9 @@ const Payment = () => {
           <h2 className="text-red-500">Payment Area</h2>
           {/* <p className='text-red-500'> <span className='text-yellow-500'>payment ID</span> :{paymentId}</p> */}
           <p className="text-red-500">
-            {" "}
-            <span className="text-yellow-500">Price</span> : ${product.price}
+            {' '}
+            <span className="text-yellow-500">Price</span> : $
+            {product.price}
           </p>
 
           <Elements stripe={stripePromise}>

@@ -1,7 +1,7 @@
-import React from "react";
-import Loading from "../../../components/Shared/Loading/Loading";
-import { useQuery } from "react-query";
-import UsersRow from "./UsersRow";
+import React from 'react';
+import { useQuery } from 'react-query';
+import Loading from '../../../components/Shared/Loading/Loading';
+import UsersRow from './UsersRow';
 
 const AllUsers = () => {
   // React Query....
@@ -9,8 +9,10 @@ const AllUsers = () => {
     data: users,
     isLoading,
     refetch,
-  } = useQuery("users", () =>
-    fetch("https://foodiebay.onrender.com/allUsers").then((res) => res.json())
+  } = useQuery('users', () =>
+    fetch(
+      'https://foodiebay-multivendor-server-production.up.railway.app/allUsers'
+    ).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading></Loading>;
@@ -36,8 +38,7 @@ const AllUsers = () => {
                 key={user._id}
                 index={index}
                 user={user}
-                refetch={refetch}
-              ></UsersRow>
+                refetch={refetch}></UsersRow>
             ))}
           </tbody>
         </table>

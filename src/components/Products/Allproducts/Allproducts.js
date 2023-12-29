@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import SingleProduct from "../SingleProduct/SingleProduct";
+import React, { useEffect, useState } from 'react';
+import SingleProduct from '../SingleProduct/SingleProduct';
 
 const Allproducts = () => {
   const [allProducts, setAllproducts] = useState([]);
   useEffect(() => {
-    fetch("https://foodiebay.onrender.com/products")
+    fetch(
+      'https://foodiebay-multivendor-server-production.up.railway.app/products'
+    )
       .then((res) => res.json())
       .then((data) => setAllproducts(data));
   }, []);
@@ -15,8 +17,7 @@ const Allproducts = () => {
         {allProducts.map((singlePro) => (
           <SingleProduct
             key={singlePro._id}
-            singlePro={singlePro}
-          ></SingleProduct>
+            singlePro={singlePro}></SingleProduct>
         ))}
       </div>
     </div>

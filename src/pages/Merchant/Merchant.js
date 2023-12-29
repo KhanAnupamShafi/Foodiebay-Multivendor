@@ -1,22 +1,21 @@
-import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import styled from "styled-components";
-import auth from "../../firebase.init";
-import BD from "../../assets/Form/bangladesh-flag-icon.svg";
-import BG from "../../assets/Merchant/merchant_img.png";
-import { Location } from "styled-icons/entypo";
-import { useForm } from "react-hook-form";
-import { format } from "date-fns";
-import { useQuery } from "react-query";
-import MerchantStatus from "./MerchantStatus";
-import { useNavigate } from "react-router-dom";
-import { Logo, NavLogo } from "../../layouts/Header/Header.elements";
-import headerLogo from "../../assets/Header/Logo2.png";
-import { useEffect } from "react";
+import { format } from 'date-fns';
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { Location } from 'styled-icons/entypo';
+import BD from '../../assets/Form/bangladesh-flag-icon.svg';
+import headerLogo from '../../assets/Header/Logo2.png';
+import BG from '../../assets/Merchant/merchant_img.png';
+import auth from '../../firebase.init';
+import { Logo, NavLogo } from '../../layouts/Header/Header.elements';
+import MerchantStatus from './MerchantStatus';
 
 const Merchant = () => {
   const [user] = useAuthState(auth);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState('');
   const [application, setApplication] = useState({});
   console.log(application);
   const {
@@ -30,22 +29,22 @@ const Merchant = () => {
 
   useEffect(() => {
     const myDate = new Date();
-    const formattedDate = format(myDate, "PP");
+    const formattedDate = format(myDate, 'PP');
     setDate(formattedDate);
   }, []);
   const {
     data: restaurantInfo,
     isLoading,
     refetch,
-  } = useQuery(["Restaurant", user.email], () =>
+  } = useQuery(['Restaurant', user.email], () =>
     fetch(
-      `https://foodiebay.onrender.com/restaurant?restaurantId=${user.email}`
+      `https://foodiebay-multivendor-server-production.up.railway.app/restaurant?restaurantId=${user.email}`
     ).then((res) => res.json())
   );
   console.log(restaurantInfo);
   const onSubmit = (data) => {
     const restaurantData = {
-      ownerName: data.fName + " " + data.lName,
+      ownerName: data.fName + ' ' + data.lName,
       contact: data.mobile,
       email: user?.email,
       restaurantName: data.restaurant,
@@ -53,25 +52,28 @@ const Merchant = () => {
       restaurantBanner: data.banner,
       restaurantLogo: data.logo,
       restaurantAddress: data.address,
-      applicationStatus: "pending",
+      applicationStatus: 'pending',
       apply_date: date,
-      restaurant_id: restaurantInfo?.restaurant_id || "",
+      restaurant_id: restaurantInfo?.restaurant_id || '',
     };
     // console.log(restaurantInfo);
-    fetch(`https://foodiebay.onrender.com/restaurant/${user.email}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(restaurantData),
-    })
+    fetch(
+      `https://foodiebay-multivendor-server-production.up.railway.app/restaurant/${user.email}`,
+      {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(restaurantData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.success) {
           setApplication(data.restaurant);
           refetch();
-          navigate("/merchants");
+          navigate('/merchants');
         }
       })
       .catch((error) => {
@@ -90,12 +92,14 @@ const Merchant = () => {
           </NavLogo>
           <h3>START GROWING YOUR BUSINESS TODAY</h3>
           <p>
-            Let your employees focus on what's important. We'll take care of the
-            food they love.
+            Let your employees focus on what's important. We'll take
+            care of the food they love.
             <br />
-            Try our easy, flexible corporate food delivery service today.
+            Try our easy, flexible corporate food delivery service
+            today.
           </p>
-          {restaurantInfo?.applicationStatus || application.acknowledged ? (
+          {restaurantInfo?.applicationStatus ||
+          application.acknowledged ? (
             <>
               <h1>Recieved Request</h1>
               <MerchantStatus
@@ -111,7 +115,9 @@ const Merchant = () => {
                   {restaurantInfo?.restaurant_id && (
                     <div className="form-control w-full max-w-xs">
                       <label className="label">
-                        <span className="label-text">Restaurant ID</span>
+                        <span className="label-text">
+                          Restaurant ID
+                        </span>
                       </label>
                       <input
                         type="text"
@@ -128,7 +134,7 @@ const Merchant = () => {
                     </label>
                     <input
                       type="text"
-                      {...register("email", {})}
+                      {...register('email', {})}
                       value={user?.email}
                       placeholder="You can't touch this"
                       className="input input-bordered w-full max-w-xs"
@@ -138,7 +144,7 @@ const Merchant = () => {
                   <div className="form-control w-full max-w-xs pt-5">
                     <input
                       required
-                      {...register("fName", {})}
+                      {...register('fName', {})}
                       type="text"
                       placeholder="First Name"
                       className="input input-bordered w-full max-w-xs"
@@ -147,7 +153,7 @@ const Merchant = () => {
                   <div className="form-control w-full max-w-xs pt-5">
                     <input
                       required
-                      {...register("lName", {})}
+                      {...register('lName', {})}
                       type="text"
                       placeholder="Last Name"
                       className="input input-bordered w-full max-w-xs"
@@ -156,12 +162,19 @@ const Merchant = () => {
                   <div className="form-control w-full max-w-xs pt-5">
                     <label className="input-group">
                       <span className="text-accent ">
-                        <img width={22} src={BD} alt="" className="mr-1" />
+                        <img
+                          width={22}
+                          src={BD}
+                          alt=""
+                          className="mr-1"
+                        />
                         +880
                       </span>
                       <input
                         required
-                        {...register("mobile", { valueAsNumber: true })}
+                        {...register('mobile', {
+                          valueAsNumber: true,
+                        })}
                         type="number"
                         className="input input-bordered w-full max-w-xs"
                       />
@@ -172,7 +185,7 @@ const Merchant = () => {
                 <div className="form-control w-full max-w-xs pt-5">
                   <input
                     required
-                    {...register("restaurant", {})}
+                    {...register('restaurant', {})}
                     type="text"
                     placeholder="Restaurant Name"
                     className="input input-bordered w-full max-w-xs"
@@ -183,7 +196,7 @@ const Merchant = () => {
                     <span>Type</span>
                     <input
                       required
-                      {...register("type", {})}
+                      {...register('type', {})}
                       type="text"
                       placeholder="eg. Convenience, Snacks"
                       className="input input-bordered w-full max-w-xs"
@@ -193,7 +206,7 @@ const Merchant = () => {
                 <div className="form-control w-full max-w-xs pt-5">
                   <input
                     // required
-                    {...register("banner", {})}
+                    {...register('banner', {})}
                     type="url"
                     placeholder="Company Banner"
                     className="input input-bordered w-full max-w-xs"
@@ -202,7 +215,7 @@ const Merchant = () => {
                 <div className="form-control w-full max-w-xs pt-5">
                   <input
                     // required
-                    {...register("logo", {})}
+                    {...register('logo', {})}
                     type="url"
                     placeholder="Company Logo"
                     className="input input-bordered w-full max-w-xs"
@@ -215,7 +228,7 @@ const Merchant = () => {
                     </span>
                     <input
                       // required
-                      {...register("address", {})}
+                      {...register('address', {})}
                       type="text"
                       placeholder="Address"
                       className="input input-bordered w-full max-w-xs"
@@ -225,8 +238,7 @@ const Merchant = () => {
                 <div className="form-control w-full max-w-xs pt-5">
                   <button
                     type="submit"
-                    className="btn btn-block w-full max-w-xs"
-                  >
+                    className="btn btn-block w-full max-w-xs">
                     Apply
                   </button>
                 </div>
@@ -296,7 +308,7 @@ const CorporateContents = styled.div`
     color: #707070;
     font-size: 3rem;
     font-weight: bold;
-    font-family: "Uber", Arial, sans-serif;
+    font-family: 'Uber', Arial, sans-serif;
     font-weight: 600;
     letter-spacing: 0.31px;
     margin: 0 0 32px;
@@ -327,7 +339,7 @@ const CorporateForm = styled.form`
     margin: 32px 0 24px;
     color: #1f4d5d;
     font-size: 2rem;
-    font-family: "Open Sans", Arial, sans-serif;
+    font-family: 'Open Sans', Arial, sans-serif;
     font-weight: 600;
     letter-spacing: 0.13px;
     word-break: break-word;
